@@ -39,7 +39,7 @@ do_pca <- function(data) {
 #' This function creates a plot of the outcome of a Principal Component Analysis
 #' (PCA) using the package ggplot2.
 #'
-#' @param pca The object returned by the function \code{\link{do_pca}}.
+#' @param x The object returned by the function \code{\link{do_pca}}.
 #'
 #' @return A ggplot object.
 #' @import ggplot2
@@ -52,20 +52,20 @@ do_pca <- function(data) {
 #' plot_pca(pca_C1_males)
 #' plot_pca(pca_C2_males)
 #' 
-plot_pca <- function(pca) {
+plot_pca <- function(x) {
   PC1 <- PC2 <- NULL ## to please R CMD check
-  gg <- ggplot(data = data.frame(pca$pca$rotation)) +
+  gg <- ggplot(data = data.frame(x$pca$rotation)) +
     geom_vline(xintercept = 0, lty = 2, col = "lightgrey") +
     geom_hline(yintercept = 0, lty = 2, col = "lightgrey") +
     ggforce::geom_circle(mapping = aes(x0 = 0, y0 = 0, r = 1), lty = 3, lwd = 0.2) +
     geom_segment(mapping = aes(x = PC1, y = PC2), xend = 0, yend = 0
     ) +
-    geom_label(aes(x = PC1, y = PC2, label = rownames(pca$pca$rotation))) +
+    geom_label(aes(x = PC1, y = PC2, label = rownames(x$pca$rotation))) +
     coord_fixed() +
     scale_y_continuous(limits = c(-1.2, 1.1), breaks = seq(-1, 1, by = 0.5)) +
     scale_x_continuous(limits = c(-1.2, 1.2), breaks = seq(-1, 1, by = 0.5)) +
-    labs(x = paste0("PC1 (", signif(pca$var_expl[1]*100, 3), "%)"),
-         y =  paste0("PC2 (", signif(pca$var_expl[2]*100, 3), "%)")) +
+    labs(x = paste0("PC1 (", signif(x$var_expl[1]*100, 3), "%)"),
+         y =  paste0("PC2 (", signif(x$var_expl[2]*100, 3), "%)")) +
     theme_classic() +
     theme(plot.margin = unit(c(5, 2, 2, 2), "mm"))
   return(gg)

@@ -4,10 +4,10 @@
 \alias{plot_pca}
 \title{Plot the result of a PCA}
 \usage{
-plot_pca(pca)
+plot_pca(x)
 }
 \arguments{
-\item{pca}{The object returned by the function \code{\link{do_pca}}.}
+\item{x}{The object returned by the function \code{\link{do_pca}}.}
 }
 \value{
 A ggplot object.

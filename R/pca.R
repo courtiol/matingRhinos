@@ -24,7 +24,7 @@
 #' 
 do_pca <- function(data) {
   pca_horn <- stats::prcomp(~ Circ_1 + Length_1 + Circ_2 + Length_2, data = data, scale. = TRUE)
-  var_expl <- pca_horn$sdev^2/sum(pca_horn$sdev^2) ## same as eigen of crossprod of x
+  var_expl <- pca_horn$sdev^2/sum(pca_horn$sdev^2)
   cum_var_expl <- cumsum(var_expl)
   data$PC2 <- data$PC1 <- NA
   complete <- rownames(data)[match(rownames(pca_horn$x), rownames(data))]

@@ -2,6 +2,5 @@
 .DS_Store
 *.Rproj
 tests/
-prepare_data/
 .Rbuildignore
 readme.html

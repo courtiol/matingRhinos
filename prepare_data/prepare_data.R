@@ -12,8 +12,8 @@ females %>% group_by(Mat_succ, Rep_succ, Cohort) %>% summarize(Count = n()) %>% 
 females
 females_agg
 
-save(males, file = "males.rda", compress = "xz")
-save(females, file = "females.rda", compress = "xz")
+save(males, file = "./data/males.rda", compress = "xz")
+save(females, file = "./data/females.rda", compress = "xz")
 
-save(males_agg, file = "males_agg.rda", compress = "xz")
-save(females_agg, file = "females_agg.rda", compress = "xz")
+save(males_agg, file = "./data/males_agg.rda", compress = "xz")
+save(females_agg, file = "./data/females_agg.rda", compress = "xz")

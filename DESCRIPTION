@@ -10,6 +10,12 @@ Description: This R package aims at providing the data and documenting the
     R code behind the analysis of the paper entitled "Mate choice, 
     reproductive success and inbreeding in white rhinos" by Kretzschmar Petra 
     et al. (in prep). This package has not been conceived for general use.
+Imports:
+    cowplot,
+    ggplot2,
+    ggforce
+Depends:
+    R (>= 2.10)
 License: GPL (>= 2)
 Encoding: UTF-8
 LazyData: true

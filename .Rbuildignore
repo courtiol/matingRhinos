@@ -1,0 +1,18 @@
+## This file defines which files must be discarded before building the package
+
+### System file(s)
+
+^.*\.Rproj$
+^.*\.DS_Store$
+^\.Rproj\.user$
+
+### Local or private file(s)
+
+tests/
+prepare_data/
+figures/
+
+### GitHub file(s)
+
+readme.Rmd
+readme.html

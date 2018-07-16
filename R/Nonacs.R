@@ -1,25 +1,88 @@
 #' Compute the the binomial skew index (B) of Nonacs
-#' 
-#' This function computes the Nonacs' binomial skew index. Nonacs defines it as an index 
-#' ``based on the observed variance in a group corrected by the expected variance if 
-#' each member had an equal probability of gaining any given group benefit or reproductive opportunity.''
+#'
+#' This function computes the Nonacs' binomial skew index. Nonacs defines it as
+#' an index ``based on the observed variance in a group corrected by the
+#' expected variance if each member had an equal probability of gaining any
+#' given group benefit or reproductive opportunity.''
 #'
 #' @param benef The vector of benefits (i.e. mating or reproductive success).
-#' @param time The vector of time-in (i.e. the time each individual spent in the group).
+#' @param time The vector of time-in (i.e. the time each individual spent in the
+#'   group).
 #'
-#' @return
+#' @return The observed Nonacs' binomial skew index value
 #' @export
-#' @references
-#' Nonacs, P. (2000). Measuring and using skew in the study of social behavior
-#' and evolution. The American Naturalist, 156(6), 577-589.
+#' @references Nonacs, P. (2000). Measuring and using skew in the study of
+#' social behavior and evolution. The American Naturalist, 156(6), 577-589.
+#' 
+#' @seealso \code{\link{test_Nonacs}}
 #'
 #' @examples
-#' Nonacs(benef = c(1, 1, 1), time = c(1, 1, 1))
+#' compute_Nonacs(benef = c(1, 1, 5), time = c(1, 1, 1))
 #' 
-Nonacs <- function(benef, time) {
+compute_Nonacs <- function(benef, time) {
   K <- sum(benef)
   p <- benef/K
   Nt <- sum(time)
   Nmax <- max(time)
-  sum((p - time/Nt)^2) - (1 - 1/(Nt/Nmax))/K
+  var_raw <- sum((p - time/Nt)^2)
+  correction <- (1 - 1/(Nt/Nmax))/K
+  B <- var_raw - correction
+  return(B)
 }
+
+
+#' Test the significance of the Nonacs' binomial skew index
+#'
+#' This functions compare the observed values of the Nonacs' binomial skew index
+#' to expectation under the null hypothesis of a contribution to the mating or
+#' breeding pool proportional to the time spent in the group.
+#'
+#' @inheritParams compute_Nonacs
+#' @param nsim The number of simulation to run.
+#' @param keep_H0 A boolean indicating whether to export the values of B under
+#'   the null hypothesis.
+#'
+#' @return A list with the observed Nonacs' binomial skew index value, its
+#'   corresponding p-value and (optionally) the values computed on data
+#'   simulated under the null hypothesis.
+#' @export
+#' 
+#' @seealso \code{\link{compute_Nonacs}}
+#' 
+#' @examples
+#' test_Nonacs(benef = males$Rep_succ, time = males$Time)
+#' 
+test_Nonacs <- function(benef, time, nsim = 1e5L, keep_H0 = FALSE) {
+  Obs <- compute_Nonacs(benef = benef, time = time)
+  H0 <- replicate(nsim, {
+    benef_no_skew <- as.numeric(stats::rmultinom(n = 1, size = sum(benef), prob = time/sum(time)))
+    compute_Nonacs(benef = benef_no_skew, time = time)
+  })
+  pv <- (sum(H0 > Obs) + 1) / (nsim + 1)
+ out <- list(B_obs = Obs, p = pv)
+ if (keep_H0) {
+   out[["B_H0"]] <- H0
+ }
+ return(out)
+}
+
+
+
+
+# 
+# if (plot & require(ggplot2)) {
+#   #hist(H0, xlim = range(c(Obs, H0)), nclass = 100, main = "", las = 1, xlab = "B")
+#   #abline(v = Obs, lty = 2, col = 2, lwd = 2)
+#   hist <- ggplot() + 
+#     geom_histogram(aes(x = H0), fill = "lightgrey", colour = "grey") +
+#     labs(x = "Nonac's binomial skew index (B)", y = "Number of simulations | H0") +
+#     geom_vline(aes(xintercept = Obs), colour = "red", lwd = 1, lty = 2) +
+#     scale_x_continuous(limits = limits, breaks = seq(-0.2, 0.2, by = 0.04)) +
+#     theme_classic() +
+#     theme(plot.margin = unit(c(10, 4, 5, 1), "mm"))
+#   r <- ggplot_build(hist)$layout$panel_scales_y[[1]]$range$range
+#   pos_y <- (max(r) - min(r))*0.8
+#   hist <- hist + geom_text(aes(x = Obs + (limits[2] - limits[1])*1/4, y = pos_y, label = paste("p-v = ", pv)),
+#                            colour = "red", vjust = 0)
+#   print(hist)
+# }

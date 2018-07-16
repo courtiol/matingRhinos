@@ -6,7 +6,7 @@
 #' - male cohort' combination (one for both sexes). The
 #' aggregated dataset is used for ploting only.
 #' 
-#' @name males
+#' @name datasets
 #' @aliases males females rhinos_agg
 #' @docType data
 #' @format A \var{dataframe}.

@@ -8,6 +8,8 @@
 #' @param benef The vector of benefits (i.e. mating or reproductive success).
 #' @param time The vector of time-in (i.e. the time each individual spent in the
 #'   group).
+#' 
+#' @aliases compute_Nonacs Nonacs
 #'
 #' @return The observed Nonacs' binomial skew index value
 #' @export

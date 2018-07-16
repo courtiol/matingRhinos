@@ -2,6 +2,7 @@
 % Please edit documentation in R/Nonacs.R
 \name{compute_Nonacs}
 \alias{compute_Nonacs}
+\alias{Nonacs}
 \title{Compute the the binomial skew index (B) of Nonacs}
 \usage{
 compute_Nonacs(benef, time)

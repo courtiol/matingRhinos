@@ -32,6 +32,7 @@
 #' 
 #'
 #' @keywords package
+#' 
 #' @examples
 #' 
 #' 
@@ -85,3 +86,4 @@
 #' figure_pca(data = males, savePDF = save_figures_on_disk)
 #'
 #'
+NULL

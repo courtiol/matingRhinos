@@ -9,6 +9,7 @@
 #' @return A ggplot object.
 #' @import ggplot2
 #' @export
+#' @seealso \code{\link{figure_bateman}}
 #'
 #' @examples
 #' plot_bateman(data_agg = rhinos_agg, sex = "males")

@@ -57,6 +57,7 @@ plot_bateman <- function(data_agg, sex) {
 #' It is a wrapper around the function \code{\link{plot_bateman}}.
 #'
 #' @inheritParams figure_pca
+#' @inheritParams plot_bateman
 #' @seealso \code{\link{plot_bateman}}
 #' @export
 #'
@@ -64,8 +65,8 @@ plot_bateman <- function(data_agg, sex) {
 #' figure_bateman(data_agg = rhinos_agg)
 #' 
 figure_bateman <- function(data_agg, savePDF = FALSE) {
-  gg1 <- plot_bateman(data_agg = rhinos_agg, sex = "males")
-  gg2 <- plot_bateman(data_agg = rhinos_agg, sex = "females")
+  gg1 <- plot_bateman(data_agg = data_agg, sex = "males")
+  gg2 <- plot_bateman(data_agg = data_agg, sex = "females")
   pannel_bateman <- cowplot::plot_grid(gg1,
                                    gg2,
                                    nrow = 1,

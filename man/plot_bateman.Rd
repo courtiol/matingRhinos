@@ -4,10 +4,12 @@
 \alias{plot_bateman}
 \title{Plot the relationship between mating and reproductive success}
 \usage{
-plot_bateman(data_agg)
+plot_bateman(data_agg, sex)
 }
 \arguments{
 \item{data_agg}{A dataframe of aggregated data.}
+
+\item{sex}{The sex of the rhinos to plot ('males' or 'females').}
 }
 \value{
 A ggplot object.
@@ -17,6 +19,10 @@ This function creates a plot of the relationship between mating and
 reproductive success.
 }
 \examples{
-plot_bateman(data_agg = males_agg)
+plot_bateman(data_agg = rhinos_agg, sex = "males")
+plot_bateman(data_agg = rhinos_agg, sex = "females")
 
+}
+\seealso{
+\code{\link{figure_bateman}}
 }

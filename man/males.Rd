@@ -4,22 +4,20 @@
 \name{males}
 \alias{males}
 \alias{females}
-\alias{males_agg}
-\alias{females_agg}
+\alias{rhinos_agg}
 \title{The datasets}
 \format{A \var{dataframe}.}
 \description{
-Those 4 datasets are those used in the paper. There are two datasets
-providing individual-level data (one for males, one for females) and two
+Those 3 datasets are those used in the paper. There are two datasets
+providing individual-level data (one for males, one for females) and one
 datasets providing data aggregated by 'mating success - reproductive success
-- male cohort' combination (also one for males and one for females). The
-aggregated data are used for ploting only.
+- male cohort' combination (one for both sexes). The
+aggregated dataset is used for ploting only.
 }
 \examples{
 males
 females
-males_agg
-females_agg
+rhinos_agg
 }
 \references{
 This study.

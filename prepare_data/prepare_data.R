@@ -15,5 +15,11 @@ females_agg
 save(males, file = "./data/males.rda", compress = "xz")
 save(females, file = "./data/females.rda", compress = "xz")
 
-save(males_agg, file = "./data/males_agg.rda", compress = "xz")
-save(females_agg, file = "./data/females_agg.rda", compress = "xz")
+males_agg$Sex <- "males"
+females_agg$Sex <- "females"
+
+rhinos_agg <- bind_rows(males_agg, females_agg)
+rhinos_agg$Sex <- factor(rhinos_agg$Sex)
+str(rhinos_agg)
+
+save(rhinos_agg, file = "./data/rhinos_agg.rda", compress = "xz")

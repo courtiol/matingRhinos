@@ -1,13 +1,13 @@
 #' The datasets
 #'
-#' Those 4 datasets are those used in the paper. There are two datasets
-#' providing individual-level data (one for males, one for females) and two
+#' Those 3 datasets are those used in the paper. There are two datasets
+#' providing individual-level data (one for males, one for females) and one
 #' datasets providing data aggregated by 'mating success - reproductive success
-#' - male cohort' combination (also one for males and one for females). The
-#' aggregated data are used for ploting only.
+#' - male cohort' combination (one for both sexes). The
+#' aggregated dataset is used for ploting only.
 #' 
 #' @name males
-#' @aliases males females males_agg females_agg
+#' @aliases males females rhinos_agg
 #' @docType data
 #' @format A \var{dataframe}.
 #' @references This study.
@@ -15,6 +15,5 @@
 #' @examples
 #' males
 #' females
-#' males_agg
-#' females_agg
+#' rhinos_agg
 NULL

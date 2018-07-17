@@ -4,7 +4,7 @@
 \alias{test_NonacsB}
 \title{Test the significance of the Nonacs' binomial skew index}
 \usage{
-test_NonacsB(benef, time, nsim = 100000L, keep_H0 = FALSE)
+test_NonacsB(benef, time, nsim = 100000L, keep_H0 = FALSE, digits = Inf)
 }
 \arguments{
 \item{benef}{The vector of benefits (i.e. mating or reproductive success).}
@@ -16,6 +16,8 @@ group).}
 
 \item{keep_H0}{A boolean indicating whether to export the values of B under
 the null hypothesis.}
+
+\item{digits}{The number of digits to keep.}
 }
 \value{
 A list with the observed Nonacs' binomial skew index value, its

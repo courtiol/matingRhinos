@@ -4,18 +4,21 @@
 \alias{figure_NonacsB}
 \title{Create the figure showing the results of the Nonacs' binomial skew analysis}
 \usage{
-figure_NonacsB(data_males, data_females, savePDF = FALSE)
+figure_NonacsB(data_males, data_females, savePDF = FALSE, seed = 1L)
 }
 \arguments{
 \item{data_males}{The dataset for males.}
 
-\item{data_females}{The dtaset for females.}
+\item{data_females}{The dataset for females.}
 
 \item{savePDF}{A boolean indicating whether to create a PDF of the plot in the
 current working directory (TRUE) or not (FALSE, default).}
+
+\item{seed}{The seed for the random number generator.}
 }
 \description{
-Create the figure showing the results of the Nonacs' binomial skew analysis
+This function creates the figure showing the results of the Nonacs' binomial skew analysis for both sexes.
+It is a wrapper around the function \code{\link{plot_NonacsB}}.
 }
 \examples{
 figure_NonacsB(data_males = males, data_females = females)

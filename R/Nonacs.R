@@ -43,6 +43,7 @@ compute_NonacsB <- function(benef, time) {
 #' @param nsim The number of simulation to run.
 #' @param keep_H0 A boolean indicating whether to export the values of B under
 #'   the null hypothesis.
+#' @param digits The number of digits to keep.
 #'
 #' @return A list with the observed Nonacs' binomial skew index value, its
 #'   corresponding p-value and (optionally) the values computed on data
@@ -54,14 +55,14 @@ compute_NonacsB <- function(benef, time) {
 #' @examples
 #' test_NonacsB(benef = males$Rep_succ, time = males$Time)
 #' 
-test_NonacsB <- function(benef, time, nsim = 1e5L, keep_H0 = FALSE) {
+test_NonacsB <- function(benef, time, nsim = 1e5L, keep_H0 = FALSE, digits = Inf) {
   Obs <- compute_NonacsB(benef = benef, time = time)
   H0 <- replicate(nsim, {
     benef_no_skew <- as.numeric(stats::rmultinom(n = 1, size = sum(benef), prob = time/sum(time)))
     compute_NonacsB(benef = benef_no_skew, time = time)
   })
   pv <- (sum(H0 > Obs) + 1) / (nsim + 1)
- out <- list(B_obs = Obs, p = pv)
+ out <- list(B_obs = signif(Obs, digits = digits), p = signif(pv, digits = digits))
  if (keep_H0) {
    out[["B_H0"]] <- H0
  }
@@ -132,26 +133,26 @@ figure_NonacsB <- function(data_males, data_females, savePDF = FALSE, seed = 1L)
   gg2 <- plot_NonacsB(x = femalesMat)
   gg3 <- plot_NonacsB(x = malesRep)
   gg4 <- plot_NonacsB(x = femalesRep)
-  pannel_pca <- cowplot::plot_grid(gg1, gg2, gg3, gg4,
-                                   nrow = 2,
-                                   labels = c("A. Males mating success",
-                                              "B. Females mating success",
-                                              "C. Males reproductive success",
-                                              "D. Females reproductive success"),
-                                   label_x = 0.02,
-                                   label_y = 1,
-                                   hjust = 0)
-  print(pannel_pca)
+  pannel <- cowplot::plot_grid(gg1, gg2, gg3, gg4,
+                               nrow = 2,
+                               labels = c("A. Males mating success",
+                                          "B. Females mating success",
+                                          "C. Males reproductive success",
+                                          "D. Females reproductive success"),
+                               label_x = 0.02,
+                               label_y = 1,
+                               hjust = 0)
+  print(pannel)
   if (savePDF) {
     if (!dir.exists("./figures")) {
       dir.create("./figures")
     }
     cowplot::ggsave(filename = "./figures/figure_NonacsB.pdf",
-                    plot = pannel_pca,
+                    plot = pannel,
                     width = 12*2,
                     height = 11*2,
                     units = "cm")
-    message("figure_bateman.pdf created and stored in directory 'figures'!")
+    message("figure_NonacsB.pdf created and stored in directory 'figures'!")
   }
   return(invisible(NULL))
 }

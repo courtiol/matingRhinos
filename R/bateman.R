@@ -67,21 +67,21 @@ plot_bateman <- function(data_agg, sex) {
 figure_bateman <- function(data_agg, savePDF = FALSE) {
   gg1 <- plot_bateman(data_agg = data_agg, sex = "males")
   gg2 <- plot_bateman(data_agg = data_agg, sex = "females")
-  pannel_bateman <- cowplot::plot_grid(gg1,
-                                   gg2,
-                                   nrow = 1,
-                                   labels = c("A. Males", "B. Females"),
-                                   label_x = 0.02,
-                                   label_y = 1,
-                                   hjust = 0) 
-  print(pannel_bateman)
+  pannel <- cowplot::plot_grid(gg1,
+                               gg2,
+                               nrow = 1,
+                               labels = c("A. Males", "B. Females"),
+                               label_x = 0.02,
+                               label_y = 1,
+                               hjust = 0) 
+  print(pannel)
   
   if (savePDF) {
     if (!dir.exists("./figures")) {
       dir.create("./figures")
     }
     cowplot::ggsave(filename = "./figures/figure_bateman.pdf",
-                    plot = pannel_bateman,
+                    plot = pannel,
                     width = 12*2,
                     height = 15,
                     units = "cm")

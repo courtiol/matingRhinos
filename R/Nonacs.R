@@ -87,7 +87,7 @@ test_NonacsB <- function(benef, time, nsim = 1e5L, keep_H0 = FALSE) {
 #' malesRep <- test_NonacsB(benef = males$Rep_succ, time = males$Time, keep_H0 = TRUE)
 #' plot_NonacsB(x = malesRep)
 #' 
-plot_NonacsB <- function(x, limits = c(-0.04, 0.08)) {
+plot_NonacsB <- function(x, limits = c(-0.02, 0.07)) {
   if (is.null(x$B_H0)) {
     stop("The object 'x' is missing an element 'B_H0', rerun the function 'test_NonacsB()' with argument 'keep_H0 = TRUE'")
   }
@@ -95,22 +95,26 @@ plot_NonacsB <- function(x, limits = c(-0.04, 0.08)) {
    geom_histogram(aes(x = x$B_H0), fill = "lightgrey", colour = "grey") +
    labs(x = "Nonac's binomial skew index (B)", y = "Number of simulations | H0") +
    geom_vline(aes(xintercept = x$B_obs), colour = "red", lwd = 1, lty = 2) +
-   scale_x_continuous(limits = limits, breaks = seq(-0.2, 0.2, by = 0.04)) +
+   scale_x_continuous(limits = limits, breaks = seq(-0.2, 0.2, by = 0.02)) +
    theme_classic() +
-   theme(plot.margin = unit(c(10, 4, 5, 1), "mm"))
+   theme(plot.margin = unit(c(10, 4, 5, 1), "mm"), axis.ticks.y = element_blank(), axis.text.y = element_blank())
   r <- ggplot_build(gg)$layout$panel_scales_y[[1]]$range$range
   pos_y <- (max(r) - min(r))*0.8
   gg <- gg + geom_text(aes(x = x$B_obs + (limits[2] - limits[1])*1/4, y = pos_y,
-                           label = paste("p-v = ", signif(x$p, digits = 3L))),
+                           label = paste("p = ", signif(x$p, digits = 3L))),
                        colour = "red", vjust = 0)
   return(gg)
 }
 
 
 #' Create the figure showing the results of the Nonacs' binomial skew analysis
+#' 
+#' This function creates the figure showing the results of the Nonacs' binomial skew analysis for both sexes.
+#' It is a wrapper around the function \code{\link{plot_NonacsB}}.
 #'
 #' @param data_males The dataset for males.
-#' @param data_females The dtaset for females.
+#' @param data_females The dataset for females.
+#' @param seed The seed for the random number generator.
 #' @inheritParams figure_pca
 #'
 #' @export
@@ -118,7 +122,8 @@ plot_NonacsB <- function(x, limits = c(-0.04, 0.08)) {
 #' @examples
 #' figure_NonacsB(data_males = males, data_females = females)
 #' 
-figure_NonacsB <- function(data_males, data_females, savePDF = FALSE) {
+figure_NonacsB <- function(data_males, data_females, savePDF = FALSE, seed = 1L) {
+  set.seed(seed = seed)
   malesMat   <- test_NonacsB(benef = data_males$Mat_succ, time = data_males$Time, keep_H0 = TRUE)
   femalesMat <- test_NonacsB(benef = data_females$Mat_succ, time = data_females$Time, keep_H0 = TRUE)
   malesRep   <- test_NonacsB(benef = data_males$Rep_succ, time = data_males$Time, keep_H0 = TRUE)

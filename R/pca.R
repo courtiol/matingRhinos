@@ -91,20 +91,20 @@ figure_pca <- function(data, savePDF = FALSE) {
   pca_C2_males <- do_pca(data[data$Cohort == "C2", ])
   gg1 <- plot_pca(pca_C1_males)
   gg2 <- plot_pca(pca_C2_males)
-  pannel_pca <- cowplot::plot_grid(gg1,
-                                   gg2,
-                                   nrow = 1,
-                                   labels = c("A. Males C1", "B. Males C2"),
-                                   label_x = 0.02,
-                                   label_y = 1,
-                                   hjust = 0)
-  print(pannel_pca)
+  pannel <- cowplot::plot_grid(gg1,
+                               gg2,
+                               nrow = 1,
+                               labels = c("A. Males C1", "B. Males C2"),
+                               label_x = 0.02,
+                               label_y = 1,
+                               hjust = 0)
+  print(pannel)
   if (savePDF) {
     if (!dir.exists("./figures")) {
       dir.create("./figures")
     }
     cowplot::ggsave(filename = "./figures/figure_pca.pdf",
-                    plot = pannel_pca,
+                    plot = pannel,
                     width = 12*2,
                     height = 12,
                     units = "cm")

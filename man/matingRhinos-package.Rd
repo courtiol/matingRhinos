@@ -42,6 +42,26 @@ save_figures_on_disk <- FALSE # export figures on drive?
 
 
 
+###############################################################
+##  Nonacs' skew analysis of mating and reproductive success ##
+###############################################################
+
+### 1. Computing the skewness tests:
+
+set.seed(1L) ## set seed random generator for reproducible results
+test_NonacsB(benef = males$Mat_succ, time = males$Time, digits = 3L)
+test_NonacsB(benef = females$Mat_succ, time = females$Time, digits = 3L)
+
+test_NonacsB(benef = males$Rep_succ, time = males$Time, digits = 3L)
+test_NonacsB(benef = females$Rep_succ, time = females$Time, digits = 3L)
+
+
+### 2. Creating the figure pannel:
+
+figure_NonacsB(data_males = males, data_females = females, savePDF = save_figures_on_disk)    
+
+
+
 ###########################################################
 ##  Relationship between mating and reproductive success ##
 ###########################################################

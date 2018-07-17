@@ -5,7 +5,7 @@
 \title{Plot the result of the null hypothesis testing of the Nonacs' binomial skew
 index}
 \usage{
-plot_NonacsB(x, limits = c(-0.04, 0.12))
+plot_NonacsB(x, limits = c(-0.04, 0.08))
 }
 \arguments{
 \item{x}{The object returned by the function \code{\link{test_NonacsB}}}

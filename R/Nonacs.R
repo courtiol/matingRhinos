@@ -87,7 +87,7 @@ test_NonacsB <- function(benef, time, nsim = 1e5L, keep_H0 = FALSE) {
 #' malesRep <- test_NonacsB(benef = males$Rep_succ, time = males$Time, keep_H0 = TRUE)
 #' plot_NonacsB(x = malesRep)
 #' 
-plot_NonacsB <- function(x, limits = c(-0.04, 0.12)) {
+plot_NonacsB <- function(x, limits = c(-0.04, 0.08)) {
   if (is.null(x$B_H0)) {
     stop("The object 'x' is missing an element 'B_H0', rerun the function 'test_NonacsB()' with argument 'keep_H0 = TRUE'")
   }

@@ -78,7 +78,7 @@ test_NonacsB <- function(benef, time, nsim = 1e5L, keep_H0 = FALSE, digits = Inf
 #' the Nonacs' binomial skew index using the package ggplot2.
 #'
 #' @param x The object returned by the function \code{\link{test_NonacsB}}
-#' @param limits 
+#' @inheritParams plot_relatedness 
 #'
 #' @return A ggplot object.
 #' @export

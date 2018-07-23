@@ -3,8 +3,8 @@
 #' This function creates a plot of the distribution of relatedness using the
 #' package ggplot2.
 #' 
-#' @param relatedness 
-#' @param ID 
+#' @param data The dataset
+#' @inheritParams plot_relatedness
 #'
 #' @return A ggplot object.
 #' @import ggplot2
@@ -12,16 +12,20 @@
 #' @seealso \code{\link{figure_relatedness}}
 #'
 #' @examples
-#' plot_relatedness(relatedness = males$Related[males$Cohort == "C1"], ID = males$No[males$Cohort == "C1"])
-#' 
-plot_relatedness <- function(relatedness, ID, limits = c(-0.25, 0.50)) {
-  gg <- ggplot(data = data.frame(y = relatedness, x = ID), aes(y = y, x = ID)) +
+#' plot_relatedness(data = males[males$Cohort == "C1", ])
+#'
+plot_relatedness <- function(data, limits = c(-0.45, 0.45)) {
+  data <- data[!is.na(data$Related_mean), ]
+  gg <- ggplot(data = data, aes(y = Related_mean, x = No)) +
     geom_bar(stat = "identity", fill = "lightgrey", width = 0.5) +
-    labs(y = "Mean relatedness to XXX") +
-    geom_hline(yintercept = 0) +
+    labs(y = "Mean relatedness to females", x = "Individual") +
+    geom_hline(yintercept = 0, colour = "lightgrey") +
     scale_y_continuous(limits = limits) +
     theme_classic() +
-    theme(plot.margin = unit(c(5, 2, 2, 2), "mm"))
+    geom_linerange(aes(ymax = Related_mean + qnorm(0.975)*Related_SD/sqrt(Related_N),
+                       ymin = Related_mean + qnorm(0.025)*Related_SD/sqrt(Related_N)), size = 0.5) +
+    geom_point(shape = 3, size = 0.5) +
+    theme(plot.margin = unit(c(10, 8, 2, 2), "mm"))
   return(gg)
 }
 
@@ -40,8 +44,8 @@ plot_relatedness <- function(relatedness, ID, limits = c(-0.25, 0.50)) {
 #' figure_relatedness(data = males)
 #' 
 figure_relatedness <- function(data, savePDF = FALSE) {
-  gg1 <- plot_relatedness(relatedness = data$Related[males$Cohort == "C1"], ID = data$No[males$Cohort == "C1"])
-  gg2 <- plot_relatedness(relatedness = data$Related[males$Cohort == "C2"], ID = data$No[males$Cohort == "C2"])
+  gg1 <- plot_relatedness(data = males[males$Cohort == "C1", ])
+  gg2 <- plot_relatedness(data = males[males$Cohort == "C2", ])
   pannel <- cowplot::plot_grid(gg1,
                                gg2,
                                nrow = 1,
@@ -58,7 +62,7 @@ figure_relatedness <- function(data, savePDF = FALSE) {
     cowplot::ggsave(filename = "./figures/figure_relatedness.pdf",
                     plot = pannel,
                     width = 12*2,
-                    height = 15,
+                    height = 12,
                     units = "cm")
     message("figure_relatedness.pdf created and stored in directory 'figures'!")
   }

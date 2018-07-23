@@ -74,7 +74,7 @@ cor.test(~ Mat_succ + Rep_succ, data = males[males$Cohort == "C2", ], method = "
  
 ### 2. Creating the figure pannel:
 
-figure_bateman(data_agg = rhinos_agg, savePDF = save_figures_on_disk)      
+figure_Bateman(data_agg = rhinos_agg, savePDF = save_figures_on_disk)      
 
 
 

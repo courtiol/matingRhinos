@@ -9,13 +9,13 @@
 #' @return A ggplot object.
 #' @import ggplot2
 #' @export
-#' @seealso \code{\link{figure_bateman}}
+#' @seealso \code{\link{figure_Bateman}}
 #'
 #' @examples
-#' plot_bateman(data_agg = rhinos_agg, sex = "males")
-#' plot_bateman(data_agg = rhinos_agg, sex = "females")
+#' plot_Bateman(data_agg = rhinos_agg, sex = "males")
+#' plot_Bateman(data_agg = rhinos_agg, sex = "females")
 #' 
-plot_bateman <- function(data_agg, sex) {
+plot_Bateman <- function(data_agg, sex) {
   if (!sex %in% c("males", "females")) stop("The argument sex must be 'males' or 'females'.")
   if (sex == "males") {
     steps <- 2
@@ -54,19 +54,19 @@ plot_bateman <- function(data_agg, sex) {
 #' Create the figure showing the relationship between mating and reproductive success for both sexes
 #' 
 #' This function creates the figure showing the results of the the relationship between mating and reproductive success for both sexes.
-#' It is a wrapper around the function \code{\link{plot_bateman}}.
+#' It is a wrapper around the function \code{\link{plot_Bateman}}.
 #'
 #' @inheritParams figure_pca
-#' @inheritParams plot_bateman
-#' @seealso \code{\link{plot_bateman}}
+#' @inheritParams plot_Bateman
+#' @seealso \code{\link{plot_Bateman}}
 #' @export
 #'
 #' @examples
-#' figure_bateman(data_agg = rhinos_agg)
+#' figure_Bateman(data_agg = rhinos_agg)
 #' 
-figure_bateman <- function(data_agg, savePDF = FALSE) {
-  gg1 <- plot_bateman(data_agg = data_agg, sex = "males")
-  gg2 <- plot_bateman(data_agg = data_agg, sex = "females")
+figure_Bateman <- function(data_agg, savePDF = FALSE) {
+  gg1 <- plot_Bateman(data_agg = data_agg, sex = "males")
+  gg2 <- plot_Bateman(data_agg = data_agg, sex = "females")
   pannel <- cowplot::plot_grid(gg1,
                                gg2,
                                nrow = 1,
@@ -80,12 +80,12 @@ figure_bateman <- function(data_agg, savePDF = FALSE) {
     if (!dir.exists("./figures")) {
       dir.create("./figures")
     }
-    cowplot::ggsave(filename = "./figures/figure_bateman.pdf",
+    cowplot::ggsave(filename = "./figures/figure_Bateman.pdf",
                     plot = pannel,
                     width = 12*2,
                     height = 15,
                     units = "cm")
-    message("figure_bateman.pdf created and stored in directory 'figures'!")
+    message("figure_Bateman.pdf created and stored in directory 'figures'!")
   }
   return(invisible(NULL))
 }

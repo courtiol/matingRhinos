@@ -78,7 +78,7 @@
 #'  
 #' ### 2. Creating the figure pannel:
 #' 
-#' figure_bateman(data_agg = rhinos_agg, savePDF = save_figures_on_disk)      
+#' figure_Bateman(data_agg = rhinos_agg, savePDF = save_figures_on_disk)      
 #'
 #'
 #'

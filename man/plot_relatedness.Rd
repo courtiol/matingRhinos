@@ -4,12 +4,12 @@
 \alias{plot_relatedness}
 \title{Plot the distribution of relatedness}
 \usage{
-plot_relatedness(relatedness, ID, limits = c(-0.25, 0.5))
+plot_relatedness(data, limits = c(-0.45, 0.45))
 }
 \arguments{
-\item{relatedness}{}
+\item{data}{The dataset}
 
-\item{ID}{}
+\item{limits}{The limit for the y-axis of the plot}
 }
 \value{
 A ggplot object.
@@ -19,7 +19,7 @@ This function creates a plot of the distribution of relatedness using the
 package ggplot2.
 }
 \examples{
-plot_relatedness(relatedness = males$Related[males$Cohort == "C1"], ID = males$No[males$Cohort == "C1"])
+plot_relatedness(data = males[males$Cohort == "C1", ])
 
 }
 \seealso{

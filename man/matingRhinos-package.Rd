@@ -102,6 +102,19 @@ cor.test(~ PC1 + Rep_succ, data = pca_C2_males$data, method = "spearman")
 figure_pca(data = males, savePDF = save_figures_on_disk)
 
 
+
+#####################################################################
+##  Testosterone as a correlate of mating and reproductive success ##
+#####################################################################
+
+### 1. Computing the correlations and testing them:
+
+cor.test(~ Testo_mean + Mat_succ, data = males[males$Cohort == "C1", ], method = "spearman")
+cor.test(~ Testo_mean + Rep_succ, data = males[males$Cohort == "C1", ], method = "spearman")
+cor.test(~ Testo_mean + Mat_succ, data = males[males$Cohort == "C2", ], method = "spearman")
+
+
+
 }
 \references{
 Kretzschmar Petra et al. (in prep)

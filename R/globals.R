@@ -1,0 +1,1 @@
+utils::globalVariables(c("Testo_mean", "Testo_SD", "Testo_N", "Related_mean", "Related_SD", "Related_N", "No"))

@@ -4,7 +4,7 @@
 #' package ggplot2.
 #' 
 #' @param data The dataset
-#' @inheritParams plot_relatedness
+#' @param limits The limit for the y-axis of the plot
 #'
 #' @return A ggplot object.
 #' @import ggplot2
@@ -22,8 +22,8 @@ plot_relatedness <- function(data, limits = c(-0.45, 0.45)) {
     geom_hline(yintercept = 0, colour = "lightgrey") +
     scale_y_continuous(limits = limits) +
     theme_classic() +
-    geom_linerange(aes(ymax = Related_mean + qnorm(0.975)*Related_SD/sqrt(Related_N),
-                       ymin = Related_mean + qnorm(0.025)*Related_SD/sqrt(Related_N)), size = 0.5) +
+    geom_linerange(aes(ymax = Related_mean + stats::qnorm(0.975)*Related_SD/sqrt(Related_N),
+                       ymin = Related_mean + stats::qnorm(0.025)*Related_SD/sqrt(Related_N)), size = 0.5) +
     geom_point(shape = 3, size = 0.5) +
     theme(plot.margin = unit(c(10, 8, 2, 2), "mm"))
   return(gg)
@@ -44,8 +44,8 @@ plot_relatedness <- function(data, limits = c(-0.45, 0.45)) {
 #' figure_relatedness(data = males)
 #' 
 figure_relatedness <- function(data, savePDF = FALSE) {
-  gg1 <- plot_relatedness(data = males[males$Cohort == "C1", ])
-  gg2 <- plot_relatedness(data = males[males$Cohort == "C2", ])
+  gg1 <- plot_relatedness(data = data[data$Cohort == "C1", ])
+  gg2 <- plot_relatedness(data = data[data$Cohort == "C2", ])
   pannel <- cowplot::plot_grid(gg1,
                                gg2,
                                nrow = 1,

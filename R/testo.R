@@ -22,8 +22,8 @@ plot_testosterone <- function(data, limits = c(0, 120)) {
     geom_hline(yintercept = 0, colour = "lightgrey") +
     scale_y_continuous(limits = limits) +
     theme_classic() +
-    geom_linerange(aes(ymax = Testo_mean + qnorm(0.975)*Testo_SD/sqrt(Testo_N),
-                      ymin = Testo_mean + qnorm(0.025)*Testo_SD/sqrt(Testo_N)), size = 0.5) +
+    geom_linerange(aes(ymax = Testo_mean + stats::qnorm(0.975)*Testo_SD/sqrt(Testo_N),
+                      ymin = Testo_mean + stats::qnorm(0.025)*Testo_SD/sqrt(Testo_N)), size = 0.5) +
     geom_point(shape = 3, size = 0.5) +
     theme(plot.margin = unit(c(10, 8, 2, 2), "mm"))
   return(gg)
@@ -44,8 +44,8 @@ plot_testosterone <- function(data, limits = c(0, 120)) {
 #' figure_testosterone(data = males)
 #' 
 figure_testosterone <- function(data, savePDF = FALSE) {
-  gg1 <- plot_testosterone(data = males[males$Cohort == "C1", ])
-  gg2 <- plot_testosterone(data = males[males$Cohort == "C2", ])
+  gg1 <- plot_testosterone(data = data[data$Cohort == "C1", ])
+  gg2 <- plot_testosterone(data = data[data$Cohort == "C2", ])
   pannel <- cowplot::plot_grid(gg1,
                                gg2,
                                nrow = 1,

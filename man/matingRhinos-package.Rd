@@ -38,7 +38,7 @@ in the paper.
 
 ### Note: set the following options to TRUE or FALSE depending on what you want.
 
-save_figures_on_disk <- FALSE # export figures on drive?
+save_figures_on_disk <- TRUE # export figures on drive?
 
 
 
@@ -112,6 +112,28 @@ figure_pca(data = males, savePDF = save_figures_on_disk)
 cor.test(~ Testo_mean + Mat_succ, data = males[males$Cohort == "C1", ], method = "spearman")
 cor.test(~ Testo_mean + Rep_succ, data = males[males$Cohort == "C1", ], method = "spearman")
 cor.test(~ Testo_mean + Mat_succ, data = males[males$Cohort == "C2", ], method = "spearman")
+
+
+### 2. Creating the figure pannel:
+
+figure_testosterone(data = males, savePDF = save_figures_on_disk)
+
+
+
+####################################################################
+##  Relatedness as a correlate of mating and reproductive success ##
+####################################################################
+
+### 1. Computing the correlations and testing them:
+
+cor.test(~ Related_mean + Mat_succ, data = males[males$Cohort == "C1", ], method = "spearman")
+cor.test(~ Related_mean + Rep_succ, data = males[males$Cohort == "C1", ], method = "spearman")
+cor.test(~ Related_mean + Mat_succ, data = males[males$Cohort == "C2", ], method = "spearman")
+
+
+### 2. Creating the figure pannel:
+
+figure_relatedness(data = males, savePDF = save_figures_on_disk)
 
 
 

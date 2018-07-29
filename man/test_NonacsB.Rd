@@ -4,7 +4,8 @@
 \alias{test_NonacsB}
 \title{Test the significance of the Nonacs' binomial skew index}
 \usage{
-test_NonacsB(benef, time, nsim = 100000L, keep_H0 = FALSE, digits = Inf)
+test_NonacsB(benef, time, nsim = 100000L, keep_H0 = FALSE,
+  digits = Inf)
 }
 \arguments{
 \item{benef}{The vector of benefits (i.e. mating or reproductive success).}

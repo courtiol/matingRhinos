@@ -44,6 +44,7 @@ compute_NonacsB <- function(benef, time) {
 #' @param keep_H0 A boolean indicating whether to export the values of B under
 #'   the null hypothesis.
 #' @param digits The number of digits to keep.
+#' @param seed The seed for the random number generator.
 #'
 #' @return A list with the observed Nonacs' binomial skew index value, its
 #'   corresponding p-value and (optionally) the values computed on data
@@ -55,7 +56,8 @@ compute_NonacsB <- function(benef, time) {
 #' @examples
 #' test_NonacsB(benef = males$Rep_succ, time = males$Time)
 #' 
-test_NonacsB <- function(benef, time, nsim = 1e5L, keep_H0 = FALSE, digits = Inf) {
+test_NonacsB <- function(benef, time, nsim = 1e5L, keep_H0 = FALSE, digits = Inf, seed = 1L) {
+  set.seed(seed)
   Obs <- compute_NonacsB(benef = benef, time = time)
   H0 <- replicate(nsim, {
     benef_no_skew <- as.numeric(stats::rmultinom(n = 1, size = sum(benef), prob = time/sum(time)))
@@ -115,7 +117,6 @@ plot_NonacsB <- function(x, limits = c(-0.02, 0.07)) {
 #'
 #' @param data_males The dataset for males.
 #' @param data_females The dataset for females.
-#' @param seed The seed for the random number generator.
 #' @inheritParams figure_pca
 #'
 #' @export
@@ -123,8 +124,7 @@ plot_NonacsB <- function(x, limits = c(-0.02, 0.07)) {
 #' @examples
 #' figure_NonacsB(data_males = males, data_females = females)
 #' 
-figure_NonacsB <- function(data_males, data_females, savePDF = FALSE, seed = 1L) {
-  set.seed(seed = seed)
+figure_NonacsB <- function(data_males, data_females, savePDF = FALSE) {
   malesMat   <- test_NonacsB(benef = data_males$Mat_succ, time = data_males$Time, keep_H0 = TRUE)
   femalesMat <- test_NonacsB(benef = data_females$Mat_succ, time = data_females$Time, keep_H0 = TRUE)
   malesRep   <- test_NonacsB(benef = data_males$Rep_succ, time = data_males$Time, keep_H0 = TRUE)

@@ -3,7 +3,7 @@ rm(list = ls())
 
 ## preparing data
 males <- read.csv("./prepare_data/males.csv")
-males$No <- factor(males$No, levels = c("Am", "Ge", "Ke", "Ra", "Schr", "123", "5", "30", "60", "62", "63", "65", "66"))
+males$No <- factor(males$No, levels = c("A", "G", "K", "R", "S", "123", "5", "30", "60", "62", "63", "65", "66"))
 
 males %>% group_by(Mat_succ, Rep_succ, Cohort) %>% summarize(Count = n()) %>% as.data.frame -> males_agg
 males

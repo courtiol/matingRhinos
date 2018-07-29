@@ -28,6 +28,7 @@ plot_relatedness <- function(data, limits = c(-0.45, 0.45)) {
     theme(plot.margin = unit(c(10, 8, 2, 2), "mm"))
   return(gg)
 }
+utils::globalVariables(c("Related_mean", "Related_SD", "Related_N", "No"))
 
 
 #' Create the figure showing the distribution of relatedness

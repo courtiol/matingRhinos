@@ -2,8 +2,10 @@ library(dplyr)
 rm(list = ls())
 
 ## preparing data
-males <- read.csv("./prepare_data/males.csv")
-males$No <- factor(males$No, levels = c("A", "G", "K", "R", "S", "123", "5", "30", "60", "62", "63", "65", "66"))
+males_temp <- read.csv("./prepare_data/males.csv")
+males_temp$No <- factor(males_temp$No, levels = c("A", "G", "K", "R", "S", "123", "5", "30", "60", "62", "63", "65", "66"))
+
+males_temp %>% arrange(Cohort, No) -> males
 
 males %>% group_by(Mat_succ, Rep_succ, Cohort) %>% summarize(Count = n()) %>% as.data.frame -> males_agg
 males

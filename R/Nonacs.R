@@ -135,9 +135,9 @@ figure_NonacsB <- function(data_males, data_females, savePDF = FALSE, seed = 1L)
   gg4 <- plot_NonacsB(x = femalesRep)
   pannel <- cowplot::plot_grid(gg1, gg2, gg3, gg4,
                                nrow = 2,
-                               labels = c("A. Males mating success",
+                               labels = c("A. Males C1 & C2 mating success",
                                           "B. Females mating success",
-                                          "C. Males reproductive success",
+                                          "C. Males C1 & C2 reproductive success",
                                           "D. Females reproductive success"),
                                label_x = 0.02,
                                label_y = 1,

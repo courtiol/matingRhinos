@@ -21,14 +21,14 @@ plot_Bateman <- function(data_agg, sex) {
     steps <- 2
     counts_nice <- c(4, seq(4, 10, length = 17)[2])
     data_agg <- data_agg[data_agg$Sex == "males", ]
-    do_guide1 <- guide_legend(override.aes = list(size = 10))
+    do_guide1 <- guide_legend(override.aes = list(size = 5))
     do_guide2 <- FALSE
   } else {
     steps <- 1
     counts_nice <- c(4, 10)
     data_agg <- data_agg[data_agg$Sex == "females", ]
     do_guide1 <- FALSE
-    do_guide2 <- guide_legend(override.aes = list(shape = 1))
+    do_guide2 <- guide_legend(override.aes = list(shape = 22, fill = "black"))
   }
   Mat_succ <- Rep_succ <- Cohort <- Count <- NULL ## to please R CMD check
   y_max_nice <- ifelse(max(data_agg$Mat_succ) %% steps == 0, max(data_agg$Rep_succ), max(data_agg$Rep_succ))

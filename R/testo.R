@@ -3,7 +3,6 @@
 #' This function creates a plot of the distribution of testosterone using the
 #' package ggplot2.
 #' 
-#' @param data The dataset
 #' @inheritParams plot_relatedness
 #'
 #' @return A ggplot object.
@@ -18,7 +17,7 @@ plot_testosterone <- function(data, limits = c(0, 120)) {
   data <- data[!is.na(data$Testo_mean), ]
   gg <- ggplot(data = data, aes(y = Testo_mean, x = No)) +
     geom_bar(stat = "identity", fill = "lightgrey", width = 0.5) +
-    labs(y = "Mean testosterone metababolites concentration (ng/g feces)", x = "Individual") +
+    labs(y = "Mean testosterone metababolites (ng/g feces)", x = "Individual") +
     geom_hline(yintercept = 0, colour = "lightgrey") +
     scale_y_continuous(limits = limits) +
     theme_classic() +
@@ -28,7 +27,7 @@ plot_testosterone <- function(data, limits = c(0, 120)) {
     theme(plot.margin = unit(c(10, 8, 2, 2), "mm"))
   return(gg)
 }
-
+utils::globalVariables(c("Testo_mean", "Testo_SD", "Testo_N", "No"))
 
 #' Create the figure showing the distribution of testosterone
 #'

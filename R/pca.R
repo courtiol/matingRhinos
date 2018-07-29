@@ -53,14 +53,18 @@ do_pca <- function(data) {
 #' plot_pca(pca_C2_males)
 #' 
 plot_pca <- function(x) {
-  PC1 <- PC2 <- NULL ## to please R CMD check
+  labels <- as.character(rownames(x$pca$rotation))
+  labels[labels == "Circ_1"] <- "circ. anterior horn"
+  labels[labels == "Circ_2"] <- "circ. posterior horn"
+  labels[labels == "Length_1"] <- "length anterior horn"
+  labels[labels == "Length_2"] <- "length posterior horn"
   gg <- ggplot(data = data.frame(x$pca$rotation)) +
     geom_vline(xintercept = 0, lty = 2, col = "lightgrey") +
     geom_hline(yintercept = 0, lty = 2, col = "lightgrey") +
     ggforce::geom_circle(mapping = aes(x0 = 0, y0 = 0, r = 1), lty = 3, lwd = 0.2) +
     geom_segment(mapping = aes(x = PC1, y = PC2), xend = 0, yend = 0
     ) +
-    geom_label(aes(x = PC1, y = PC2, label = rownames(x$pca$rotation))) +
+    geom_label(aes(x = PC1, y = PC2, label = labels)) +
     coord_fixed() +
     scale_y_continuous(limits = c(-1.2, 1.1), breaks = seq(-1, 1, by = 0.5)) +
     scale_x_continuous(limits = c(-1.2, 1.2), breaks = seq(-1, 1, by = 0.5)) +
@@ -70,6 +74,7 @@ plot_pca <- function(x) {
     theme(plot.margin = unit(c(5, 2, 2, 2), "mm"))
   return(gg)
 }
+utils::globalVariables(c("PC1", "PC2"))
 
 
 #' Create the figure showing the PCA results

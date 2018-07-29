@@ -5,7 +5,7 @@
 \title{Test the significance of the Nonacs' binomial skew index}
 \usage{
 test_NonacsB(benef, time, nsim = 100000L, keep_H0 = FALSE,
-  digits = Inf)
+  digits = Inf, seed = 1L)
 }
 \arguments{
 \item{benef}{The vector of benefits (i.e. mating or reproductive success).}
@@ -19,6 +19,8 @@ group).}
 the null hypothesis.}
 
 \item{digits}{The number of digits to keep.}
+
+\item{seed}{The seed for the random number generator.}
 }
 \value{
 A list with the observed Nonacs' binomial skew index value, its

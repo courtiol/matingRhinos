@@ -2,7 +2,8 @@
 
 export(compute_Bateman)
 export(compute_NonacsB)
-export(do_pca)
+export(compute_correlation)
+export(compute_pca)
 export(figure_Bateman)
 export(figure_NonacsB)
 export(figure_correlations)

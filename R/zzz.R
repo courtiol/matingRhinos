@@ -14,3 +14,14 @@
     '\n'
   )
 }
+
+.info_package <- function() {
+  print(paste("number of functions =", length(ls("package:matingRhinos"))))
+  if (requireNamespace("R.utils", quietly = TRUE)) {
+    files <- dir(paste0(system.file(package = "matingRhinos"), "/R/"))
+    filenames_R <- paste0(system.file(package = "matingRhinos"), "/R/", files)
+    lines_code <- sum(sapply(filenames_R, function(file) R.utils::countLines(file)))
+    print(paste("number of lines of code =", lines_code))
+  } else {message("Install the package R.utils for more info.")}
+  return(invisible(NULL))
+}

@@ -15,6 +15,8 @@ Imports:
     cowplot,
     ggplot2,
     ggforce
+Suggests:
+    R.utils
 Depends:
     R (>= 2.10)
 License: GPL (>= 2)

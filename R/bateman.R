@@ -53,6 +53,12 @@ compute_Bateman <- function(mating_success, reproductive_success, digits = 3L) {
 #' plot_Bateman(data_agg = rhinos_agg, sex = 'females')
 #' 
 plot_Bateman <- function(data_agg, sex) {
+  col1 <- 'red'
+  col2 <- 'blue'
+  if (!is.null(options('matingRhinos_colours')[[1]]) && !options('matingRhinos_colours')[[1]]) {
+    col1 <- 'black'
+    col2 <- 'black'
+  }
   if (!sex %in% c('males', 'females')) stop("The argument sex must be 'males' or 'females'.")
   if (sex == 'males') {
     steps <- 2
@@ -65,7 +71,7 @@ plot_Bateman <- function(data_agg, sex) {
     counts_nice <- c(4, 10)
     data_agg <- data_agg[data_agg$Sex == 'females', ]
     do_guide1 <- FALSE
-    do_guide2 <- guide_legend(override.aes = list(shape = 22, fill = 'white'))
+    do_guide2 <- guide_legend(override.aes = list(shape = 22, fill = 'white', col = col1))
   }
   Mat_succ <- Rep_succ <- Cohort <- Count <- NULL ## to please R CMD check
   y_max_nice <- ifelse(max(data_agg$Mat_succ) %% steps == 0, max(data_agg$Rep_succ), max(data_agg$Rep_succ))
@@ -73,6 +79,7 @@ plot_Bateman <- function(data_agg, sex) {
   gg <- ggplot(data = data_agg, mapping = aes(x = Mat_succ,
                                               y = Rep_succ,
                                               shape = Cohort,
+                                              colour = Cohort,
                                               size = Count,
                                               fill = Cohort)) + 
     geom_point(alpha = 0.8) +
@@ -81,6 +88,7 @@ plot_Bateman <- function(data_agg, sex) {
     scale_y_continuous(limits = c(0, y_max_nice), breaks = function(x) seq(0, x[2], by = steps)) +
     scale_shape_manual(values = c(22, 24), name = 'Cohort of males:', guide = do_guide1) +
     scale_fill_manual(values = c('white', 'white'), name = 'Cohort of males:', guide = do_guide1) +
+    scale_colour_manual(values = c(col1, col2), name = 'Cohort of males:', guide = do_guide1) +
     scale_radius(range = counts_nice, breaks = c(1, 10, 17), name = 'Number of rhinos:', guide = do_guide2) +
     theme_classic() +
     theme(plot.margin = unit(c(10, 4, 5, 1), 'mm'), legend.position = 'bottom', legend.box.margin = margin(5, 1, 1, 1, unit = 'pt'))
@@ -101,7 +109,7 @@ plot_Bateman <- function(data_agg, sex) {
 #' @examples
 #' figure_Bateman(data_agg = rhinos_agg)
 #' 
-figure_Bateman <- function(data_agg, savePDF = FALSE) {
+figure_Bateman <- function(data_agg) {
   gg1 <- plot_Bateman(data_agg = data_agg, sex = 'males')
   gg2 <- plot_Bateman(data_agg = data_agg, sex = 'females')
   pannel <- cowplot::plot_grid(gg1,
@@ -113,7 +121,7 @@ figure_Bateman <- function(data_agg, savePDF = FALSE) {
                                hjust = 0) 
   print(pannel)
   
-  if (savePDF) {
+  if (!is.null(options('matingRhinos_PDF')[[1]]) && options('matingRhinos_PDF')[[1]][[1]]) {
     if (!dir.exists('./figures')) {
       dir.create('./figures')
     }

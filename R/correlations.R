@@ -58,11 +58,18 @@ compute_correlation <- function(var1, var2, n_tests = 1L, digits = 3L) {
 #'                  xlab = 'x-axis title', ylab = 'y-axis title')
 #'
 plot_correlation <- function(data, x, y, xlab = 'x-axis title', ylab = 'y-axis title', limits = NULL) {
-  gg <- ggplot(data = data, aes(y = !!sym(y), x = !!sym(x), shape = Cohort)) +
+  col1 <- 'red'
+  col2 <- 'blue'
+  if (!is.null(options('matingRhinos_colours')[[1]]) && !options('matingRhinos_colours')[[1]]) {
+    col1 <- 'black'
+    col2 <- 'black'
+  }
+  gg <- ggplot(data = data, aes(y = !!sym(y), x = !!sym(x), shape = Cohort, col = Cohort)) +
     labs(y = ylab, x = xlab) +
     scale_y_continuous(limits = limits, breaks = function(x) seq(0, x[2], by = 2L)) +
     theme_classic() +
     scale_shape_manual(values = c(22, 24), name = 'Cohort of males:') +
+    scale_colour_manual(values = c(col1, col2), name = 'Cohort of males:') +
     geom_point(size = 9) +
     geom_text(aes(label = No)) +
     theme(plot.margin = unit(c(10, 4, 5, 1), 'mm'), legend.position = 'none', legend.box.margin = margin(5, 1, 1, 1, unit = 'pt'))
@@ -87,10 +94,10 @@ utils::globalVariables('Cohort')
 #' figure_correlations(data = males, which = 'mating')
 #' figure_correlations(data = males, which = 'repro')
 #' 
-figure_correlations <- function(data, which = c('mating', 'repro'), savePDF = FALSE) {
+figure_correlations <- function(data, which = c('mating', 'repro')) {
   if (length(which) == 2) {
-    Recall(data = data, which = which[1], savePDF = savePDF)
-    Recall(data = data, which = which[2], savePDF = savePDF)
+    Recall(data = data, which = which[1])
+    Recall(data = data, which = which[2])
     return(invisible(NULL))
   }
   if (length(which) != 1L || !which %in% c('mating', 'repro')) {
@@ -165,7 +172,7 @@ figure_correlations <- function(data, which = c('mating', 'repro'), savePDF = FA
                                label_y = 1,
                                hjust = 0)
   print(pannel)
-  if (savePDF) {
+  if (!is.null(options('matingRhinos_PDF')[[1]]) && options('matingRhinos_PDF')[[1]][[1]]) {
     if (!dir.exists('./figures')) {
       dir.create('./figures')
     }

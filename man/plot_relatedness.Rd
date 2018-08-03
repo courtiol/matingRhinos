@@ -20,6 +20,8 @@ package ggplot2.
 }
 \examples{
 plot_relatedness(data = males[males$Cohort == 'C1', ])
+plot_relatedness(data = males[males$Cohort == 'C2', ])
+plot_relatedness(data = males)
 
 }
 \seealso{

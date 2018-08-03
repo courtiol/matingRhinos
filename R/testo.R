@@ -12,13 +12,24 @@
 #'
 #' @examples
 #' plot_testosterone(data = males[males$Cohort == 'C1', ])
+#' plot_testosterone(data = males[males$Cohort == 'C2', ])
+#' plot_testosterone(data = males)
 #'
 plot_testosterone <- function(data, limits = c(0, 120)) {
+  col1 <- 'red'
+  col2 <- 'blue'
+  if (length(unique(data$Cohort)) == 1) {
+    col1 <- col2 <- ifelse(data$Cohort == 'C1', 'red', 'blue')
+  }
+  if (!is.null(options('matingRhinos_colours')[[1]]) && !options('matingRhinos_colours')[[1]]) {
+    col <- 'lightgrey'
+  }
   data <- data[!is.na(data$Testo_mean), ]
-  gg <- ggplot(data = data, aes(y = Testo_mean, x = No)) +
-    geom_bar(stat = 'identity', fill = 'lightgrey', width = 0.5) +
+  gg <- ggplot(data = data, aes(y = Testo_mean, x = No, fill = Cohort)) +
+    geom_bar(stat = 'identity', width = 0.5) +
     labs(y = 'Mean testosterone metababolites (ng/g feces)', x = 'Individual') +
     geom_hline(yintercept = 0, colour = 'lightgrey') +
+    scale_fill_manual(values = c(col1, col2), guide = FALSE) +
     scale_y_continuous(limits = limits) +
     theme_classic() +
     geom_linerange(aes(ymax = Testo_mean + stats::qnorm(0.975)*Testo_SD/sqrt(Testo_N),
@@ -42,7 +53,7 @@ utils::globalVariables(c('Testo_mean', 'Testo_SD', 'Testo_N', 'No'))
 #' @examples
 #' figure_testosterone(data = males)
 #' 
-figure_testosterone <- function(data, savePDF = FALSE) {
+figure_testosterone <- function(data) {
   gg1 <- plot_testosterone(data = data[data$Cohort == 'C1', ])
   gg2 <- plot_testosterone(data = data[data$Cohort == 'C2', ])
   pannel <- cowplot::plot_grid(gg1,
@@ -54,7 +65,7 @@ figure_testosterone <- function(data, savePDF = FALSE) {
                                hjust = 0)
   print(pannel)
   
-  if (savePDF) {
+  if (!is.null(!is.null(options('matingRhinos_PDF')[[1]]) && options('matingRhinos_PDF')[[1]][[1]]) && !is.null(options('matingRhinos_PDF')[[1]]) && options('matingRhinos_PDF')[[1]][[1]]) {
     if (!dir.exists('./figures')) {
       dir.create('./figures')
     }

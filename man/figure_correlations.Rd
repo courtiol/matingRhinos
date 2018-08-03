@@ -4,16 +4,12 @@
 \alias{figure_correlations}
 \title{Create the figures showing the correlation between mating/reproductive success and their correlates}
 \usage{
-figure_correlations(data, which = c("mating", "repro"),
-  savePDF = FALSE)
+figure_correlations(data, which = c("mating", "repro"))
 }
 \arguments{
 \item{data}{A dataframe containing the data to be processed.}
 
 \item{which}{The figure to be drawn ('mating' or 'repro').}
-
-\item{savePDF}{A boolean indicating whether to create a PDF of the plot in the
-current working directory (TRUE) or not (FALSE, default).}
 }
 \description{
 This function creates the figures showing the correlations. It is a

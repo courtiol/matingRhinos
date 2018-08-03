@@ -93,13 +93,18 @@ test_NonacsB <- function(benef, time, nsim = 1e5L, keep_H0 = FALSE, digits = Inf
 #'                           keep_H0 = TRUE))
 #' 
 plot_NonacsB <- function(x, limits = c(-0.02, 0.07)) {
+  col <- 'red'
+  if (!is.null(options('matingRhinos_colours')[[1]]) && !options('matingRhinos_colours')[[1]]) {
+    col <- 'black'
+  }
+  
   if (is.null(x$B_H0)) {
     stop("The object 'x' is missing an element 'B_H0', rerun the function 'test_NonacsB()' with argument 'keep_H0 = TRUE'")
   }
   gg <- ggplot() + 
    geom_histogram(aes(x = x$B_H0), fill = 'lightgrey', colour = 'grey') +
    labs(x = "Nonac's binomial skew index (B)", y = 'Number of simulations | H0') +
-   geom_vline(aes(xintercept = x$B_obs), colour = 'red', lwd = 1, lty = 2) +
+   geom_vline(aes(xintercept = x$B_obs), colour = col, lwd = 1, lty = 2) +
    scale_x_continuous(limits = limits, breaks = seq(-0.2, 0.2, by = 0.02)) +
    theme_classic() +
    theme(plot.margin = unit(c(10, 4, 5, 1), 'mm'), axis.ticks.y = element_blank(), axis.text.y = element_blank())
@@ -107,7 +112,7 @@ plot_NonacsB <- function(x, limits = c(-0.02, 0.07)) {
   pos_y <- (max(r) - min(r))*0.8
   gg <- gg + geom_text(aes(x = x$B_obs + (limits[2] - limits[1])*1/4, y = pos_y,
                            label = paste('p = ', signif(x$p, digits = 3L))),
-                       colour = 'red', vjust = 0)
+                       colour = col, vjust = 0)
   return(gg)
 }
 
@@ -126,7 +131,7 @@ plot_NonacsB <- function(x, limits = c(-0.02, 0.07)) {
 #' @examples
 #' figure_NonacsB(data_males = males, data_females = females)
 #' 
-figure_NonacsB <- function(data_males, data_females, savePDF = FALSE) {
+figure_NonacsB <- function(data_males, data_females) {
   malesMat   <- test_NonacsB(benef = data_males$Mat_succ, time = data_males$Time, keep_H0 = TRUE)
   femalesMat <- test_NonacsB(benef = data_females$Mat_succ, time = data_females$Time, keep_H0 = TRUE)
   malesRep   <- test_NonacsB(benef = data_males$Rep_succ, time = data_males$Time, keep_H0 = TRUE)
@@ -145,7 +150,7 @@ figure_NonacsB <- function(data_males, data_females, savePDF = FALSE) {
                                label_y = 1,
                                hjust = 0)
   print(pannel)
-  if (savePDF) {
+  if (!is.null(options('matingRhinos_PDF')[[1]]) && options('matingRhinos_PDF')[[1]][[1]]) {
     if (!dir.exists('./figures')) {
       dir.create('./figures')
     }

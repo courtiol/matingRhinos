@@ -4,15 +4,12 @@
 \alias{figure_NonacsB}
 \title{Create the figure showing the results of the Nonacs' binomial skew analysis}
 \usage{
-figure_NonacsB(data_males, data_females, savePDF = FALSE)
+figure_NonacsB(data_males, data_females)
 }
 \arguments{
 \item{data_males}{The dataset for males.}
 
 \item{data_females}{The dataset for females.}
-
-\item{savePDF}{A boolean indicating whether to create a PDF of the plot in the
-current working directory (TRUE) or not (FALSE, default).}
 }
 \description{
 This function creates the figure showing the results of the Nonacs' binomial skew analysis for both sexes.

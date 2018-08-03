@@ -4,13 +4,10 @@
 \alias{figure_Bateman}
 \title{Create the figure showing the relationship between mating and reproductive success for both sexes}
 \usage{
-figure_Bateman(data_agg, savePDF = FALSE)
+figure_Bateman(data_agg)
 }
 \arguments{
 \item{data_agg}{A dataframe of aggregated data to be processed.}
-
-\item{savePDF}{A boolean indicating whether to create a PDF of the plot in the
-current working directory (TRUE) or not (FALSE, default).}
 }
 \description{
 This function creates the figure showing the results of the the relationship between mating and reproductive success for both sexes.

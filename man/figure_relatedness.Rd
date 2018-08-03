@@ -4,13 +4,10 @@
 \alias{figure_relatedness}
 \title{Create the figure showing the distribution of relatedness}
 \usage{
-figure_relatedness(data, savePDF = FALSE)
+figure_relatedness(data)
 }
 \arguments{
 \item{data}{A dataframe containing the data to be processed.}
-
-\item{savePDF}{A boolean indicating whether to create a PDF of the plot in the
-current working directory (TRUE) or not (FALSE, default).}
 }
 \description{
 This function creates the figure showing the distribution of relatedness for

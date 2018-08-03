@@ -20,6 +20,8 @@ package ggplot2.
 }
 \examples{
 plot_testosterone(data = males[males$Cohort == 'C1', ])
+plot_testosterone(data = males[males$Cohort == 'C2', ])
+plot_testosterone(data = males)
 
 }
 \seealso{

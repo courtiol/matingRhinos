@@ -13,13 +13,24 @@
 #'
 #' @examples
 #' plot_relatedness(data = males[males$Cohort == 'C1', ])
+#' plot_relatedness(data = males[males$Cohort == 'C2', ])
+#' plot_relatedness(data = males)
 #'
 plot_relatedness <- function(data, limits = c(-0.45, 0.45)) {
+  col1 <- 'red'
+  col2 <- 'blue'
+  if (length(unique(data$Cohort)) == 1) {
+    col1 <- col2 <- ifelse(data$Cohort == 'C1', 'red', 'blue')
+  }
+  if (!is.null(options('matingRhinos_colours')[[1]]) && !options('matingRhinos_colours')[[1]]) {
+    col <- 'lightgrey'
+  }
   data <- data[!is.na(data$Related_mean), ]
-  gg <- ggplot(data = data, aes(y = Related_mean, x = No)) +
-    geom_bar(stat = 'identity', fill = 'lightgrey', width = 0.5) +
+  gg <- ggplot(data = data, aes(y = Related_mean, x = No, fill = Cohort)) +
+    geom_bar(stat = 'identity', width = 0.5) +
     labs(y = 'Mean relatedness to females', x = 'Individual') +
     geom_hline(yintercept = 0, colour = 'lightgrey') +
+    scale_fill_manual(values = c(col1, col2), guide = FALSE) +
     scale_y_continuous(limits = limits) +
     theme_classic() +
     geom_linerange(aes(ymax = Related_mean + stats::qnorm(0.975)*Related_SD/sqrt(Related_N),
@@ -44,7 +55,7 @@ utils::globalVariables(c('Related_mean', 'Related_SD', 'Related_N', 'No'))
 #' @examples
 #' figure_relatedness(data = males)
 #' 
-figure_relatedness <- function(data, savePDF = FALSE) {
+figure_relatedness <- function(data) {
   gg1 <- plot_relatedness(data = data[data$Cohort == 'C1', ])
   gg2 <- plot_relatedness(data = data[data$Cohort == 'C2', ])
   pannel <- cowplot::plot_grid(gg1,
@@ -56,7 +67,7 @@ figure_relatedness <- function(data, savePDF = FALSE) {
                                hjust = 0)
   print(pannel)
   
-  if (savePDF) {
+  if (!is.null(options('matingRhinos_PDF')[[1]]) && options('matingRhinos_PDF')[[1]][[1]]) {
     if (!dir.exists('./figures')) {
       dir.create('./figures')
     }

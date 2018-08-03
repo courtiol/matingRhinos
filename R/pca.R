@@ -53,6 +53,12 @@ compute_PCA <- function(data, digits = 3L) {
 #' plot_PCA(PCA_C2_males)
 #' 
 plot_PCA <- function(x) {
+  col <- 'black'
+  if (length(unique(x$data$Cohort)) == 1 &&
+      !is.null(options('matingRhinos_colours')[[1]]) &&
+      options('matingRhinos_colours')[[1]]) {
+    col <- ifelse(unique(x$data$Cohort) == 'C1', 'red', 'blue')
+  }
   labels <- as.character(rownames(x$PCA$rotation))
   labels[labels == 'Circ_1'] <- 'circ. anterior horn'
   labels[labels == 'Circ_2'] <- 'circ. posterior horn'
@@ -62,9 +68,10 @@ plot_PCA <- function(x) {
     geom_vline(xintercept = 0, lty = 2, col = 'lightgrey') +
     geom_hline(yintercept = 0, lty = 2, col = 'lightgrey') +
     ggforce::geom_circle(mapping = aes(x0 = 0, y0 = 0, r = 1), lty = 3, lwd = 0.2) +
-    geom_segment(mapping = aes(x = PC1, y = PC2), xend = 0, yend = 0
-    ) +
-    geom_label(aes(x = PC1, y = PC2, label = labels)) +
+    geom_segment(mapping = aes(x = PC1, y = PC2),
+                 xend = 0, yend = 0,
+                 col = col) +
+    geom_label(aes(x = PC1, y = PC2, label = labels), col = col) +
     coord_fixed() +
     scale_y_continuous(limits = c(-1.2, 1.1), breaks = seq(-1, 1, by = 0.5)) +
     scale_x_continuous(limits = c(-1.2, 1.2), breaks = seq(-1, 1, by = 0.5)) +
@@ -83,15 +90,13 @@ utils::globalVariables(c('PC1', 'PC2'))
 #' around the function \code{\link{compute_PCA}} and \code{\link{plot_PCA}}.
 #'
 #' @inheritParams compute_PCA
-#' @param savePDF A boolean indicating whether to create a PDF of the plot in the
-#' current working directory (TRUE) or not (FALSE, default).
 #' @seealso \code{\link{compute_PCA}} \code{\link{plot_PCA}}
 #' @export
 #'
 #' @examples
 #' figure_PCA(data = males)
 #' 
-figure_PCA <- function(data, savePDF = FALSE) {
+figure_PCA <- function(data) {
   PCA_C1_males <- compute_PCA(data[data$Cohort == 'C1', ])
   PCA_C2_males <- compute_PCA(data[data$Cohort == 'C2', ])
   gg1 <- plot_PCA(PCA_C1_males)
@@ -104,7 +109,7 @@ figure_PCA <- function(data, savePDF = FALSE) {
                                label_y = 1,
                                hjust = 0)
   print(pannel)
-  if (savePDF) {
+  if (!is.null(options('matingRhinos_PDF')[[1]]) && options('matingRhinos_PDF')[[1]][[1]]) {
     if (!dir.exists('./figures')) {
       dir.create('./figures')
     }

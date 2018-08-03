@@ -4,13 +4,10 @@
 \alias{figure_testosterone}
 \title{Create the figure showing the distribution of testosterone}
 \usage{
-figure_testosterone(data, savePDF = FALSE)
+figure_testosterone(data)
 }
 \arguments{
 \item{data}{A dataframe containing the data to be processed.}
-
-\item{savePDF}{A boolean indicating whether to create a PDF of the plot in the
-current working directory (TRUE) or not (FALSE, default).}
 }
 \description{
 This function creates the figure showing the distribution of testosterone for

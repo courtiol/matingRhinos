@@ -1,3 +1,40 @@
+#' Compute the Bateman gradient
+#'
+#' This function computes the Bateman gradient. The Bateman gradient is the
+#' slope of the regression line of the reproductive success on the mating
+#' success. Following Jones 2009 (and unlike some other works), we consider the
+#' relative reproductive success and the relative mating success to compute the
+#' gradient; that is we divide each variable by the population mean before
+#' fitting the linear model.
+#' 
+#' @param mating_success A vector of mating success outcomes
+#' @param reproductive_success A vector of reproductive success outcomes
+#' @inheritParams test_NonacsB
+#'
+#' @return The Bateman gradient
+#' @export
+#' @references Jones A.G (2009).On the opportunity for sexual selection, the
+#'   Bateman gradient and the maximum intensity of sexual selection. Evolution,
+#'   63(7), 1673-1684.
+#' 
+#' @seealso \code{\link{test_NonacsB}}
+#'
+#' @examples
+#' compute_Bateman(mating_success = males$Mat_succ,
+#'                 reproductive_success = males$Rep_succ)
+#' 
+compute_Bateman <- function(mating_success, reproductive_success, digits = 3L) {
+  d <- data.frame(mating_success_rel = mating_success / mean(mating_success, na.rm = TRUE),
+                  reproductive_success_rel = reproductive_success / mean(reproductive_success, na.rm = TRUE),
+                  mating_success = mating_success,
+                  reproductive_success = reproductive_success)
+  d <- na.omit(d)
+  B <- stats::coef(stats::lm(reproductive_success_rel ~ mating_success_rel, data = d))[['mating_success_rel']]
+  print(signif(B, digits = digits))
+  return(invisible(B))
+}
+
+
 #' Plot the relationship between mating and reproductive success
 #'
 #' This function creates a plot of the relationship between mating and 
@@ -80,12 +117,12 @@ figure_Bateman <- function(data_agg, savePDF = FALSE) {
     if (!dir.exists("./figures")) {
       dir.create("./figures")
     }
-    cowplot::ggsave(filename = "./figures/figure_Bateman.pdf",
+    cowplot::ggsave(filename = "./figures/figure2_Bateman.pdf",
                     plot = pannel,
                     width = 12*2,
                     height = 15,
                     units = "cm")
-    message("figure_Bateman.pdf created and stored in directory 'figures'!")
+    message("figure2_Bateman.pdf created and stored in directory 'figures'!")
   }
   return(invisible(NULL))
 }

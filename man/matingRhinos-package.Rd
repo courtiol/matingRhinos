@@ -133,8 +133,8 @@ compute_correlation(var1 = malesC2$Mat_succ, var2 = malesC2$Related_mean, n_test
 ##########################
 
 ### 1. Running the Principal Component Analyses:
-pca_C1_males <- do_pca(data = malesC1)
-pca_C2_males <- do_pca(data = malesC2)
+pca_C1_males <- compute_pca(data = malesC1)
+pca_C2_males <- compute_pca(data = malesC2)
 
 
 ### 2. Computing the correlations and testing them:

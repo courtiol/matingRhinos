@@ -41,10 +41,10 @@ compute_correlation <- function(var1, var2, n_tests = 1L, digits = 3L) {
 #' This function creates a plot of the correlations using the
 #' package ggplot2.
 #' 
-#' @param x The name of the x covariate
-#' @param y The name of the y covariate
-#' @param xlab A title for the x-axis
-#' @param ylab A title for the y-axis
+#' @param x The name of the x covariate.
+#' @param y The name of the y covariate.
+#' @param xlab A title for the x-axis.
+#' @param ylab A title for the y-axis.
 #' @inheritParams plot_relatedness
 #'
 #' @return A ggplot object.
@@ -60,7 +60,7 @@ compute_correlation <- function(var1, var2, n_tests = 1L, digits = 3L) {
 plot_correlation <- function(data, x, y, xlab = 'x-axis title', ylab = 'y-axis title', limits = NULL) {
   gg <- ggplot(data = data, aes(y = !!sym(y), x = !!sym(x), shape = Cohort)) +
     labs(y = ylab, x = xlab) +
-    scale_y_continuous(limits = limits) +
+    scale_y_continuous(limits = limits, breaks = function(x) seq(0, x[2], by = 2L)) +
     theme_classic() +
     scale_shape_manual(values = c(22, 24), name = 'Cohort of males:') +
     geom_point(size = 10) +
@@ -71,52 +71,87 @@ plot_correlation <- function(data, x, y, xlab = 'x-axis title', ylab = 'y-axis t
 utils::globalVariables('Cohort')
 
 
-#' Create the figure showing the correlation between mating/reproductive success and their correlates
+#' Create the figures showing the correlation between mating/reproductive success and their correlates
 #' 
-#' This function creates the figure showing the correlations. It is a wrapper
-#' around the function \code{\link{plot_correlation}}.
+#' This function creates the figures showing the correlations. It is a
+#' wrapper around the function \code{\link{plot_correlation}}. The function
+#' can either illustrate the correlations with the mating success or those with 
+#' the reproductive success depending on the value of the argument \code{which}.
 #'
 #' @inheritParams figure_pca
+#' @param which 'mating' or 'repro', to indicate which plot to draw.
 #' @seealso \code{\link{plot_correlation}}
 #' @export
 #'
 #' @examples
-#' figure_correlations(data = males, savePDF = TRUE)
+#' figure_correlations(data = males, which = 'mating')
+#' figure_correlations(data = males, which = 'repro')
 #' 
-figure_correlations <- function(data, savePDF = FALSE) {
-  limits <- c(0, 15)
+figure_correlations <- function(data, which = c('mating', 'repro'), savePDF = FALSE) {
+  if (length(which) == 2) {
+    Recall(data = data, which = which[1], savePDF = savePDF)
+    Recall(data = data, which = which[2], savePDF = savePDF)
+    return(invisible(NULL))
+  }
+  if (length(which) != 1L || !which %in% c('mating', 'repro')) {
+    stop('argument which not as expected!')
+  }
+  if (which == 'mating') {
+    y <- 'Mat_succ'
+    ylab <- 'Number of mates'
+    basename_fig <- 'figure3_correlations_mating'
+    limits <- c(0L, 12L)
+  }
+  if (which == 'repro') {
+    y <- 'Rep_succ'
+    ylab <- 'Number of offspring'
+    basename_fig <- 'figure4_correlations_repro'
+    limits <- c(0L, 18L)
+  }
   gg1 <- plot_correlation(data = data,
-                          x = 'Ter_map', y = 'Mat_succ',
-                          xlab = 'x-axis title', ylab = 'y-axis title',
+                          x = 'Related_mean',
+                          y = y,
+                          xlab = 'Mean relatedness',
+                          ylab = ylab,
                           limits = limits)
   gg2 <- plot_correlation(data = data,
-                          x = 'Ter_map', y = 'Mat_succ',
-                          xlab = 'x-axis title', ylab = 'y-axis title',
+                          x = 'Ter_map',
+                          y = y,
+                          xlab = expression(paste('Territory size (km'^2,')')),
+                          ylab = ylab,
                           limits = limits)
   gg3 <- plot_correlation(data = data,
-                          x = 'Ter_map', y = 'Mat_succ',
-                          xlab = 'x-axis title', ylab = 'y-axis title',
+                          x = 'Ter_map',
+                          y = y,
+                          xlab = 'x-axis title',
+                          ylab = ylab,
                           limits = limits)
   gg4 <- plot_correlation(data = data,
-                          x = 'Ter_map', y = 'Mat_succ',
-                          xlab = 'x-axis title', ylab = 'y-axis title',
+                          x = 'Ter_map',
+                          y = y,
+                          xlab = 'x-axis title',
+                          ylab = ylab,
                           limits = limits)
   gg5 <- plot_correlation(data = data,
-                          x = 'Ter_map', y = 'Mat_succ',
-                          xlab = 'x-axis title', ylab = 'y-axis title',
+                          x = 'Ter_map',
+                          y = y,
+                          xlab = 'x-axis title',
+                          ylab = ylab,
                           limits = limits)
   gg6 <- plot_correlation(data = data,
-                          x = 'Ter_map', y = 'Mat_succ',
-                          xlab = 'x-axis title', ylab = 'y-axis title',
+                          x = 'Ter_map',
+                          y = y,
+                          xlab = 'x-axis title',
+                          ylab = ylab,
                           limits = limits)
   pannel <- cowplot::plot_grid(gg1, gg2, gg3, gg4, gg5, gg6,
                                nrow = 3,
-                               labels = c('A. bla',
-                                          'B. bla',
-                                          'C. bla',
-                                          'D. bla',
-                                          'E. bla',
-                                          'F. bla'),
+                               labels = c('A.',
+                                          'B.',
+                                          'C.',
+                                          'D.',
+                                          'E.',
+                                          'F.'),
                                label_x = 0.02,
                                label_y = 1,
                                hjust = 0)
@@ -125,12 +160,12 @@ figure_correlations <- function(data, savePDF = FALSE) {
     if (!dir.exists('./figures')) {
       dir.create('./figures')
     }
-    cowplot::ggsave(filename = './figures/figure_correlations.pdf',
+    cowplot::ggsave(filename = paste0('./figures/', basename_fig, '.pdf'),
                     plot = pannel,
                     width = 12*2,
                     height = 12*3,
                     units = 'cm')
-    message("figure_correlations.pdf created and stored in directory 'figures'!")
+    message(paste0(basename_fig, '.pdf ',  "created and stored in directory 'figures'!"))
   }
   return(invisible(NULL))
 }

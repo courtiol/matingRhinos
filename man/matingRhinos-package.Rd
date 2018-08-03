@@ -41,40 +41,58 @@ in the paper.
 save_figures_on_disk <- TRUE # export figures on drive?
 
 
+#############################
+##  Preparing the datasets ##
+#############################
 
-###############################################################
-##  Nonacs' skew analysis of mating and reproductive success ##
-###############################################################
+### 1. We split the dataset of all males per cohorts:
+malesC1 <- droplevels(males[males$Cohort == "C1", ])
+malesC2 <- droplevels(males[males$Cohort == "C2", ])
 
-### 1. Computing the skewness tests:
+### 2. We visuallise the first 6 rows of all the datasets:
+head(males)
+head(malesC1)
+head(malesC2)
+head(females)
 
-set.seed(1L) ## set seed random generator for reproducible results
-test_NonacsB(benef = males$Mat_succ, time = males$Time, digits = 3L)
-test_NonacsB(benef = females$Mat_succ, time = females$Time, digits = 3L)
 
+#########################
+##  Parentage analysis ##
+#########################
+
+### 1. Note: the bioinformatic work leading to parentage has not been done using R.
+
+### 2. Result about the higher relatedness among C2 males than among C1 males:#' 
+round(mean(malesC1$Related_mean), digits = 3L)
+round(sd(malesC1$Related_mean), digits = 3L)
+round(mean(malesC2$Related_mean), digits = 3L)
+round(sd(malesC2$Related_mean), digits = 3L)
+
+wilcox.test(malesC1$Related_mean, malesC2$Related_mean)
+
+
+######################################
+##  Mating and reproductive success ##
+######################################
+
+### 1. Computing the skewness tests:#' 
 test_NonacsB(benef = males$Rep_succ, time = males$Time, digits = 3L)
+test_NonacsB(benef = males$Mat_succ, time = males$Time, digits = 3L)
 test_NonacsB(benef = females$Rep_succ, time = females$Time, digits = 3L)
 
 
-### 2. Creating the figure pannel:
+### 2. Creating figure 1:#' 
+figure_NonacsB(data_males = males, data_females = females, savePDF = save_figures_on_disk)
 
-figure_NonacsB(data_males = males, data_females = females, savePDF = save_figures_on_disk)    
+### 3. Relationship between mating and reproductive success: 
+cor.test(~ Mat_succ + Rep_succ, data = malesC1, method = "spearman")
 
-
-
-###########################################################
-##  Relationship between mating and reproductive success ##
-###########################################################
-
-### 1. Computing the correlations and testing them:
-
-cor.test(~ Mat_succ + Rep_succ, data = males[males$Cohort == "C1", ], method = "spearman")
-cor.test(~ Mat_succ + Rep_succ, data = males[males$Cohort == "C2", ], method = "spearman")
+cor.test(~ Mat_succ + Rep_succ, data = malesC2, method = "spearman")
 
  
 ### 2. Creating the figure pannel:
 
-figure_Bateman(data_agg = rhinos_agg, savePDF = save_figures_on_disk)      
+figure_Bateman(data_agg = rhinos_agg, savePDF = save_figures_on_disk)
 
 
 
@@ -84,8 +102,8 @@ figure_Bateman(data_agg = rhinos_agg, savePDF = save_figures_on_disk)
 
 ### 1. Running the Principal Component Analyses:
 
-pca_C1_males <- do_pca(data = males[males$Cohort == "C1", ])
-pca_C2_males <- do_pca(data = males[males$Cohort == "C2", ])
+pca_C1_males <- do_pca(data = malesC1)
+pca_C2_males <- do_pca(data = malesC2)
 
 
 ### 2. Computing the correlations and testing them:
@@ -109,9 +127,9 @@ figure_pca(data = males, savePDF = save_figures_on_disk)
 
 ### 1. Computing the correlations and testing them:
 
-cor.test(~ Testo_mean + Mat_succ, data = males[males$Cohort == "C1", ], method = "spearman")
-cor.test(~ Testo_mean + Rep_succ, data = males[males$Cohort == "C1", ], method = "spearman")
-cor.test(~ Testo_mean + Mat_succ, data = males[males$Cohort == "C2", ], method = "spearman")
+cor.test(~ Testo_mean + Mat_succ, data = malesC1, method = "spearman")
+cor.test(~ Testo_mean + Rep_succ, data = malesC1, method = "spearman")
+cor.test(~ Testo_mean + Mat_succ, data = malesC2, method = "spearman")
 
 
 ### 2. Creating the figure pannel:
@@ -126,14 +144,14 @@ figure_testosterone(data = males, savePDF = save_figures_on_disk)
 
 ### 1. Computing the correlations and testing them:
 
-cor.test(~ Related_mean + Mat_succ, data = males[males$Cohort == "C1", ], method = "spearman")
-cor.test(~ Related_mean + Rep_succ, data = males[males$Cohort == "C1", ], method = "spearman")
-cor.test(~ Related_mean + Mat_succ, data = males[males$Cohort == "C2", ], method = "spearman")
+cor.test(~ Related_mean + Mat_succ, data = malesC1, method = "spearman")
+cor.test(~ Related_mean + Rep_succ, data = malesC1, method = "spearman")
+cor.test(~ Related_mean + Mat_succ, data = malesC2, method = "spearman")
 
 
 ### 2. Creating the figure pannel:
 
-figure_relatedness(data = males, savePDF = save_figures_on_disk)
+figure_correlations(data = males, savePDF = save_figures_on_disk)
 
 
 

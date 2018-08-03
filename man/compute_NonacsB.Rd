@@ -4,7 +4,7 @@
 \alias{compute_NonacsB}
 \alias{NonacsB}
 \alias{Nonacs}
-\title{Compute the the binomial skew index (B) of Nonacs}
+\title{Compute the binomial skew index (B) of Nonacs}
 \usage{
 compute_NonacsB(benef, time)
 }

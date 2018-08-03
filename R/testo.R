@@ -58,11 +58,11 @@ figure_testosterone <- function(data, savePDF = FALSE) {
     if (!dir.exists('./figures')) {
       dir.create('./figures')
     }
-    cowplot::ggsave(filename = './figures/figure_testosterone.pdf',
+    cowplot::ggsave(filename = './figures/figureS4_testosterone.pdf',
                     plot = pannel,
                     width = 12*2,
                     height = 12,
                     units = 'cm')
-    message("figure_testosterone.pdf created and stored in directory 'figures'!")
+    message("figureS4_testosterone.pdf created and stored in directory 'figures'!")
   }
 }

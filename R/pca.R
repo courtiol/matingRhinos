@@ -108,12 +108,12 @@ figure_pca <- function(data, savePDF = FALSE) {
     if (!dir.exists('./figures')) {
       dir.create('./figures')
     }
-    cowplot::ggsave(filename = './figures/figure_pca.pdf',
+    cowplot::ggsave(filename = './figures/figureS3_pca.pdf',
                     plot = pannel,
                     width = 12*2,
                     height = 12,
                     units = 'cm')
-    message("figure_pca.pdf created and stored in directory 'figures'!")
+    message("figureS3_pca.pdf created and stored in directory 'figures'!")
   }
   return(invisible(NULL))
 }

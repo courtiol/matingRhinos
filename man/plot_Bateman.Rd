@@ -19,8 +19,8 @@ This function creates a plot of the relationship between mating and
 reproductive success.
 }
 \examples{
-plot_Bateman(data_agg = rhinos_agg, sex = "males")
-plot_Bateman(data_agg = rhinos_agg, sex = "females")
+plot_Bateman(data_agg = rhinos_agg, sex = 'males')
+plot_Bateman(data_agg = rhinos_agg, sex = 'females')
 
 }
 \seealso{

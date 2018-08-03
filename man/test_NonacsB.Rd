@@ -18,7 +18,7 @@ group).}
 \item{keep_H0}{A boolean indicating whether to export the values of B under
 the null hypothesis.}
 
-\item{digits}{The number of digits to keep.}
+\item{digits}{The number of digits for the display.}
 
 \item{seed}{The seed for the random number generator.}
 }

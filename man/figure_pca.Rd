@@ -14,12 +14,12 @@ current working directory (TRUE) or not (FALSE, default).}
 }
 \description{
 This function creates the figure showing the results of the PCAs. It is a wrapper
-around the function \code{\link{do_pca}} and \code{\link{plot_pca}}.
+around the function \code{\link{compute_pca}} and \code{\link{plot_pca}}.
 }
 \examples{
 figure_pca(data = males)
 
 }
 \seealso{
-\code{\link{do_pca}} \code{\link{plot_pca}}
+\code{\link{compute_pca}} \code{\link{plot_pca}}
 }

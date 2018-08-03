@@ -7,7 +7,7 @@
 plot_pca(x)
 }
 \arguments{
-\item{x}{The object returned by the function \code{\link{do_pca}}.}
+\item{x}{The object returned by the function \code{\link{compute_pca}}.}
 }
 \value{
 A ggplot object.
@@ -17,12 +17,12 @@ This function creates a plot of the outcome of a Principal Component Analysis
 (PCA) using the package ggplot2.
 }
 \examples{
-pca_C1_males <- do_pca(males[males$Cohort == "C1", ])
-pca_C2_males <- do_pca(males[males$Cohort == "C2", ])
+pca_C1_males <- compute_pca(males[males$Cohort == 'C1', ])
+pca_C2_males <- compute_pca(males[males$Cohort == 'C2', ])
 plot_pca(pca_C1_males)
 plot_pca(pca_C2_males)
 
 }
 \seealso{
-\code{\link{do_pca}} \code{\link{figure_pca}}
+\code{\link{compute_pca}} \code{\link{figure_pca}}
 }

@@ -19,7 +19,7 @@ This function creates a plot of the distribution of relatedness using the
 package ggplot2.
 }
 \examples{
-plot_relatedness(data = males[males$Cohort == "C1", ])
+plot_relatedness(data = males[males$Cohort == 'C1', ])
 
 }
 \seealso{

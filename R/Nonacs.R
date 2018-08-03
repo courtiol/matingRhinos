@@ -67,7 +67,7 @@ test_NonacsB <- function(benef, time, nsim = 1e5L, keep_H0 = FALSE, digits = Inf
   pv <- (sum(H0 > Obs) + 1) / (nsim + 1)
  out <- list(B_obs = signif(Obs, digits = digits), p = signif(pv, digits = digits), N = length(benef))
  if (keep_H0) {
-   out[["B_H0"]] <- H0
+   out[['B_H0']] <- H0
  }
  return(out)
 }
@@ -96,17 +96,17 @@ plot_NonacsB <- function(x, limits = c(-0.02, 0.07)) {
     stop("The object 'x' is missing an element 'B_H0', rerun the function 'test_NonacsB()' with argument 'keep_H0 = TRUE'")
   }
   gg <- ggplot() + 
-   geom_histogram(aes(x = x$B_H0), fill = "lightgrey", colour = "grey") +
-   labs(x = "Nonac's binomial skew index (B)", y = "Number of simulations | H0") +
-   geom_vline(aes(xintercept = x$B_obs), colour = "red", lwd = 1, lty = 2) +
+   geom_histogram(aes(x = x$B_H0), fill = 'lightgrey', colour = 'grey') +
+   labs(x = "Nonac's binomial skew index (B)", y = 'Number of simulations | H0') +
+   geom_vline(aes(xintercept = x$B_obs), colour = 'red', lwd = 1, lty = 2) +
    scale_x_continuous(limits = limits, breaks = seq(-0.2, 0.2, by = 0.02)) +
    theme_classic() +
-   theme(plot.margin = unit(c(10, 4, 5, 1), "mm"), axis.ticks.y = element_blank(), axis.text.y = element_blank())
+   theme(plot.margin = unit(c(10, 4, 5, 1), 'mm'), axis.ticks.y = element_blank(), axis.text.y = element_blank())
   r <- ggplot_build(gg)$layout$panel_scales_y[[1]]$range$range
   pos_y <- (max(r) - min(r))*0.8
   gg <- gg + geom_text(aes(x = x$B_obs + (limits[2] - limits[1])*1/4, y = pos_y,
-                           label = paste("p = ", signif(x$p, digits = 3L))),
-                       colour = "red", vjust = 0)
+                           label = paste('p = ', signif(x$p, digits = 3L))),
+                       colour = 'red', vjust = 0)
   return(gg)
 }
 
@@ -136,23 +136,23 @@ figure_NonacsB <- function(data_males, data_females, savePDF = FALSE) {
   gg4 <- plot_NonacsB(x = femalesRep)
   pannel <- cowplot::plot_grid(gg1, gg2, gg3, gg4,
                                nrow = 2,
-                               labels = c("A. Males C1 & C2 mating success",
-                                          "B. Females mating success",
-                                          "C. Males C1 & C2 reproductive success",
-                                          "D. Females reproductive success"),
+                               labels = c('A. Males C1 & C2 mating success',
+                                          'B. Females mating success',
+                                          'C. Males C1 & C2 reproductive success',
+                                          'D. Females reproductive success'),
                                label_x = 0.02,
                                label_y = 1,
                                hjust = 0)
   print(pannel)
   if (savePDF) {
-    if (!dir.exists("./figures")) {
-      dir.create("./figures")
+    if (!dir.exists('./figures')) {
+      dir.create('./figures')
     }
-    cowplot::ggsave(filename = "./figures/figure1_NonacsB.pdf",
+    cowplot::ggsave(filename = './figures/figure1_NonacsB.pdf',
                     plot = pannel,
                     width = 12*2,
                     height = 11*2,
-                    units = "cm")
+                    units = 'cm')
     message("figure1_NonacsB.pdf created and stored in directory 'figures'!")
   }
   return(invisible(NULL))

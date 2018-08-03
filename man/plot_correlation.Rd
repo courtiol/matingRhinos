@@ -29,8 +29,8 @@ package ggplot2.
 }
 \examples{
 plot_correlation(data = males,
-                 x = "Ter_map", y = "Mat_succ",
-                 xlab = "x-axis title", ylab = "y-axis title")
+                 x = 'Ter_map', y = 'Mat_succ',
+                 xlab = 'x-axis title', ylab = 'y-axis title')
 
 }
 \seealso{

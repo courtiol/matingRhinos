@@ -8,15 +8,15 @@
 Rhinos}
 \description{
 This R package aims at providing the data and documenting the R code behind
-the analysis of the paper entitled "Mate choice, reproductive success and
-inbreeding in white rhinos" by Kretzschmar Petra et al. (in prep).
+the analysis of the paper entitled 'Mate choice, reproductive success and
+inbreeding in white rhinos' by Kretzschmar Petra et al. (in prep).
 }
 \details{
 This package has not been conceived for general use!
 
 All main functions of this package contain a small documentation and examples
 which could be useful for those who try to understand our code. Type
-\code{ls("package:matingRhinos")} for a list of all exported functions and
+\code{ls('package:matingRhinos')} for a list of all exported functions and
 datasets.
 
 You may directly explore the files contained in the package on GitHub at
@@ -32,22 +32,24 @@ in the paper.
 \examples{
 
 
-################################################
-##  Setting general options for this workflow ##
-################################################
+###############################################
+## Setting general options for this workflow ##
+###############################################
 
 ### Note: set the following options to TRUE or FALSE depending on what you want.
 
 save_figures_on_disk <- TRUE # export figures on drive?
 
 
-#############################
-##  Preparing the datasets ##
-#############################
+############################
+## Preparing the datasets ##
+############################
 
-### 1. We split the dataset of all males per cohorts:
-malesC1 <- droplevels(males[males$Cohort == "C1", ])
-malesC2 <- droplevels(males[males$Cohort == "C2", ])
+### 1. We split the dataset per cohorts:
+malesC1 <- droplevels(males[males$Cohort == 'C1', ])
+malesC2 <- droplevels(males[males$Cohort == 'C2', ])
+femalesC1 <- droplevels(females[females$Cohort == 'C1', ])
+femalesC2 <- droplevels(females[females$Cohort == 'C2', ])
 
 ### 2. We visuallise the first 6 rows of all the datasets:
 head(males)
@@ -56,13 +58,13 @@ head(malesC2)
 head(females)
 
 
-#########################
-##  Parentage analysis ##
-#########################
+########################
+## Parentage analysis ##
+########################
 
 ### 1. Note: the bioinformatic work leading to parentage has not been done using R.
 
-### 2. Result about the higher relatedness among C2 males than among C1 males:#' 
+### 2. Result about the higher relatedness among C2 males than among C1 males:
 round(mean(malesC1$Related_mean), digits = 3L)
 round(sd(malesC1$Related_mean), digits = 3L)
 round(mean(malesC2$Related_mean), digits = 3L)
@@ -71,48 +73,77 @@ round(sd(malesC2$Related_mean), digits = 3L)
 wilcox.test(malesC1$Related_mean, malesC2$Related_mean)
 
 
-######################################
-##  Mating and reproductive success ##
-######################################
+#####################################
+## Mating and reproductive success ##
+#####################################
 
-### 1. Computing the skewness tests:#' 
+### 1. Computing the skewness tests for males: 
 test_NonacsB(benef = males$Rep_succ, time = males$Time, digits = 3L)
 test_NonacsB(benef = males$Mat_succ, time = males$Time, digits = 3L)
-test_NonacsB(benef = females$Rep_succ, time = females$Time, digits = 3L)
 
-
-### 2. Creating figure 1:#' 
+### 2. Creating figure 1:
 figure_NonacsB(data_males = males, data_females = females, savePDF = save_figures_on_disk)
 
-### 3. Relationship between mating and reproductive success: 
-cor.test(~ Mat_succ + Rep_succ, data = malesC1, method = "spearman")
+### 3. Relationship between mating and reproductive success for males: 
+compute_correlation(var1 = malesC1$Mat_succ, var2 = malesC1$Rep_succ)
+compute_Bateman(mating_success = malesC1$Mat_succ, reproductive_success = malesC1$Rep_succ)
 
-cor.test(~ Mat_succ + Rep_succ, data = malesC2, method = "spearman")
+compute_correlation(var1 = malesC2$Mat_succ, var2 = malesC2$Rep_succ)
+compute_Bateman(mating_success = malesC2$Mat_succ, reproductive_success = malesC2$Rep_succ)
 
- 
-### 2. Creating the figure pannel:
+compute_correlation(var1 = males$Mat_succ, var2 = males$Rep_succ)
+compute_Bateman(mating_success = males$Mat_succ, reproductive_success = males$Rep_succ)
 
+### 4. Creating figure 2:
 figure_Bateman(data_agg = rhinos_agg, savePDF = save_figures_on_disk)
 
+### 5. Computing the skewness tests for females: 
+test_NonacsB(benef = females$Mat_succ, time = females$Time, digits = 3L)
+test_NonacsB(benef = females$Rep_succ, time = females$Time, digits = 3L)
+
+### 6. Relationship between mating and reproductive success for females:
+compute_correlation(var1 = femalesC1$Mat_succ, var2 = femalesC1$Rep_succ)
+compute_Bateman(mating_success = femalesC1$Mat_succ, reproductive_success = femalesC1$Rep_succ)
+
+compute_correlation(var1 = femalesC2$Mat_succ, var2 = femalesC2$Rep_succ)
+compute_Bateman(mating_success = femalesC2$Mat_succ, reproductive_success = femalesC2$Rep_succ)
+
+compute_correlation(var1 = females$Mat_succ, var2 = females$Rep_succ)
+compute_Bateman(mating_success = females$Mat_succ, reproductive_success = females$Rep_succ)
 
 
-#############################################################################
-##  Horn characteristics as a correlate of mating and reproductive success ##
-#############################################################################
+#################
+## Relatedness ##
+#################
+
+### 1. Relatedness of male most related to females:
+males[which.max(males$Related_mean), c('No', 'Cohort', 'Related_mean', 'Related_SD')]
+
+### 2. Creating figure S1:
+figure_relatedness(data = males, savePDF = save_figures_on_disk)
+
+### 3. Correlation mating, reproductive success and relatedness:
+compute_correlation(var1 = malesC1$Mat_succ, var2 = malesC1$Related_mean, n_tests = 6)
+compute_correlation(var1 = malesC1$Rep_succ, var2 = malesC1$Related_mean, n_tests = 6)
+compute_correlation(var1 = malesC2$Mat_succ, var2 = malesC2$Related_mean, n_tests = 6)
+
+
+##########################
+## Horn characteristics ##
+##########################
 
 ### 1. Running the Principal Component Analyses:
-
 pca_C1_males <- do_pca(data = malesC1)
 pca_C2_males <- do_pca(data = malesC2)
 
 
 ### 2. Computing the correlations and testing them:
 
-cor.test(~ PC1 + Mat_succ, data = pca_C1_males$data, method = "spearman")
-cor.test(~ PC1 + Rep_succ, data = pca_C1_males$data, method = "spearman")
+cor.test(~ PC1 + Mat_succ, data = pca_C1_males$data, method = 'spearman')
+cor.test(~ PC1 + Rep_succ, data = pca_C1_males$data, method = 'spearman')
 
-cor.test(~ PC1 + Mat_succ, data = pca_C2_males$data, method = "spearman")
-cor.test(~ PC1 + Rep_succ, data = pca_C2_males$data, method = "spearman")
+cor.test(~ PC1 + Mat_succ, data = pca_C2_males$data, method = 'spearman')
+cor.test(~ PC1 + Rep_succ, data = pca_C2_males$data, method = 'spearman')
 
 
 ### 3. Creating the figure pannel:
@@ -127,9 +158,9 @@ figure_pca(data = males, savePDF = save_figures_on_disk)
 
 ### 1. Computing the correlations and testing them:
 
-cor.test(~ Testo_mean + Mat_succ, data = malesC1, method = "spearman")
-cor.test(~ Testo_mean + Rep_succ, data = malesC1, method = "spearman")
-cor.test(~ Testo_mean + Mat_succ, data = malesC2, method = "spearman")
+cor.test(~ Testo_mean + Mat_succ, data = malesC1, method = 'spearman')
+cor.test(~ Testo_mean + Rep_succ, data = malesC1, method = 'spearman')
+cor.test(~ Testo_mean + Mat_succ, data = malesC2, method = 'spearman')
 
 
 ### 2. Creating the figure pannel:
@@ -137,21 +168,6 @@ cor.test(~ Testo_mean + Mat_succ, data = malesC2, method = "spearman")
 figure_testosterone(data = males, savePDF = save_figures_on_disk)
 
 
-
-####################################################################
-##  Relatedness as a correlate of mating and reproductive success ##
-####################################################################
-
-### 1. Computing the correlations and testing them:
-
-cor.test(~ Related_mean + Mat_succ, data = malesC1, method = "spearman")
-cor.test(~ Related_mean + Rep_succ, data = malesC1, method = "spearman")
-cor.test(~ Related_mean + Mat_succ, data = malesC2, method = "spearman")
-
-
-### 2. Creating the figure pannel:
-
-figure_correlations(data = males, savePDF = save_figures_on_disk)
 
 
 

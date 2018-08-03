@@ -11,7 +11,7 @@ compute_Bateman(mating_success, reproductive_success, digits = 3L)
 
 \item{reproductive_success}{A vector of reproductive success outcomes}
 
-\item{digits}{The number of digits to keep.}
+\item{digits}{The number of digits for the display.}
 }
 \value{
 The Bateman gradient

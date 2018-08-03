@@ -1,3 +1,31 @@
+#' Compute a Spearman correlation test between two variables
+#'
+#' This function computes the Spearman correlation between two variables. It is
+#' a simple wrapper around the R function \code{\link{cor.test}}, with more
+#' simple display of the output.
+#' 
+#' @param var1 A vector
+#' @param var2 A vector
+#' @inheritParams test_NonacsB
+#'
+#' @return A vector containing the correlation between two variables, the 
+#' p-value of the correlation test, and the sample size after discarding the 
+#' missing values.
+#' @export
+#' 
+#' @examples
+#' compute_correlation(var1 = males$Mat_succ,
+#'                     var2 = males$Rep_succ)
+#' 
+compute_correlation <- function(var1, var2, digits = 3L) {
+  d <- na.omit(data.frame(var1 = var1, var2 = var2))
+  corr <- cor.test(~ var1 + var2, data = d, method = "spearman")
+  out <- c(rho = corr$estimate[[1]], p = corr$p.value[[1]], n = nrow(d))
+  print(out, digits = digits)
+  return(invisible(out))
+}
+
+
 #' Plot the correlation between mating/reproductive success and their correlates
 #'
 #' This function creates a plot of the correlations using the

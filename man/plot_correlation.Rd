@@ -8,7 +8,7 @@ plot_correlation(data, x, y, xlab = "x-axis title",
   ylab = "y-axis title", limits = NULL)
 }
 \arguments{
-\item{data}{The dataset}
+\item{data}{A dataframe containing the data to be processed.}
 
 \item{x}{The name of the x covariate.}
 
@@ -18,7 +18,7 @@ plot_correlation(data, x, y, xlab = "x-axis title",
 
 \item{ylab}{A title for the y-axis.}
 
-\item{limits}{The limit for the y-axis of the plot}
+\item{limits}{The limit for the y-axis of the plot.}
 }
 \value{
 A ggplot object.

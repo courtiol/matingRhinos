@@ -19,13 +19,13 @@ the Bonferroni adjustment.}
 \value{
 A vector containing the correlation between two variables, the 
 p-value of the correlation test, the expect value (i.e. the p-value 
-multiplied by n_tests) and the sample size after discarding the 
+multiplied by \code{n_tests}) and the sample size after discarding the 
 missing values.
 }
 \description{
 This function computes the Spearman correlation between two variables. It is
 a simple wrapper around the R function \code{\link{cor.test}}, with better
-display of the output which includes the outcome of the Bonferroni correction.
+display of the output that includes the outcome of the Bonferroni correction.
 }
 \examples{
 compute_correlation(var1 = males$Mat_succ, var2 = males$Rep_succ, n_tests = 3)

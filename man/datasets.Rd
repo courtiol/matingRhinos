@@ -9,11 +9,10 @@
 \title{The datasets}
 \format{A \var{dataframe}.}
 \description{
-Those 3 datasets are those used in the paper. There are two datasets
-providing individual-level data (one for males, one for females) and one
-datasets providing data aggregated by 'mating success - reproductive success
-- male cohort' combination (one for both sexes). The
-aggregated dataset is used for ploting only.
+Those 3 datasets are those used in the paper. Two datasets
+provide individual-level data (one for males, one for females) and one
+dataset provides data aggregated by 'mating success - reproductive success
+- male cohort' combination. The aggregated dataset is used for ploting only.
 }
 \examples{
 males

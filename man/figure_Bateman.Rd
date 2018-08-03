@@ -7,7 +7,7 @@
 figure_Bateman(data_agg, savePDF = FALSE)
 }
 \arguments{
-\item{data_agg}{A dataframe of aggregated data.}
+\item{data_agg}{A dataframe of aggregated data to be processed.}
 
 \item{savePDF}{A boolean indicating whether to create a PDF of the plot in the
 current working directory (TRUE) or not (FALSE, default).}

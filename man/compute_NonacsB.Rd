@@ -4,7 +4,7 @@
 \alias{compute_NonacsB}
 \alias{NonacsB}
 \alias{Nonacs}
-\title{Compute the binomial skew index (B) of Nonacs}
+\title{Compute the binomial skew index of Nonacs}
 \usage{
 compute_NonacsB(benef, time)
 }
@@ -15,10 +15,10 @@ compute_NonacsB(benef, time)
 group).}
 }
 \value{
-The observed Nonacs' binomial skew index value
+The observed Nonacs' binomial skew index value.
 }
 \description{
-This function computes the Nonacs' binomial skew index. Nonacs defines it as
+This function computes Nonacs' binomial skew index (B). Nonacs defines it as
 an index ``based on the observed variance in a group corrected by the
 expected variance if each member had an equal probability of gaining any
 given group benefit or reproductive opportunity.''

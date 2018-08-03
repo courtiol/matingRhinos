@@ -2,16 +2,16 @@
 #'
 #' This function computes the Bateman gradient. The Bateman gradient is the
 #' slope of the regression line of the reproductive success on the mating
-#' success. Following Jones 2009 (and unlike some other works), we consider the
+#' success. Following Jones 2009 (and unlike some other work), we consider the
 #' relative reproductive success and the relative mating success to compute the
-#' gradient; that is we divide each variable by the population mean before
+#' gradient; i.e. we divide each variable by the population mean before
 #' fitting the linear model.
 #' 
 #' @param mating_success A vector of mating success outcomes.
 #' @param reproductive_success A vector of reproductive success outcomes.
 #' @inheritParams test_NonacsB
 #'
-#' @return The Bateman gradient
+#' @return The Bateman gradient.
 #' @export
 #' @references Jones A.G (2009).On the opportunity for sexual selection, the
 #'   Bateman gradient and the maximum intensity of sexual selection. Evolution,
@@ -40,7 +40,7 @@ compute_Bateman <- function(mating_success, reproductive_success, digits = 3L) {
 #' This function creates a plot of the relationship between mating and 
 #' reproductive success.
 #'
-#' @param data_agg A dataframe of aggregated data.
+#' @param data_agg A dataframe of aggregated data to be processed.
 #' @param sex The sex of the rhinos to plot ('males' or 'females').
 #'
 #' @return A ggplot object.
@@ -93,7 +93,7 @@ plot_Bateman <- function(data_agg, sex) {
 #' This function creates the figure showing the results of the the relationship between mating and reproductive success for both sexes.
 #' It is a wrapper around the function \code{\link{plot_Bateman}}.
 #'
-#' @inheritParams figure_pca
+#' @inheritParams figure_PCA
 #' @inheritParams plot_Bateman
 #' @seealso \code{\link{plot_Bateman}}
 #' @export

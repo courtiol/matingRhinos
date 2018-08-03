@@ -7,7 +7,7 @@
 plot_Bateman(data_agg, sex)
 }
 \arguments{
-\item{data_agg}{A dataframe of aggregated data.}
+\item{data_agg}{A dataframe of aggregated data to be processed.}
 
 \item{sex}{The sex of the rhinos to plot ('males' or 'females').}
 }

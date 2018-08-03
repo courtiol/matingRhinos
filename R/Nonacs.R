@@ -1,6 +1,6 @@
-#' Compute the binomial skew index (B) of Nonacs
+#' Compute the binomial skew index of Nonacs
 #'
-#' This function computes the Nonacs' binomial skew index. Nonacs defines it as
+#' This function computes Nonacs' binomial skew index (B). Nonacs defines it as
 #' an index ``based on the observed variance in a group corrected by the
 #' expected variance if each member had an equal probability of gaining any
 #' given group benefit or reproductive opportunity.''
@@ -11,7 +11,7 @@
 #' 
 #' @aliases compute_NonacsB NonacsB Nonacs
 #'
-#' @return The observed Nonacs' binomial skew index value
+#' @return The observed Nonacs' binomial skew index value.
 #' @export
 #' @references Nonacs, P. (2000). Measuring and using skew in the study of
 #' social behavior and evolution. The American Naturalist, 156(6), 577-589.
@@ -42,8 +42,8 @@ compute_NonacsB <- function(benef, time) {
 #'
 #' @inheritParams compute_NonacsB
 #' @param nsim The number of simulation to run.
-#' @param keep_H0 A boolean indicating whether to export the values of B under
-#'   the null hypothesis.
+#' @param keep_H0 A boolean indicating whether to export the values of
+#'  the Nonacs' binomial skew index simulated under the null hypothesis.
 #' @param digits The number of digits for the display.
 #' @param seed The seed for the random number generator.
 #'
@@ -88,8 +88,9 @@ test_NonacsB <- function(benef, time, nsim = 1e5L, keep_H0 = FALSE, digits = Inf
 #' @import ggplot2
 #'
 #' @examples
-#' malesRep <- test_NonacsB(benef = males$Rep_succ, time = males$Time, keep_H0 = TRUE)
-#' plot_NonacsB(x = malesRep)
+#' plot_NonacsB(test_NonacsB(benef = males$Rep_succ,
+#'                           time = males$Time,
+#'                           keep_H0 = TRUE))
 #' 
 plot_NonacsB <- function(x, limits = c(-0.02, 0.07)) {
   if (is.null(x$B_H0)) {
@@ -118,7 +119,7 @@ plot_NonacsB <- function(x, limits = c(-0.02, 0.07)) {
 #'
 #' @param data_males The dataset for males.
 #' @param data_females The dataset for females.
-#' @inheritParams figure_pca
+#' @inheritParams figure_PCA
 #'
 #' @export
 #'

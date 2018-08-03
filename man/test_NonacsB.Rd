@@ -15,8 +15,8 @@ group).}
 
 \item{nsim}{The number of simulation to run.}
 
-\item{keep_H0}{A boolean indicating whether to export the values of B under
-the null hypothesis.}
+\item{keep_H0}{A boolean indicating whether to export the values of
+the Nonacs' binomial skew index simulated under the null hypothesis.}
 
 \item{digits}{The number of digits for the display.}
 

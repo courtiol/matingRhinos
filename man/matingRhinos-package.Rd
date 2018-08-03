@@ -132,6 +132,17 @@ compute_correlation(var1 = malesC2$Mat_succ, var2 = malesC2$Related_mean, n_test
 ## Male territories ##
 ######################
 
+### 1. Computing the ranges of territories:
+rbind(malesC1[which.min(malesC1$Ter_map), c('No', 'Cohort', 'Ter_map')],
+      malesC1[which.max(malesC1$Ter_map), c('No', 'Cohort', 'Ter_map')])
+
+rbind(malesC2[which.min(malesC1$Ter_map), c('No', 'Cohort', 'Ter_map')],
+      malesC2[which.max(malesC1$Ter_map), c('No', 'Cohort', 'Ter_map')])
+
+### 2. Correlation mating, reproductive success and territory size:
+compute_correlation(var1 = malesC1$Mat_succ, var2 = malesC1$Ter_map, n_tests = 6)
+compute_correlation(var1 = malesC1$Rep_succ, var2 = malesC1$Ter_map, n_tests = 6)
+compute_correlation(var1 = malesC2$Mat_succ, var2 = malesC2$Ter_map, n_tests = 6)
 
 
 ##########################
@@ -142,40 +153,60 @@ compute_correlation(var1 = malesC2$Mat_succ, var2 = malesC2$Related_mean, n_test
 pca_C1_males <- compute_pca(data = malesC1)
 pca_C2_males <- compute_pca(data = malesC2)
 
+### 2. Correlation mating, reproductive success and horn characteristics:
+compute_correlation(var1 = pca_C1_males$data$Mat_succ, var2 = pca_C1_males$data$PC1, n_tests = 6)
+compute_correlation(var1 = pca_C1_males$data$Rep_succ, var2 = pca_C1_males$data$PC1, n_tests = 6)
+compute_correlation(var1 = pca_C2_males$data$Mat_succ, var2 = pca_C2_males$data$PC1, n_tests = 6)
 
-### 2. Computing the correlations and testing them:
-
-cor.test(~ PC1 + Mat_succ, data = pca_C1_males$data, method = 'spearman')
-cor.test(~ PC1 + Rep_succ, data = pca_C1_males$data, method = 'spearman')
-
-cor.test(~ PC1 + Mat_succ, data = pca_C2_males$data, method = 'spearman')
-cor.test(~ PC1 + Rep_succ, data = pca_C2_males$data, method = 'spearman')
-
-
-### 3. Creating the figure pannel:
-
+### 3. Creating figure S3:
 figure_pca(data = males, savePDF = save_figures_on_disk)
 
 
+#####################
+## Habitat quality ##
+#####################
 
-#####################################################################
-##  Testosterone as a correlate of mating and reproductive success ##
-#####################################################################
+### 1. Correlation mating, reproductive success and occurence of medium open to dense thickets:
+compute_correlation(var1 = malesC1$Mat_succ, var2 = malesC1$Me_open, n_tests = 6)
+compute_correlation(var1 = malesC1$Rep_succ, var2 = malesC1$Me_open, n_tests = 6)
+compute_correlation(var1 = malesC2$Mat_succ, var2 = malesC2$Me_open, n_tests = 6)
+
+### 2. Correlation mating, reproductive success and occurence of dense thickets:
+compute_correlation(var1 = malesC1$Mat_succ, var2 = malesC1$Thick, n_tests = 6)
+compute_correlation(var1 = malesC1$Rep_succ, var2 = malesC1$Thick, n_tests = 6)
+compute_correlation(var1 = malesC2$Mat_succ, var2 = malesC2$Thick, n_tests = 6)
+
+
+########################
+## Vegetation quality ##
+########################
+
+### 1. Correlation mating, reproductive success and volume of Panicum maximum:
+compute_correlation(var1 = malesC1$Mat_succ, var2 = malesC1$Pmax, n_tests = 6)
+compute_correlation(var1 = malesC1$Rep_succ, var2 = malesC1$Pmax, n_tests = 6)
+compute_correlation(var1 = malesC2$Mat_succ, var2 = malesC2$Pmax, n_tests = 6)
+
+
+#############################################
+##  Testosterone metabolites concentration ##
+#############################################
 
 ### 1. Computing the correlations and testing them:
+compute_correlation(var1 = malesC1$Mat_succ, var2 = malesC1$Testo_mean, n_tests = 6)
+compute_correlation(var1 = malesC1$Rep_succ, var2 = malesC1$Testo_mean, n_tests = 6)
+compute_correlation(var1 = malesC2$Mat_succ, var2 = malesC2$Testo_mean, n_tests = 6)
 
-cor.test(~ Testo_mean + Mat_succ, data = malesC1, method = 'spearman')
-cor.test(~ Testo_mean + Rep_succ, data = malesC1, method = 'spearman')
-cor.test(~ Testo_mean + Mat_succ, data = malesC2, method = 'spearman')
-
-
-### 2. Creating the figure pannel:
-
+### 2. Creating figure S4:
 figure_testosterone(data = males, savePDF = save_figures_on_disk)
 
 
+######################
+## All correlations ##
+######################
 
-
+### Creating figures 3 & 4:
+figure_correlations(data = males, savePDF = save_figures_on_disk)
+## note: rerun if bug 'polygon edge not found'; this is a ggplot hiccup.
 
 }
 \references{

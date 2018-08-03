@@ -22,7 +22,8 @@ can either illustrate the correlations with the mating success or those with
 the reproductive success depending on the value of the argument \code{which}.
 }
 \examples{
-figure_correlations(data = males, which = 'mating', savePDF = FALSE)
+figure_correlations(data = males, which = 'mating')
+figure_correlations(data = males, which = 'repro')
 
 }
 \seealso{

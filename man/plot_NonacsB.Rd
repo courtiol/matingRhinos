@@ -8,7 +8,7 @@ index}
 plot_NonacsB(x, limits = c(-0.02, 0.07))
 }
 \arguments{
-\item{x}{The object returned by the function \code{\link{test_NonacsB}}}
+\item{x}{The object returned by the function \code{\link{test_NonacsB}}.}
 
 \item{limits}{The limit for the y-axis of the plot}
 }

@@ -7,9 +7,9 @@
 compute_Bateman(mating_success, reproductive_success, digits = 3L)
 }
 \arguments{
-\item{mating_success}{A vector of mating success outcomes}
+\item{mating_success}{A vector of mating success outcomes.}
 
-\item{reproductive_success}{A vector of reproductive success outcomes}
+\item{reproductive_success}{A vector of reproductive success outcomes.}
 
 \item{digits}{The number of digits for the display.}
 }

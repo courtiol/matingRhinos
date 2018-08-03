@@ -1,27 +1,37 @@
 #' Compute a Spearman correlation test between two variables
 #'
 #' This function computes the Spearman correlation between two variables. It is
-#' a simple wrapper around the R function \code{\link{cor.test}}, with more
-#' simple display of the output.
+#' a simple wrapper around the R function \code{\link{cor.test}}, with better
+#' display of the output which includes the outcome of the Bonferroni correction.
 #' 
-#' @param var1 A vector
-#' @param var2 A vector
+#' @param var1 A vector.
+#' @param var2 A vector.
+#' @param n_tests An integer providing the number of tests to account for during 
+#' the Bonferroni adjustment. 
 #' @inheritParams test_NonacsB
 #'
 #' @return A vector containing the correlation between two variables, the 
-#' p-value of the correlation test, and the sample size after discarding the 
+#' p-value of the correlation test, the expect value (i.e. the p-value 
+#' multiplied by n_tests) and the sample size after discarding the 
 #' missing values.
 #' @export
 #' 
 #' @examples
-#' compute_correlation(var1 = males$Mat_succ,
-#'                     var2 = males$Rep_succ)
+#' compute_correlation(var1 = males$Mat_succ, var2 = males$Rep_succ, n_tests = 3)
 #' 
-compute_correlation <- function(var1, var2, digits = 3L) {
+compute_correlation <- function(var1, var2, n_tests = 1L, digits = 3L) {
   d <- na.omit(data.frame(var1 = var1, var2 = var2))
   corr <- cor.test(~ var1 + var2, data = d, method = "spearman")
-  out <- c(rho = corr$estimate[[1]], p = corr$p.value[[1]], n = nrow(d))
-  print(out, digits = digits)
+  out <- c(rho = corr$estimate[[1]],
+           p = corr$p.value[[1]],
+           n_obs = nrow(d),
+           E = corr$p.value[[1]] * n_tests,
+           n_tests = n_tests)
+  out_txt <- prettyNum(out, digits = digits)
+  if (out['p'] < 0.001) out_txt['p'] <- '<0.001'
+  if (out['E'] < 0.001) out_txt['E'] <- '<0.001'
+  if (out['E'] > 1) out_txt['E'] <- '>1'
+  print(out_txt, quote = FALSE)
   return(invisible(out))
 }
 

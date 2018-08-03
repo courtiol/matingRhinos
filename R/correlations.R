@@ -20,8 +20,8 @@
 #' compute_correlation(var1 = males$Mat_succ, var2 = males$Rep_succ, n_tests = 3)
 #' 
 compute_correlation <- function(var1, var2, n_tests = 1L, digits = 3L) {
-  d <- na.omit(data.frame(var1 = var1, var2 = var2))
-  corr <- cor.test(~ var1 + var2, data = d, method = "spearman")
+  d <- stats::na.omit(data.frame(var1 = var1, var2 = var2))
+  corr <- stats::cor.test(~ var1 + var2, data = d, method = "spearman")
   out <- c(rho = corr$estimate[[1]],
            p = corr$p.value[[1]],
            n_obs = nrow(d),

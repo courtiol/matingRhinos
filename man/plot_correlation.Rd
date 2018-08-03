@@ -10,13 +10,13 @@ plot_correlation(data, x, y, xlab = "x-axis title",
 \arguments{
 \item{data}{The dataset}
 
-\item{x}{The name of the x covariate}
+\item{x}{The name of the x covariate.}
 
-\item{y}{The name of the y covariate}
+\item{y}{The name of the y covariate.}
 
-\item{xlab}{A title for the x-axis}
+\item{xlab}{A title for the x-axis.}
 
-\item{ylab}{A title for the y-axis}
+\item{ylab}{A title for the y-axis.}
 
 \item{limits}{The limit for the y-axis of the plot}
 }

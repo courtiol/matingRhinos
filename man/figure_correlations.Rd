@@ -2,22 +2,27 @@
 % Please edit documentation in R/correlations.R
 \name{figure_correlations}
 \alias{figure_correlations}
-\title{Create the figure showing the correlation between mating/reproductive success and their correlates}
+\title{Create the figures showing the correlation between mating/reproductive success and their correlates}
 \usage{
-figure_correlations(data, savePDF = FALSE)
+figure_correlations(data, which = c("mating", "repro"),
+  savePDF = FALSE)
 }
 \arguments{
 \item{data}{The dataset on which to perform the PCAs.}
+
+\item{which}{'mating' or 'repro', to indicate which plot to draw.}
 
 \item{savePDF}{A boolean indicating whether to create a PDF of the plot in the
 current working directory (TRUE) or not (FALSE, default).}
 }
 \description{
-This function creates the figure showing the correlations. It is a wrapper
-around the function \code{\link{plot_correlation}}.
+This function creates the figures showing the correlations. It is a
+wrapper around the function \code{\link{plot_correlation}}. The function
+can either illustrate the correlations with the mating success or those with 
+the reproductive success depending on the value of the argument \code{which}.
 }
 \examples{
-figure_correlations(data = males, savePDF = TRUE)
+figure_correlations(data = males, which = 'mating', savePDF = FALSE)
 
 }
 \seealso{

@@ -128,6 +128,12 @@ compute_correlation(var1 = malesC1$Rep_succ, var2 = malesC1$Related_mean, n_test
 compute_correlation(var1 = malesC2$Mat_succ, var2 = malesC2$Related_mean, n_tests = 6)
 
 
+######################
+## Male territories ##
+######################
+
+
+
 ##########################
 ## Horn characteristics ##
 ##########################

@@ -1,4 +1,4 @@
-#' Compute the the binomial skew index (B) of Nonacs
+#' Compute the binomial skew index (B) of Nonacs
 #'
 #' This function computes the Nonacs' binomial skew index. Nonacs defines it as
 #' an index ``based on the observed variance in a group corrected by the
@@ -22,6 +22,7 @@
 #' compute_NonacsB(benef = c(1, 1, 5), time = c(1, 1, 1))
 #' 
 compute_NonacsB <- function(benef, time) {
+  if (length(benef) != length(time)) stop("arguments of wrong length")
   K <- sum(benef)
   p <- benef/K
   Nt <- sum(time)
@@ -43,7 +44,7 @@ compute_NonacsB <- function(benef, time) {
 #' @param nsim The number of simulation to run.
 #' @param keep_H0 A boolean indicating whether to export the values of B under
 #'   the null hypothesis.
-#' @param digits The number of digits to keep.
+#' @param digits The number of digits for the display.
 #' @param seed The seed for the random number generator.
 #'
 #' @return A list with the observed Nonacs' binomial skew index value, its
@@ -64,7 +65,7 @@ test_NonacsB <- function(benef, time, nsim = 1e5L, keep_H0 = FALSE, digits = Inf
     compute_NonacsB(benef = benef_no_skew, time = time)
   })
   pv <- (sum(H0 > Obs) + 1) / (nsim + 1)
- out <- list(B_obs = signif(Obs, digits = digits), p = signif(pv, digits = digits))
+ out <- list(B_obs = signif(Obs, digits = digits), p = signif(pv, digits = digits), N = length(benef))
  if (keep_H0) {
    out[["B_H0"]] <- H0
  }
@@ -147,12 +148,12 @@ figure_NonacsB <- function(data_males, data_females, savePDF = FALSE) {
     if (!dir.exists("./figures")) {
       dir.create("./figures")
     }
-    cowplot::ggsave(filename = "./figures/figure_NonacsB.pdf",
+    cowplot::ggsave(filename = "./figures/figure1_NonacsB.pdf",
                     plot = pannel,
                     width = 12*2,
                     height = 11*2,
                     units = "cm")
-    message("figure_NonacsB.pdf created and stored in directory 'figures'!")
+    message("figure1_NonacsB.pdf created and stored in directory 'figures'!")
   }
   return(invisible(NULL))
 }

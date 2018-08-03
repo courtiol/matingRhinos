@@ -3,8 +3,8 @@
 #' This function creates a plot of the distribution of relatedness using the
 #' package ggplot2.
 #' 
-#' @param data The dataset
-#' @param limits The limit for the y-axis of the plot
+#' @inheritParams compute_PCA
+#' @param limits The limit for the y-axis of the plot.
 #'
 #' @return A ggplot object.
 #' @import ggplot2
@@ -37,7 +37,7 @@ utils::globalVariables(c('Related_mean', 'Related_SD', 'Related_N', 'No'))
 #' the two cohorts of males and for females. It is a wrapper around the function
 #' \code{\link{plot_relatedness}}.
 #' 
-#' @inheritParams figure_pca
+#' @inheritParams figure_PCA
 #' @seealso \code{\link{plot_relatedness}}
 #' @export
 #'

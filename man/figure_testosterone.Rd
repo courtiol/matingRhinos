@@ -14,7 +14,7 @@ current working directory (TRUE) or not (FALSE, default).}
 }
 \description{
 This function creates the figure showing the distribution of testosterone for
-the two cohorts of males and for females. It is a wrapper around the function
+the two cohorts of males. It is a wrapper around the function 
 \code{\link{plot_testosterone}}.
 }
 \examples{

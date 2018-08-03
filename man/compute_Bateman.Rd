@@ -14,14 +14,14 @@ compute_Bateman(mating_success, reproductive_success, digits = 3L)
 \item{digits}{The number of digits for the display.}
 }
 \value{
-The Bateman gradient
+The Bateman gradient.
 }
 \description{
 This function computes the Bateman gradient. The Bateman gradient is the
 slope of the regression line of the reproductive success on the mating
-success. Following Jones 2009 (and unlike some other works), we consider the
+success. Following Jones 2009 (and unlike some other work), we consider the
 relative reproductive success and the relative mating success to compute the
-gradient; that is we divide each variable by the population mean before
+gradient; i.e. we divide each variable by the population mean before
 fitting the linear model.
 }
 \examples{

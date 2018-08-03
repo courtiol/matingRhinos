@@ -10,7 +10,7 @@ plot_NonacsB(x, limits = c(-0.02, 0.07))
 \arguments{
 \item{x}{The object returned by the function \code{\link{test_NonacsB}}.}
 
-\item{limits}{The limit for the y-axis of the plot}
+\item{limits}{The limit for the y-axis of the plot.}
 }
 \value{
 A ggplot object.
@@ -20,7 +20,8 @@ This function creates a plot of the outcome of the null hypothesis testing of
 the Nonacs' binomial skew index using the package ggplot2.
 }
 \examples{
-malesRep <- test_NonacsB(benef = males$Rep_succ, time = males$Time, keep_H0 = TRUE)
-plot_NonacsB(x = malesRep)
+plot_NonacsB(test_NonacsB(benef = males$Rep_succ,
+                          time = males$Time,
+                          keep_H0 = TRUE))
 
 }

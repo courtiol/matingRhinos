@@ -7,9 +7,9 @@
 plot_testosterone(data, limits = c(0, 120))
 }
 \arguments{
-\item{data}{The dataset}
+\item{data}{A dataframe containing the data to be processed.}
 
-\item{limits}{The limit for the y-axis of the plot}
+\item{limits}{The limit for the y-axis of the plot.}
 }
 \value{
 A ggplot object.

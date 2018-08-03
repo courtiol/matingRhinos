@@ -2,7 +2,7 @@
 #'
 #' This function computes the Spearman correlation between two variables. It is
 #' a simple wrapper around the R function \code{\link{cor.test}}, with better
-#' display of the output which includes the outcome of the Bonferroni correction.
+#' display of the output that includes the outcome of the Bonferroni correction.
 #' 
 #' @param var1 A vector.
 #' @param var2 A vector.
@@ -12,7 +12,7 @@
 #'
 #' @return A vector containing the correlation between two variables, the 
 #' p-value of the correlation test, the expect value (i.e. the p-value 
-#' multiplied by n_tests) and the sample size after discarding the 
+#' multiplied by \code{n_tests}) and the sample size after discarding the 
 #' missing values.
 #' @export
 #' 
@@ -78,8 +78,8 @@ utils::globalVariables('Cohort')
 #' can either illustrate the correlations with the mating success or those with 
 #' the reproductive success depending on the value of the argument \code{which}.
 #'
-#' @inheritParams figure_pca
-#' @param which 'mating' or 'repro', to indicate which plot to draw.
+#' @inheritParams figure_PCA
+#' @param which The figure to be drawn ('mating' or 'repro').
 #' @seealso \code{\link{plot_correlation}}
 #' @export
 #'
@@ -112,9 +112,9 @@ figure_correlations <- function(data, which = c('mating', 'repro'), savePDF = FA
   ## compute PCA:
   malesC1 <- droplevels(data[data$Cohort == 'C1', ])
   malesC2 <- droplevels(data[data$Cohort == 'C2', ])
-  pca_C1_males <- compute_pca(data = malesC1)
-  pca_C2_males <- compute_pca(data = malesC2)
-  data <- rbind(pca_C1_males$data, pca_C2_males$data)
+  PCA_C1_males <- compute_PCA(data = malesC1)
+  PCA_C2_males <- compute_PCA(data = malesC2)
+  data <- rbind(PCA_C1_males$data, PCA_C2_males$data)
   
   ## plots:
   gg1 <- plot_correlation(data = data,

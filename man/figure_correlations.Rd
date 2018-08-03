@@ -10,7 +10,7 @@ figure_correlations(data, which = c("mating", "repro"),
 \arguments{
 \item{data}{The dataset on which to perform the PCAs.}
 
-\item{which}{'mating' or 'repro', to indicate which plot to draw.}
+\item{which}{The figure to be drawn ('mating' or 'repro').}
 
 \item{savePDF}{A boolean indicating whether to create a PDF of the plot in the
 current working directory (TRUE) or not (FALSE, default).}

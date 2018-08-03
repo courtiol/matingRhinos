@@ -7,8 +7,8 @@
 #' gradient; that is we divide each variable by the population mean before
 #' fitting the linear model.
 #' 
-#' @param mating_success A vector of mating success outcomes
-#' @param reproductive_success A vector of reproductive success outcomes
+#' @param mating_success A vector of mating success outcomes.
+#' @param reproductive_success A vector of reproductive success outcomes.
 #' @inheritParams test_NonacsB
 #'
 #' @return The Bateman gradient

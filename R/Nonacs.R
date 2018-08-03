@@ -80,7 +80,7 @@ test_NonacsB <- function(benef, time, nsim = 1e5L, keep_H0 = FALSE, digits = Inf
 #' This function creates a plot of the outcome of the null hypothesis testing of
 #' the Nonacs' binomial skew index using the package ggplot2.
 #'
-#' @param x The object returned by the function \code{\link{test_NonacsB}}
+#' @param x The object returned by the function \code{\link{test_NonacsB}}.
 #' @inheritParams plot_relatedness 
 #'
 #' @return A ggplot object.

@@ -210,5 +210,6 @@
 #' 
 #' ### Creating figures 3 & 4:
 #' figure_correlations(data = males, savePDF = save_figures_on_disk)
+#' ## note: rerun if bug 'polygon edge not found'; this is a ggplot hiccup.
 #'
 NULL

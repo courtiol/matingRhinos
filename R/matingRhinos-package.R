@@ -43,8 +43,8 @@
 #' ###############################################
 #'
 #' ### Note: set the following options to TRUE or FALSE depending on what you want.
-#' options(matingRhinos_PDF = TRUE) # export figures on hard drive as pdf?
-#' options(matingRhinos_colours = TRUE) # use colours in figures?
+#' options(matingRhinos_PDF = FALSE) # export figures on hard drive as pdf?
+#' options(matingRhinos_colours = FALSE) # use colours in figures?
 #' 
 #'
 #' ############################

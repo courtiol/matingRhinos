@@ -22,7 +22,7 @@ plot_testosterone <- function(data, limits = c(0, 120)) {
     col1 <- col2 <- ifelse(data$Cohort == 'C1', 'red', 'blue')
   }
   if (!is.null(options('matingRhinos_colours')[[1]]) && !options('matingRhinos_colours')[[1]]) {
-    col <- 'lightgrey'
+    col1 <- col2 <- 'lightgrey'
   }
   data <- data[!is.na(data$Testo_mean), ]
   gg <- ggplot(data = data, aes(y = Testo_mean, x = No, fill = Cohort)) +

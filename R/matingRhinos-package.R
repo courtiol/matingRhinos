@@ -43,8 +43,8 @@
 #' ###############################################
 #'
 #' ### Note: set the following options to TRUE or FALSE depending on what you want.
-#' options(matingRhinos_PDF = FALSE) # export figures on hard drive as pdf?
-#' options(matingRhinos_colours = FALSE) # use colours in figures?
+#' options(matingRhinos_PDF = TRUE) # export figures on hard drive as pdf?
+#' options(matingRhinos_colours = TRUE) # use colours in figures?
 #' 
 #'
 #' ############################
@@ -200,12 +200,18 @@
 #' ##  Testosterone metabolites concentration ##
 #' #############################################
 #' 
-#' ### 1. Computing the correlations and testing them:
+#' ### 1. Mean +/- SD:
+#' round(mean(malesC1$Testo_mean, na.rm = TRUE), digits = 3L)
+#' round(sd(malesC1$Testo_mean, na.rm = TRUE), digits = 3L)
+#' round(mean(malesC2$Testo_mean, na.rm = TRUE), digits = 3L)
+#' round(sd(malesC2$Testo_mean, na.rm = TRUE), digits = 3L)
+#' 
+#' ### 2. Computing the correlations and testing them:
 #' compute_correlation(var1 = malesC1$Mat_succ, var2 = malesC1$Testo_mean, n_tests = 7)
 #' compute_correlation(var1 = malesC1$Rep_succ, var2 = malesC1$Testo_mean, n_tests = 7)
 #' compute_correlation(var1 = malesC2$Mat_succ, var2 = malesC2$Testo_mean, n_tests = 7)
 #'
-#' ### 2. Creating figure S4:
+#' ### 3. Creating figure S4:
 #' figure_testosterone(data = males)
 #'
 #'

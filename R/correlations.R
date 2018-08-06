@@ -71,8 +71,10 @@ plot_correlation <- function(data, x, y, xlab = 'x-axis title', ylab = 'y-axis t
     scale_shape_manual(values = c(22, 24), name = 'Cohort of males:') +
     scale_colour_manual(values = c(col1, col2), name = 'Cohort of males:') +
     geom_point(size = 9) +
-    geom_text(aes(label = No)) +
-    theme(plot.margin = unit(c(10, 4, 5, 1), 'mm'), legend.position = 'none', legend.box.margin = margin(5, 1, 1, 1, unit = 'pt'))
+    geom_text(aes(label = No), size = 2) +
+    theme(plot.margin = unit(c(10, 10, 4, 1), 'mm'),
+          legend.position = 'none',
+          text = element_text(size = 16))
   return(gg)
 }
 utils::globalVariables('Cohort')
@@ -137,37 +139,58 @@ figure_correlations <- function(data, which = c('mating', 'repro')) {
                           ylab = ylab,
                           limits = limits)
   gg3 <- plot_correlation(data = data,
-                          x = 'Me_open',
+                          x = 'Open',
                           y = y,
-                          xlab = 'Occurence of medium/open thicket',
+                          xlab = 'Occurence of grassland (%)',
                           ylab = ylab,
                           limits = limits)
   gg4 <- plot_correlation(data = data,
-                          x = 'Pmax',
+                          x = 'Me_open',
                           y = y,
-                          xlab = expression(paste('Volume of ', italic('Panicum maximum'), ' (unit?)')),
+                          xlab = 'Occurence of open woodland (%)',
                           ylab = ylab,
                           limits = limits)
   gg5 <- plot_correlation(data = data,
+                          x = 'Me_thick',
+                          y = y,
+                          xlab = 'Occurence of close woodland (%)',
+                          ylab = ylab,
+                          limits = limits)
+  gg6 <- plot_correlation(data = data,
+                          x = 'Thick',
+                          y = y,
+                          xlab = 'Occurence of thickets (%)',
+                          ylab = ylab,
+                          limits = limits)
+  gg7 <- plot_correlation(data = data,
+                          x = 'Pmax',
+                          y = y,
+                          xlab = expression(paste('Volume of ', italic('Panicum maximum'), ' (m'^3,')')),
+                          ylab = ylab,
+                          limits = limits)
+  gg8 <- plot_correlation(data = data,
                           x = 'PC1',
                           y = y,
                           xlab = 'Horn characteristics',
                           ylab = ylab,
                           limits = limits)
-  gg6 <- plot_correlation(data = data,
+  gg9 <- plot_correlation(data = data,
                           x = 'Testo_mean',
                           y = y,
-                          xlab = 'Mean testosterone metabolites [ng/g feces]',
+                          xlab = 'Testosterone metabolites (ng/g feces)',
                           ylab = ylab,
                           limits = limits)
-  pannel <- cowplot::plot_grid(gg1, gg2, gg3, gg4, gg5, gg6,
+  pannel <- cowplot::plot_grid(gg1, gg2, gg3, gg4, gg5, gg6, gg7, gg8, gg9,
                                nrow = 3,
                                labels = c('A.',
                                           'B.',
                                           'C.',
                                           'D.',
                                           'E.',
-                                          'F.'),
+                                          'F.',
+                                          'G.',
+                                          'H.',
+                                          'I.'),
                                label_x = 0.02,
                                label_y = 1,
                                hjust = 0)
@@ -178,7 +201,7 @@ figure_correlations <- function(data, which = c('mating', 'repro')) {
     }
     cowplot::ggsave(filename = paste0('./figures/', basename_fig, '.pdf'),
                     plot = pannel,
-                    width = 12*2,
+                    width = 11.5*3,
                     height = 11*3,
                     units = 'cm')
     message(paste0(basename_fig, '.pdf ',  "created and stored in directory 'figures'!"))

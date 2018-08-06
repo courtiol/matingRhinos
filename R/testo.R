@@ -27,7 +27,7 @@ plot_testosterone <- function(data, limits = c(0, 120)) {
   data <- data[!is.na(data$Testo_mean), ]
   gg <- ggplot(data = data, aes(y = Testo_mean, x = No, fill = Cohort)) +
     geom_bar(stat = 'identity', width = 0.5) +
-    labs(y = 'Mean testosterone metababolites (ng/g feces)', x = 'Individual') +
+    labs(y = 'Mean testosterone metababolites\n (ng/g feces)', x = 'Individual') +
     geom_hline(yintercept = 0, colour = 'lightgrey') +
     scale_fill_manual(values = c(col1, col2), guide = FALSE) +
     scale_y_continuous(limits = limits) +
@@ -35,7 +35,8 @@ plot_testosterone <- function(data, limits = c(0, 120)) {
     geom_linerange(aes(ymax = Testo_mean + stats::qnorm(0.975)*Testo_SD/sqrt(Testo_N),
                       ymin = Testo_mean + stats::qnorm(0.025)*Testo_SD/sqrt(Testo_N)), size = 0.5) +
     geom_point(shape = 3, size = 0.5) +
-    theme(plot.margin = unit(c(10, 8, 2, 2), 'mm'))
+    theme(plot.margin = unit(c(10, 8, 2, 2), 'mm'),
+          text = element_text(size = 16))
   return(gg)
 }
 utils::globalVariables(c('Testo_mean', 'Testo_SD', 'Testo_N', 'No'))
@@ -71,8 +72,8 @@ figure_testosterone <- function(data) {
     }
     cowplot::ggsave(filename = './figures/figureS4_testosterone.pdf',
                     plot = pannel,
-                    width = 12*2,
-                    height = 12,
+                    width = 11.5*2,
+                    height = 11,
                     units = 'cm')
     message("figureS4_testosterone.pdf created and stored in directory 'figures'!")
   }

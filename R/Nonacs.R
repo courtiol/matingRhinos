@@ -107,7 +107,9 @@ plot_NonacsB <- function(x, limits = c(-0.02, 0.07)) {
    geom_vline(aes(xintercept = x$B_obs), colour = col, lwd = 1, lty = 2) +
    scale_x_continuous(limits = limits, breaks = seq(-0.2, 0.2, by = 0.02)) +
    theme_classic() +
-   theme(plot.margin = unit(c(10, 4, 5, 1), 'mm'), axis.ticks.y = element_blank(), axis.text.y = element_blank())
+   theme(plot.margin = unit(c(10, 4, 5, 1), 'mm'),
+         axis.ticks.y = element_blank(), axis.text.y = element_blank(),
+         text = element_text(size = 16))
   r <- ggplot_build(gg)$layout$panel_scales_y[[1]]$range$range
   pos_y <- (max(r) - min(r))*0.8
   gg <- gg + geom_text(aes(x = x$B_obs + (limits[2] - limits[1])*1/4, y = pos_y,
@@ -156,7 +158,7 @@ figure_NonacsB <- function(data_males, data_females) {
     }
     cowplot::ggsave(filename = './figures/figure1_NonacsB.pdf',
                     plot = pannel,
-                    width = 12*2,
+                    width = 11.5*2,
                     height = 11*2,
                     units = 'cm')
     message("figure1_NonacsB.pdf created and stored in directory 'figures'!")

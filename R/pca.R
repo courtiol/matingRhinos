@@ -78,7 +78,8 @@ plot_PCA <- function(x) {
     labs(x = paste0('PC1 (', signif(x$var_expl[1]*100, 3), '%)'),
          y =  paste0('PC2 (', signif(x$var_expl[2]*100, 3), '%)')) +
     theme_classic() +
-    theme(plot.margin = unit(c(5, 2, 2, 2), 'mm'))
+    theme(plot.margin = unit(c(10, 2, 2, 2), 'mm'),
+          text = element_text(size = 16))
   return(gg)
 }
 utils::globalVariables(c('PC1', 'PC2'))
@@ -115,8 +116,8 @@ figure_PCA <- function(data) {
     }
     cowplot::ggsave(filename = './figures/figureS3_PCA.pdf',
                     plot = pannel,
-                    width = 12*2,
-                    height = 12,
+                    width = 11.5*2,
+                    height = 11,
                     units = 'cm')
     message("figureS3_PCA.pdf created and stored in directory 'figures'!")
   }

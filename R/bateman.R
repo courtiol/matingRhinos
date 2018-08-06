@@ -91,7 +91,10 @@ plot_Bateman <- function(data_agg, sex) {
     scale_colour_manual(values = c(col1, col2), name = 'Cohort of males:', guide = do_guide1) +
     scale_radius(range = counts_nice, breaks = c(1, 10, 17), name = 'Number of rhinos:', guide = do_guide2) +
     theme_classic() +
-    theme(plot.margin = unit(c(10, 4, 5, 1), 'mm'), legend.position = 'bottom', legend.box.margin = margin(5, 1, 1, 1, unit = 'pt'))
+    theme(plot.margin = unit(c(10, 4, 5, 1), 'mm'),
+          legend.position = 'bottom',
+          legend.box.margin = margin(5, 1, 1, 1, unit = 'pt'),
+          text = element_text(size = 16))
   return(gg)
 }
 
@@ -127,8 +130,8 @@ figure_Bateman <- function(data_agg) {
     }
     cowplot::ggsave(filename = './figures/figure2_Bateman.pdf',
                     plot = pannel,
-                    width = 12*2,
-                    height = 15,
+                    width = 11.5*2,
+                    height = 13.5,
                     units = 'cm')
     message("figure2_Bateman.pdf created and stored in directory 'figures'!")
   }

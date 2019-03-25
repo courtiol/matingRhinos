@@ -88,11 +88,11 @@ figure_relatedness <- function(data) {
     if (!dir.exists('./figures')) {
       dir.create('./figures')
     }
-    cowplot::ggsave(filename = './figures/figureS1_relatedness.pdf',
-                    plot = pannel,
-                    width = 11.5*2,
-                    height = 11*2,
-                    units = 'cm')
+    ggsave(filename = './figures/figureS1_relatedness.pdf',
+           plot = pannel,
+           width = 11.5*2,
+           height = 11*2,
+           units = 'cm')
     message("figureS1_relatedness.pdf created and stored in directory 'figures'!")
   }
 }

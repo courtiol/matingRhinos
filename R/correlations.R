@@ -199,11 +199,11 @@ figure_correlations <- function(data, which = c('mating', 'repro')) {
     if (!dir.exists('./figures')) {
       dir.create('./figures')
     }
-    cowplot::ggsave(filename = paste0('./figures/', basename_fig, '.pdf'),
-                    plot = pannel,
-                    width = 11.5*3,
-                    height = 11*3,
-                    units = 'cm')
+    ggsave(filename = paste0('./figures/', basename_fig, '.pdf'),
+           plot = pannel,
+           width = 11.5*3,
+           height = 11*3,
+           units = 'cm')
     message(paste0(basename_fig, '.pdf ',  "created and stored in directory 'figures'!"))
   }
   return(invisible(NULL))

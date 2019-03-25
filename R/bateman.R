@@ -128,11 +128,11 @@ figure_Bateman <- function(data_agg) {
     if (!dir.exists('./figures')) {
       dir.create('./figures')
     }
-    cowplot::ggsave(filename = './figures/figure2_Bateman.pdf',
-                    plot = pannel,
-                    width = 11.5*2,
-                    height = 13.5,
-                    units = 'cm')
+    ggsave(filename = './figures/figure2_Bateman.pdf',
+           plot = pannel,
+           width = 11.5*2,
+           height = 13.5,
+           units = 'cm')
     message("figure2_Bateman.pdf created and stored in directory 'figures'!")
   }
   return(invisible(NULL))

@@ -156,11 +156,11 @@ figure_NonacsB <- function(data_males, data_females) {
     if (!dir.exists('./figures')) {
       dir.create('./figures')
     }
-    cowplot::ggsave(filename = './figures/figure1_NonacsB.pdf',
-                    plot = pannel,
-                    width = 11.5*2,
-                    height = 11*2,
-                    units = 'cm')
+    ggsave(filename = './figures/figure1_NonacsB.pdf',
+           plot = pannel,
+           width = 11.5*2,
+           height = 11*2,
+           units = 'cm')
     message("figure1_NonacsB.pdf created and stored in directory 'figures'!")
   }
   return(invisible(NULL))

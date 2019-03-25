@@ -109,13 +109,13 @@ figure_correlations <- function(data, which = c('mating', 'repro')) {
     y <- 'Mat_succ'
     ylab <- 'Number of mates'
     basename_fig <- 'figure3_correlations_mating'
-    limits <- c(0L, 12L)
+    limits <- c(0L, 14L)
   }
   if (which == 'repro') {
     y <- 'Rep_succ'
     ylab <- 'Number of offspring'
     basename_fig <- 'figure4_correlations_repro'
-    limits <- c(0L, 18L)
+    limits <- c(0L, 20L)
   }
   
   ## compute PCA:

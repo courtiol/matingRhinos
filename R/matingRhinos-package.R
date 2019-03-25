@@ -3,8 +3,8 @@
 #'
 #' This R package aims at providing the data and documenting the R code behind
 #' the analysis of the paper entitled 'Mate choice, reproductive success and
-#' inbreeding in white rhinos' by by Kretzschmar P., Auld H., Boag P., 
-#' Ganslosser U., Scott C., Courtiol A. & Van Coeverden de Groot P.J. (in prep).
+#' inbreeding in white rhiceros...' by by Kretzschmar P., Auld H., Boag P., 
+#' Ganslosser U., Scott C. Van Coeverden de Groot P.J. & Courtiol A. (in prep).
 #'
 #' This package has not been conceived for general use!
 #'
@@ -28,8 +28,8 @@
 #' @docType package
 #'
 #' @references
-#' Kretzschmar P., Auld H., Boag P., Ganslosser U., Scott C., Courtiol A. & 
-#' Van Coeverden de Groot P.J. (in prep)
+#' Kretzschmar P., Auld H., Boag P., Ganslosser U., Scott C.,
+#' Van Coeverden de Groot P.J. & Courtiol A. (in prep)
 #' Mate choice, reproductive success and inbreeding in white rhinos.
 #' 
 #'
@@ -100,9 +100,6 @@
 #' compute_correlation(var1 = malesC2$Mat_succ, var2 = malesC2$Rep_succ)
 #' compute_Bateman(mating_success = malesC2$Mat_succ, reproductive_success = malesC2$Rep_succ)
 #' 
-#' compute_correlation(var1 = males$Mat_succ, var2 = males$Rep_succ)
-#' compute_Bateman(mating_success = males$Mat_succ, reproductive_success = males$Rep_succ)
-#'
 #' ### 4. Creating figure 2:
 #' figure_Bateman(data_agg = rhinos_agg)
 #'
@@ -116,9 +113,6 @@
 #' 
 #' compute_correlation(var1 = femalesC2$Mat_succ, var2 = femalesC2$Rep_succ)
 #' compute_Bateman(mating_success = femalesC2$Mat_succ, reproductive_success = femalesC2$Rep_succ)
-#' 
-#' compute_correlation(var1 = females$Mat_succ, var2 = females$Rep_succ)
-#' compute_Bateman(mating_success = females$Mat_succ, reproductive_success = females$Rep_succ)
 #'
 #'
 #' #################

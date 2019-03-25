@@ -3,11 +3,11 @@ rm(list = ls())
 
 ## preparing data
 males_temp <- read.csv("./prepare_data/males.csv")
-males_temp$No <- factor(males_temp$No, levels = c("A", "G", "K", "R", "S", "123", "5", "30", "60", "62", "63", "65", "66"))
+males_temp$No <- factor(males_temp$No, levels = c("A", "G", "K", "R", "S", "123", "5", "30", "62", "63", "65", "66"))
 
-males_temp %>% arrange(Cohort, No) -> males
+males_temp %>% arrange(Cohort, No) %>% filter(!is.na(No)) -> males
 
-males %>% group_by(Mat_succ, Rep_succ, Cohort) %>% summarize(Count = n()) %>% as.data.frame -> males_agg
+males %>% group_by(Mat_succ, Rep_succ, Cohort) %>% summarize(Count = n()) %>% as.data.frame %>% na.omit() -> males_agg
 males
 males_agg
 

@@ -12,7 +12,7 @@ males
 males_agg
 
 females <- read.csv("./prepare_data/females.csv")
-females %>% group_by(Mat_succ, Rep_succ, Cohort) %>% summarize(Count = n()) %>% as.data.frame -> females_agg
+females %>% group_by(Mat_succ, Rep_succ, Cohort) %>% summarize(Count = n()) %>% as.data.frame %>% na.omit() -> females_agg
 females
 females_agg
 

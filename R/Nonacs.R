@@ -112,9 +112,16 @@ plot_NonacsB <- function(x, limits = c(-0.02, 0.07)) {
          text = element_text(size = 16))
   r <- ggplot_build(gg)$layout$panel_scales_y[[1]]$range$range
   pos_y <- (max(r) - min(r))*0.8
-  gg <- gg + geom_text(aes(x = x$B_obs + (limits[2] - limits[1])*1/4, y = pos_y,
-                           label = paste('p = ', signif(x$p, digits = 3L))),
-                       colour = col, vjust = 0)
+  
+  out_txt <- format(signif(x$p, digits = 2L), nsmall = 2)
+  if (x$p < 0.001) {
+    out_txt <- 'p < 0.001'
+    } else if (out_txt != "1.00") {
+    out_txt <- paste('p =', out_txt)
+    } else out_txt <- paste('p ~', out_txt)
+
+  gg <- gg + geom_text(aes(x = x$B_obs + 0.01, y = pos_y, label = out_txt),
+                       colour = col, vjust = 0, hjust = 0)
   return(gg)
 }
 

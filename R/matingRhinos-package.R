@@ -114,6 +114,13 @@
 #' compute_correlation(var1 = femalesC2$Mat_succ, var2 = femalesC2$Rep_succ)
 #' compute_Bateman(mating_success = femalesC2$Mat_succ, reproductive_success = femalesC2$Rep_succ)
 #'
+#' ### 7. Successful males
+#' malesC1[malesC1$Rep_succ == max(malesC1$Rep_succ), c('No', 'Rep_succ', 'Mat_succ')]
+#' range(malesC1$Mat_succ[malesC1$Rep_succ != max(malesC1$Rep_succ)])
+#' range(malesC1$Rep_succ[malesC1$Rep_succ != max(malesC1$Rep_succ)])
+#' 
+#' malesC2[malesC2$Rep_succ == max(malesC2$Rep_succ), c('No', 'Rep_succ', 'Mat_succ')]
+#'
 #'
 #' #################
 #' ## Relatedness ##
@@ -122,14 +129,14 @@
 #' ### 1. Relatedness of the male the most related to females:
 #' males[which.max(males$Related_mean), c('No', 'Cohort', 'Related_mean', 'Related_SD')]
 #' 
-#' ### 2. Creating figure S1:
+#' ### 2. Creating figure S2:
 #' figure_relatedness(data = males)
 #' 
 #' ### 3. Correlation mating, reproductive success and relatedness to females:
 #' compute_correlation(var1 = malesC1$Mat_succ, var2 = malesC1$Related_mean, n_tests = 9)
 #' compute_correlation(var1 = malesC1$Rep_succ, var2 = malesC1$Related_mean, n_tests = 9)
 #' compute_correlation(var1 = malesC2$Mat_succ, var2 = malesC2$Related_mean, n_tests = 9)
-#'
+#' compute_correlation(var1 = malesC2$Rep_succ, var2 = malesC2$Related_mean, n_tests = 9)
 #'
 #' ######################
 #' ## Male territories ##
@@ -139,14 +146,14 @@
 #' rbind(malesC1[which.min(malesC1$Ter_map), c('No', 'Cohort', 'Ter_map')],
 #'       malesC1[which.max(malesC1$Ter_map), c('No', 'Cohort', 'Ter_map')])
 #' 
-#' rbind(malesC2[which.min(malesC1$Ter_map), c('No', 'Cohort', 'Ter_map')],
-#'       malesC2[which.max(malesC1$Ter_map), c('No', 'Cohort', 'Ter_map')])
+#' rbind(malesC2[which.min(malesC2$Ter_map), c('No', 'Cohort', 'Ter_map')],
+#'       malesC2[which.max(malesC2$Ter_map), c('No', 'Cohort', 'Ter_map')])
 #' 
 #' ### 2. Correlation mating, reproductive success and territory size:
 #' compute_correlation(var1 = malesC1$Mat_succ, var2 = malesC1$Ter_map, n_tests = 9)
 #' compute_correlation(var1 = malesC1$Rep_succ, var2 = malesC1$Ter_map, n_tests = 9)
 #' compute_correlation(var1 = malesC2$Mat_succ, var2 = malesC2$Ter_map, n_tests = 9)
-#' 
+#' compute_correlation(var1 = malesC2$Rep_succ, var2 = malesC2$Ter_map, n_tests = 9)
 #' 
 #' #####################
 #' ## Habitat quality ##

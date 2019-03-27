@@ -87,8 +87,8 @@
 #' #####################################
 #' 
 #' ### 1. Computing the skewness tests for males: 
-#' test_NonacsB(benef = males$Rep_succ, time = males$Time, digits = 3L)
 #' test_NonacsB(benef = males$Mat_succ, time = males$Time, digits = 3L)
+#' test_NonacsB(benef = males$Rep_succ, time = males$Time, digits = 3L)
 #'
 #' ### 2. Creating figure 1:
 #' figure_NonacsB(data_males = males, data_females = females)

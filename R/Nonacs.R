@@ -92,7 +92,7 @@ test_NonacsB <- function(benef, time, nsim = 1e5L, keep_H0 = FALSE, digits = Inf
 #'                           time = males$Time,
 #'                           keep_H0 = TRUE))
 #' 
-plot_NonacsB <- function(x, limits = c(-0.02, 0.07)) {
+plot_NonacsB <- function(x, limits = c(-0.02, 0.05)) {
   col <- 'red'
   if (!is.null(options('matingRhinos_colours')[[1]]) && !options('matingRhinos_colours')[[1]]) {
     col <- 'black'
@@ -120,8 +120,8 @@ plot_NonacsB <- function(x, limits = c(-0.02, 0.07)) {
     out_txt <- paste('p =', out_txt)
     } else out_txt <- paste('p ~', out_txt)
 
-  gg <- gg + geom_text(aes(x = x$B_obs + 0.01, y = pos_y, label = out_txt),
-                       colour = col, vjust = 0, hjust = 0)
+  gg <- gg + geom_text(aes(x = x$B_obs - 0.003, y = pos_y, label = out_txt),
+                       colour = col, vjust = 0, hjust = 1)
   return(gg)
 }
 

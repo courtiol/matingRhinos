@@ -3,7 +3,7 @@
 This is the GitHub repository hosting the R package matingRhinos. The package will not
 evolve much in the future because it aims at documenting how we obtained the
 results for the paper entitled "Mate choice, reproductive success and inbreeding 
-in white rhinos" by Kretzschmar Petra et al. (in prep).
+in white rhinoceros..." by Kretzschmar Petra et al. (in prep).
 The only planned updates are those that will be necessary to maintain
 compatibility with other packages, so that our code won't break.
 

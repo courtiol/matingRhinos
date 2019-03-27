@@ -4,7 +4,7 @@
 #' This R package aims at providing the data and documenting the R code behind
 #' the analysis of the paper entitled 'Mate choice, reproductive success and
 #' inbreeding in white rhiceros...' by by Kretzschmar P., Auld H., Boag P., 
-#' Ganslosser U., Scott C. Van Coeverden de Groot P.J. & Courtiol A. (in prep).
+#' Ganslosser U., Scott C., Van Coeverden de Groot P.J. & Courtiol A. (in prep).
 #'
 #' This package has not been conceived for general use!
 #'

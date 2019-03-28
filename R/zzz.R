@@ -28,6 +28,7 @@
 
 .pretty_p <- function(p, prefix = TRUE) {
   stopifnot(length(p) == 1)
+  if(is.na(p)) return(NA)
   out_txt <- format(signif(p, digits = 2L), nsmall = 2)
   if (p < 0.001) {
     out_txt <- ifelse(prefix, 'p < 0.001', '< 0.001')

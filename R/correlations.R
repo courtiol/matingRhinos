@@ -4,6 +4,12 @@
 #' a simple wrapper around the R function \code{\link{cor.test}}, with better
 #' display of the output.
 #' 
+#' @note We set the argument \code{exact} to \var{FALSE} in the call to \code{\link{cor.test}},
+#' so that the presence of ties in some correlation tests would not change
+#' how the p-values are computed (exact tests are not possible in the presence of ties for this implementation of
+#' the test). Otherwise p-values obtained can sometimes be inconsistent across tests (ex: smaller p-values despite higher rho and same sample
+#' size.)
+#' 
 #' @param var1 A vector.
 #' @param var2 A vector.
 #' @inheritParams test_NonacsB
@@ -13,12 +19,14 @@
 #' missing values.
 #' @export
 #' 
+#' @seealso \code{\link{compute_correlation_table}}
+#' 
 #' @examples
 #' compute_correlation(var1 = males$Mat_succ, var2 = males$Rep_succ)
 #' 
 compute_correlation <- function(var1, var2) {
   d <- stats::na.omit(data.frame(var1 = var1, var2 = var2))
-  corr <- stats::cor.test(~ var1 + var2, data = d, method = "spearman")
+  corr <- stats::cor.test(~ var1 + var2, data = d, method = "spearman", exact = FALSE)
   out <- c(rho = signif(corr$estimate[[1]], 2L),
            p = .pretty_p(corr$p.value[[1]], prefix = FALSE),
            n_obs = nrow(d))
@@ -32,11 +40,11 @@ compute_correlation <- function(var1, var2) {
 #' This function computes the Spearman correlation tests between a fitness
 #' component and all predictors. It is a simple wrapper around the R function
 #' \code{\link{cor.test}}, with better display of the output that includes
-#' correction for multiple testing (default = 'holm').
+#' correction for multiple testing (default = 'bonferroni').
 #' 
 #' @param cohort The cohort of males ('C1' or 'C2').
 #' @param fitness The column name for the fitness component ('Mat_succ' or 'Rep_succ').
-#' @param method The method for the multiple testing correction, see \code{\link{p.adjust}}.
+#' @param method The method for the multiple testing correction, see \code{\link{p.adjust}} or ?dunn.test::p.adjustment.methods for more details (requires to install the pacakge dunn.test).
 #' @param data The dataset.
 #'
 #' @return A data.frame containing the predictor, the sample size after
@@ -44,18 +52,25 @@ compute_correlation <- function(var1, var2) {
 #'   p-value of the correlation test, the p-value after correction for
 #'   multiple testing, and significance stars for the raw and adjusted p-values.
 #'   
+#' @note We set the argument \code{exact} to \var{FALSE} in the call to \code{\link{cor.test}},
+#'   so that the presence of ties in some correlation tests would not change
+#'   how the p-values are computed (exact tests are not possible in the presence of ties for this implementation of
+#'   the test). Otherwise p-values obtained can sometimes be inconsistent across tests (ex: smaller p-values despite higher rho and same sample
+#'   size.)
+#'   
 #' @export
 #' 
 #' @examples
-#' compute_correlation_table(cohort = 'C1', fitness = 'Mat_succ', method = 'holm', data = males)
+#' compute_correlation_table(cohort = 'C1', fitness = 'Mat_succ', method = 'bonferroni', data = males)
 #' 
-compute_correlation_table <- function(cohort = NULL, fitness = NULL, method = 'holm', data = NULL) {
+compute_correlation_table <- function(cohort = NULL, fitness = NULL, method = 'bonferroni', data = NULL) {
   predictors <- c('Related_mean', 'Ter_map', 'Open', 'Me_open', 'Me_thick', 'Thick', 'Pmax', 'Horn', 'Testo_mean')
   fitness_var <- data[data$Cohort == cohort, fitness]
   list_corrs <- lapply(predictors, function(var) {
     if(is.null(data[data$Cohort == cohort, var])) return(c(n_obs = 0, rho = NA, p = NA))
     d <- stats::na.omit(data.frame(fitness_var = fitness_var, predictor = data[data$Cohort == cohort, var]))
-    corr <- suppressWarnings(stats::cor.test(~ fitness_var + predictor, data = d, method = "spearman"))
+    corr <- (stats::cor.test(~ fitness_var + predictor, data = d,
+                                             method = "spearman", exact = FALSE))
     c(n_obs = nrow(d), rho = signif(corr$estimate[[1]], 2), p = corr$p.value[[1]])
     })
   out <- data.frame(predictors, do.call('rbind', list_corrs))

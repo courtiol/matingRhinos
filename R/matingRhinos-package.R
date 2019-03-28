@@ -129,6 +129,7 @@
 #' range(malesC1$Rep_succ[malesC1$Rep_succ != max(malesC1$Rep_succ)])
 #' 
 #' malesC2[malesC2$Rep_succ == max(malesC2$Rep_succ), c('No', 'Rep_succ', 'Mat_succ')]
+#' 
 #'
 #' ######################
 #' ## All correlations ##
@@ -144,6 +145,7 @@
 #' figure_correlations(data = males)
 #' ## note: rerun if bug 'polygon edge not found'; this is a ggplot hiccup.
 #' 
+#' 
 #' #################
 #' ## Relatedness ##
 #' #################
@@ -153,7 +155,8 @@
 #' 
 #' ### 2. Creating figure S2:
 #' figure_relatedness(data = males)
-
+#' 
+#' 
 #' ######################
 #' ## Male territories ##
 #' ######################
@@ -164,16 +167,6 @@
 #' 
 #' rbind(malesC2[which.min(malesC2$Ter_map), c('No', 'Cohort', 'Ter_map')],
 #'       malesC2[which.max(malesC2$Ter_map), c('No', 'Cohort', 'Ter_map')])
-#' 
-#' 
-#' ########################
-#' ## Vegetation quality ##
-#' ########################
-#' 
-#' ### 1. Correlation mating, reproductive success and volume of Panicum maximum:
-#' compute_correlation(var1 = malesC1$Mat_succ, var2 = malesC1$Pmax, n_tests = 9)
-#' compute_correlation(var1 = malesC1$Rep_succ, var2 = malesC1$Pmax, n_tests = 9)
-#' compute_correlation(var1 = malesC2$Mat_succ, var2 = malesC2$Pmax, n_tests = 9)
 #' 
 #' 
 #' ##########################

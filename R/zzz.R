@@ -25,3 +25,25 @@
   } else {message("Install the package R.utils for more info.")}
   return(invisible(NULL))
 }
+
+.pretty_p <- function(p, prefix = TRUE) {
+  stopifnot(length(p) == 1)
+  out_txt <- format(signif(p, digits = 2L), nsmall = 2)
+  if (p < 0.001) {
+    out_txt <- ifelse(prefix, 'p < 0.001', '< 0.001')
+  } else if (out_txt != "1.00") {
+    out_txt <- ifelse(prefix, paste('p =', out_txt), out_txt)
+  } else out_txt <- ifelse(prefix, paste('p ~', out_txt), paste('~', out_txt))
+  return(out_txt)
+}
+
+.pretty_ps <- Vectorize(.pretty_p)
+
+.pretty_star <- function(p) {
+  stars <- character(length(p))
+  stars[p < 0.1] <- '.'
+  stars[p < 0.05] <- '*'
+  stars[p < 0.01] <- '**'
+  stars[p < 0.001] <- '***'
+  stars
+}

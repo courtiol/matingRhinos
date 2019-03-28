@@ -4,30 +4,24 @@
 \alias{compute_correlation}
 \title{Compute a Spearman correlation test between two variables}
 \usage{
-compute_correlation(var1, var2, n_tests = 1L, digits = 3L)
+compute_correlation(var1, var2)
 }
 \arguments{
 \item{var1}{A vector.}
 
 \item{var2}{A vector.}
-
-\item{n_tests}{An integer providing the number of tests to account for during 
-the Bonferroni adjustment.}
-
-\item{digits}{The number of digits for the display.}
 }
 \value{
 A vector containing the correlation between two variables, the 
-p-value of the correlation test, the expect value (i.e. the p-value 
-multiplied by \code{n_tests}) and the sample size after discarding the 
+p-value of the correlation test, and the sample size after discarding the 
 missing values.
 }
 \description{
 This function computes the Spearman correlation between two variables. It is
 a simple wrapper around the R function \code{\link{cor.test}}, with better
-display of the output that includes the outcome of the Bonferroni correction.
+display of the output.
 }
 \examples{
-compute_correlation(var1 = males$Mat_succ, var2 = males$Rep_succ, n_tests = 3)
+compute_correlation(var1 = males$Mat_succ, var2 = males$Rep_succ)
 
 }

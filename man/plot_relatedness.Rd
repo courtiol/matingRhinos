@@ -4,7 +4,7 @@
 \alias{plot_relatedness}
 \title{Plot the distribution of relatedness}
 \usage{
-plot_relatedness(data, limits = c(0, 0.25), to = "males")
+plot_relatedness(data, limits = c(0, 0.5), to = "males")
 }
 \arguments{
 \item{data}{A dataframe containing the data to be processed.}

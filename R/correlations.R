@@ -37,6 +37,7 @@ compute_correlation <- function(var1, var2) {
 #' @param cohort The cohort of males ('C1' or 'C2').
 #' @param fitness The column name for the fitness component ('Mat_succ' or 'Rep_succ').
 #' @param method The method for the multiple testing correction, see \code{\link{p.adjust}}.
+#' @param data The dataset.
 #'
 #' @return A data.frame containing the predictor, the sample size after
 #'   discarding the missing values, the correlation between two variables, the
@@ -50,10 +51,11 @@ compute_correlation <- function(var1, var2) {
 #' 
 compute_correlation_table <- function(cohort = NULL, fitness = NULL, method = 'holm', data = NULL) {
   predictors <- c('Related_mean', 'Ter_map', 'Open', 'Me_open', 'Me_thick', 'Thick', 'Pmax', 'Horn', 'Testo_mean')
-  fitness_var <- data[data$Cohort == cohort, fitness] 
+  fitness_var <- data[data$Cohort == cohort, fitness]
   list_corrs <- lapply(predictors, function(var) {
+    if(is.null(data[data$Cohort == cohort, var])) return(c(n_obs = 0, rho = NA, p = NA))
     d <- stats::na.omit(data.frame(fitness_var = fitness_var, predictor = data[data$Cohort == cohort, var]))
-    corr <- stats::cor.test(~ fitness_var + predictor, data = d, method = "spearman")
+    corr <- suppressWarnings(stats::cor.test(~ fitness_var + predictor, data = d, method = "spearman"))
     c(n_obs = nrow(d), rho = signif(corr$estimate[[1]], 2), p = corr$p.value[[1]])
     })
   out <- data.frame(predictors, do.call('rbind', list_corrs))

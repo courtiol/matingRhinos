@@ -5,14 +5,14 @@
 \title{Compute a Spearman correlation tests for a given cohort and fitness measurement}
 \usage{
 compute_correlation_table(cohort = NULL, fitness = NULL,
-  method = "holm", data = NULL)
+  method = "bonferroni", data = NULL)
 }
 \arguments{
 \item{cohort}{The cohort of males ('C1' or 'C2').}
 
 \item{fitness}{The column name for the fitness component ('Mat_succ' or 'Rep_succ').}
 
-\item{method}{The method for the multiple testing correction, see \code{\link{p.adjust}}.}
+\item{method}{The method for the multiple testing correction, see \code{\link{p.adjust}} or ?dunn.test::p.adjustment.methods for more details (requires to install the pacakge dunn.test).}
 
 \item{data}{The dataset.}
 }
@@ -26,9 +26,16 @@ A data.frame containing the predictor, the sample size after
 This function computes the Spearman correlation tests between a fitness
 component and all predictors. It is a simple wrapper around the R function
 \code{\link{cor.test}}, with better display of the output that includes
-correction for multiple testing (default = 'holm').
+correction for multiple testing (default = 'bonferroni').
+}
+\note{
+We set the argument \code{exact} to \var{FALSE} in the call to \code{\link{cor.test}},
+  so that the presence of ties in some correlation tests would not change
+  how the p-values are computed (exact tests are not possible in the presence of ties for this implementation of
+  the test). Otherwise p-values obtained can sometimes be inconsistent across tests (ex: smaller p-values despite higher rho and same sample
+  size.)
 }
 \examples{
-compute_correlation_table(cohort = 'C1', fitness = 'Mat_succ', method = 'holm', data = males)
+compute_correlation_table(cohort = 'C1', fitness = 'Mat_succ', method = 'bonferroni', data = males)
 
 }

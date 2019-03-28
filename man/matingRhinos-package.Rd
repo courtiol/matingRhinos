@@ -130,10 +130,10 @@ malesC2[malesC2$Rep_succ == max(malesC2$Rep_succ), c('No', 'Rep_succ', 'Mat_succ
 ######################
 
 ### 1. Computing all the correlation tests
-compute_correlation_table(cohort = 'C1', fitness = 'Rep_succ', method = 'holm', data = males)
-compute_correlation_table(cohort = 'C1', fitness = 'Mat_succ', method = 'holm', data = males)
-compute_correlation_table(cohort = 'C2', fitness = 'Rep_succ', method = 'holm', data = males)
-compute_correlation_table(cohort = 'C2', fitness = 'Mat_succ', method = 'holm', data = males)
+compute_correlation_table(cohort = 'C1', fitness = 'Rep_succ', data = males)
+compute_correlation_table(cohort = 'C1', fitness = 'Mat_succ', data = males)
+compute_correlation_table(cohort = 'C2', fitness = 'Rep_succ', data = males)
+compute_correlation_table(cohort = 'C2', fitness = 'Mat_succ', data = males)
 
 ### 2. Creating figures 3 & 4:
 figure_correlations(data = males)

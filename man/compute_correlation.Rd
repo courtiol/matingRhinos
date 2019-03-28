@@ -21,7 +21,17 @@ This function computes the Spearman correlation between two variables. It is
 a simple wrapper around the R function \code{\link{cor.test}}, with better
 display of the output.
 }
+\note{
+We set the argument \code{exact} to \var{FALSE} in the call to \code{\link{cor.test}},
+so that the presence of ties in some correlation tests would not change
+how the p-values are computed (exact tests are not possible in the presence of ties for this implementation of
+the test). Otherwise p-values obtained can sometimes be inconsistent across tests (ex: smaller p-values despite higher rho and same sample
+size.)
+}
 \examples{
 compute_correlation(var1 = males$Mat_succ, var2 = males$Rep_succ)
 
+}
+\seealso{
+\code{\link{compute_correlation_table}}
 }

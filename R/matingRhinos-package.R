@@ -57,7 +57,16 @@
 #' femalesC1 <- droplevels(females[females$Cohort == 'C1', ])
 #' femalesC2 <- droplevels(females[females$Cohort == 'C2', ])
 #' 
-#' ### 2. We visuallise the first 6 rows of each dataset:
+#' ### 2. Running the Principal Component Analyses (PCA) on horns characteristics:
+#' PCA_C1_males <- compute_PCA(data = malesC1)
+#' PCA_C2_males <- compute_PCA(data = malesC2)
+#' males$Horn <- NA
+#' males$Horn[males$Cohort == 'C1'] <- PCA_C1_males$data$PC1
+#' malesC1$Horn <- PCA_C1_males$data$PC1
+#' males$Horn[males$Cohort == 'C2'] <- PCA_C2_males$data$PC1
+#' malesC2$Horn <- PCA_C2_males$data$PC1
+
+#' ### 3. We visuallise the first 6 rows of each dataset:
 #' head(males)
 #' head(malesC1)
 #' head(malesC2)
@@ -121,7 +130,20 @@
 #' 
 #' malesC2[malesC2$Rep_succ == max(malesC2$Rep_succ), c('No', 'Rep_succ', 'Mat_succ')]
 #'
-#'
+#' ######################
+#' ## All correlations ##
+#' ######################
+#' 
+#' ### 1. Computing all the correlation tests
+#' compute_correlation_table(cohort = 'C1', fitness = 'Rep_succ', method = 'holm', data = males)
+#' compute_correlation_table(cohort = 'C1', fitness = 'Mat_succ', method = 'holm', data = males)
+#' compute_correlation_table(cohort = 'C2', fitness = 'Rep_succ', method = 'holm', data = males)
+#' compute_correlation_table(cohort = 'C2', fitness = 'Mat_succ', method = 'holm', data = males)
+#' 
+#' ### 2. Creating figures 3 & 4:
+#' figure_correlations(data = males)
+#' ## note: rerun if bug 'polygon edge not found'; this is a ggplot hiccup.
+#' 
 #' #################
 #' ## Relatedness ##
 #' #################
@@ -131,13 +153,7 @@
 #' 
 #' ### 2. Creating figure S2:
 #' figure_relatedness(data = males)
-#' 
-#' ### 3. Correlation mating, reproductive success and relatedness to females:
-#' compute_correlation(var1 = malesC1$Mat_succ, var2 = malesC1$Related_mean, n_tests = 9)
-#' compute_correlation(var1 = malesC1$Rep_succ, var2 = malesC1$Related_mean, n_tests = 9)
-#' compute_correlation(var1 = malesC2$Mat_succ, var2 = malesC2$Related_mean, n_tests = 9)
-#' compute_correlation(var1 = malesC2$Rep_succ, var2 = malesC2$Related_mean, n_tests = 9)
-#'
+
 #' ######################
 #' ## Male territories ##
 #' ######################
@@ -148,36 +164,6 @@
 #' 
 #' rbind(malesC2[which.min(malesC2$Ter_map), c('No', 'Cohort', 'Ter_map')],
 #'       malesC2[which.max(malesC2$Ter_map), c('No', 'Cohort', 'Ter_map')])
-#' 
-#' ### 2. Correlation mating, reproductive success and territory size:
-#' compute_correlation(var1 = malesC1$Mat_succ, var2 = malesC1$Ter_map, n_tests = 9)
-#' compute_correlation(var1 = malesC1$Rep_succ, var2 = malesC1$Ter_map, n_tests = 9)
-#' compute_correlation(var1 = malesC2$Mat_succ, var2 = malesC2$Ter_map, n_tests = 9)
-#' compute_correlation(var1 = malesC2$Rep_succ, var2 = malesC2$Ter_map, n_tests = 9)
-#' 
-#' #####################
-#' ## Habitat quality ##
-#' #####################
-#' 
-#' ### 1. Correlation mating, reproductive success and occurence of grassland:
-#' compute_correlation(var1 = malesC1$Mat_succ, var2 = malesC1$Open, n_tests = 9)
-#' compute_correlation(var1 = malesC1$Rep_succ, var2 = malesC1$Open, n_tests = 9)
-#' compute_correlation(var1 = malesC2$Mat_succ, var2 = malesC2$Open, n_tests = 9)
-#' 
-#' ### 2. Correlation mating, reproductive success and occurence of open woodland:
-#' compute_correlation(var1 = malesC1$Mat_succ, var2 = malesC1$Me_open, n_tests = 9)
-#' compute_correlation(var1 = malesC1$Rep_succ, var2 = malesC1$Me_open, n_tests = 9)
-#' compute_correlation(var1 = malesC2$Mat_succ, var2 = malesC2$Me_open, n_tests = 9)
-#' 
-#' ### 3. Correlation mating, reproductive success and occurence of close woodland:
-#' compute_correlation(var1 = malesC1$Mat_succ, var2 = malesC1$Me_thick, n_tests = 9)
-#' compute_correlation(var1 = malesC1$Rep_succ, var2 = malesC1$Me_thick, n_tests = 9)
-#' compute_correlation(var1 = malesC2$Mat_succ, var2 = malesC2$Me_thick, n_tests = 9)
-#' 
-#' ### 4. Correlation mating, reproductive success and occurence of thickets:
-#' compute_correlation(var1 = malesC1$Mat_succ, var2 = malesC1$Thick, n_tests = 9)
-#' compute_correlation(var1 = malesC1$Rep_succ, var2 = malesC1$Thick, n_tests = 9)
-#' compute_correlation(var1 = malesC2$Mat_succ, var2 = malesC2$Thick, n_tests = 9)
 #' 
 #' 
 #' ########################
@@ -193,17 +179,8 @@
 #' ##########################
 #' ## Horn characteristics ##
 #' ##########################
-#'
-#' ### 1. Running the Principal Component Analyses (PCA):
-#' PCA_C1_males <- compute_PCA(data = malesC1)
-#' PCA_C2_males <- compute_PCA(data = malesC2)
 #' 
-#' ### 2. Correlation mating, reproductive success and horn characteristics:
-#' compute_correlation(var1 = PCA_C1_males$data$Mat_succ, var2 = PCA_C1_males$data$PC1, n_tests = 9)
-#' compute_correlation(var1 = PCA_C1_males$data$Rep_succ, var2 = PCA_C1_males$data$PC1, n_tests = 9)
-#' compute_correlation(var1 = PCA_C2_males$data$Mat_succ, var2 = PCA_C2_males$data$PC1, n_tests = 9)
-#'
-#' ### 3. Creating figure S3:
+#' ### 1. Creating figure S3:
 #' figure_PCA(data = males)
 #' 
 #' 
@@ -217,21 +194,8 @@
 #' round(mean(malesC2$Testo_mean, na.rm = TRUE), digits = 3L)
 #' round(sd(malesC2$Testo_mean, na.rm = TRUE), digits = 3L)
 #' 
-#' ### 2. Computing the correlations and testing them:
-#' compute_correlation(var1 = malesC1$Mat_succ, var2 = malesC1$Testo_mean, n_tests = 9)
-#' compute_correlation(var1 = malesC1$Rep_succ, var2 = malesC1$Testo_mean, n_tests = 9)
-#' compute_correlation(var1 = malesC2$Mat_succ, var2 = malesC2$Testo_mean, n_tests = 9)
-#'
-#' ### 3. Creating figure S4:
+#' ### 2. Creating figure S4:
 #' figure_testosterone(data = males)
 #'
-#'
-#' ######################
-#' ## All correlations ##
-#' ######################
-#' 
-#' ### Creating figures 3 & 4:
-#' figure_correlations(data = males)
-#' ## note: rerun if bug 'polygon edge not found'; this is a ggplot hiccup.
 #'
 NULL

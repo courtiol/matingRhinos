@@ -2,39 +2,68 @@
 #'
 #' This function computes the Spearman correlation between two variables. It is
 #' a simple wrapper around the R function \code{\link{cor.test}}, with better
-#' display of the output that includes the outcome of the Bonferroni correction.
+#' display of the output.
 #' 
 #' @param var1 A vector.
 #' @param var2 A vector.
-#' @param n_tests An integer providing the number of tests to account for during 
-#' the Bonferroni adjustment. 
 #' @inheritParams test_NonacsB
 #'
 #' @return A vector containing the correlation between two variables, the 
-#' p-value of the correlation test, the expect value (i.e. the p-value 
-#' multiplied by \code{n_tests}) and the sample size after discarding the 
+#' p-value of the correlation test, and the sample size after discarding the 
 #' missing values.
 #' @export
 #' 
 #' @examples
-#' compute_correlation(var1 = males$Mat_succ, var2 = males$Rep_succ, n_tests = 3)
+#' compute_correlation(var1 = males$Mat_succ, var2 = males$Rep_succ)
 #' 
-compute_correlation <- function(var1, var2, n_tests = 1L, digits = 2L) {
+compute_correlation <- function(var1, var2) {
   d <- stats::na.omit(data.frame(var1 = var1, var2 = var2))
   corr <- stats::cor.test(~ var1 + var2, data = d, method = "spearman")
-  out <- c(rho = corr$estimate[[1]],
-           p = corr$p.value[[1]],
-           n_obs = nrow(d),
-           E = corr$p.value[[1]] * n_tests,
-           n_tests = n_tests)
-  out_txt <- prettyNum(out, digits = digits)
-  if (out['p'] < 0.001) out_txt['p'] <- '<0.001'
-  if (out['E'] < 0.001) out_txt['E'] <- '<0.001'
-  if (out['E'] > 1) out_txt['E'] <- '>1'
-  print(out_txt, quote = FALSE)
+  out <- c(rho = signif(corr$estimate[[1]], 2L),
+           p = .pretty_p(corr$p.value[[1]], prefix = FALSE),
+           n_obs = nrow(d))
+  print(out, quote = FALSE)
   return(invisible(out))
 }
 
+
+#' Compute a Spearman correlation tests for a given cohort and fitness measurement
+#'
+#' This function computes the Spearman correlation tests between a fitness
+#' component and all predictors. It is a simple wrapper around the R function
+#' \code{\link{cor.test}}, with better display of the output that includes
+#' correction for multiple testing (default = 'holm').
+#' 
+#' @param cohort The cohort of males ('C1' or 'C2').
+#' @param fitness The column name for the fitness component ('Mat_succ' or 'Rep_succ').
+#' @param method The method for the multiple testing correction, see \code{\link{p.adjust}}.
+#'
+#' @return A data.frame containing the predictor, the sample size after
+#'   discarding the missing values, the correlation between two variables, the
+#'   p-value of the correlation test, the p-value after correction for
+#'   multiple testing, and significance stars for the raw and adjusted p-values.
+#'   
+#' @export
+#' 
+#' @examples
+#' compute_correlation_table(cohort = 'C1', fitness = 'Mat_succ', method = 'holm', data = males)
+#' 
+compute_correlation_table <- function(cohort = NULL, fitness = NULL, method = 'holm', data = NULL) {
+  predictors <- c('Related_mean', 'Ter_map', 'Open', 'Me_open', 'Me_thick', 'Thick', 'Pmax', 'Horn', 'Testo_mean')
+  fitness_var <- data[data$Cohort == cohort, fitness] 
+  list_corrs <- lapply(predictors, function(var) {
+    d <- stats::na.omit(data.frame(fitness_var = fitness_var, predictor = data[data$Cohort == cohort, var]))
+    corr <- stats::cor.test(~ fitness_var + predictor, data = d, method = "spearman")
+    c(n_obs = nrow(d), rho = signif(corr$estimate[[1]], 2), p = corr$p.value[[1]])
+    })
+  out <- data.frame(predictors, do.call('rbind', list_corrs))
+  out$`p*` <- .pretty_star(out$p)
+  out$p_adj <- stats::p.adjust(out$p, method = method)
+  out$`p_adj*` <- .pretty_star(out$p_adj)
+  out$p <- .pretty_ps(out$p, prefix = FALSE)
+  out$p_adj <- .pretty_ps(out$p_adj, prefix = FALSE)
+  return(out)
+}
 
 #' Plot the correlation between mating/reproductive success and their correlates
 #'

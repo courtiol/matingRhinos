@@ -50,7 +50,8 @@ compute_correlation <- function(var1, var2) {
 #' @return A data.frame containing the predictor, the sample size after
 #'   discarding the missing values, the correlation between two variables, the
 #'   p-value of the correlation test, the p-value after correction for
-#'   multiple testing, and significance stars for the raw and adjusted p-values.
+#'   multiple testing, the number of tests, the E-value (p-value times number of 
+#'   tests), and significance stars for the raw and adjusted p-values.
 #'   
 #' @note We set the argument \code{exact} to \var{FALSE} in the call to \code{\link{cor.test}},
 #'   so that the presence of ties in some correlation tests would not change
@@ -67,18 +68,21 @@ compute_correlation_table <- function(cohort = NULL, fitness = NULL, method = 'b
   predictors <- c('Related_mean', 'Ter_map', 'Open', 'Me_open', 'Me_thick', 'Thick', 'Pmax', 'Horn', 'Testo_mean')
   fitness_var <- data[data$Cohort == cohort, fitness]
   list_corrs <- lapply(predictors, function(var) {
-    if(is.null(data[data$Cohort == cohort, var])) return(c(n_obs = 0, rho = NA, p = NA))
+    if (is.null(data[data$Cohort == cohort, var])) return(c(n_obs = 0, rho = NA, p = NA))
     d <- stats::na.omit(data.frame(fitness_var = fitness_var, predictor = data[data$Cohort == cohort, var]))
     corr <- (stats::cor.test(~ fitness_var + predictor, data = d,
                                              method = "spearman", exact = FALSE))
-    c(n_obs = nrow(d), rho = signif(corr$estimate[[1]], 2), p = corr$p.value[[1]])
+    data.frame(n_obs = nrow(d), rho = .pretty_ps(corr$estimate[[1]], raw = TRUE), p = corr$p.value[[1]])
     })
   out <- data.frame(predictors, do.call('rbind', list_corrs))
   out$`p*` <- .pretty_star(out$p)
   out$p_adj <- stats::p.adjust(out$p, method = method)
   out$`p_adj*` <- .pretty_star(out$p_adj)
+  out$n_tests <- length(out$p[!is.na(out$p)])
+  out$E <- out$p*out$n_tests
   out$p <- .pretty_ps(out$p, prefix = FALSE)
   out$p_adj <- .pretty_ps(out$p_adj, prefix = FALSE)
+  out$E <- .pretty_ps(out$E, prefix = FALSE)
   return(out)
 }
 

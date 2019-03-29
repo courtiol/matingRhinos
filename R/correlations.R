@@ -91,6 +91,8 @@ compute_correlation_table <- function(cohort = NULL, fitness = NULL, method = 'b
 #' @param y The name of the y covariate.
 #' @param xlab A title for the x-axis.
 #' @param ylab A title for the y-axis.
+#' @param y_limits The limit for the y-axis of the plot.
+#' @param x_limits The limit for the x-axis of the plot.
 #' @inheritParams plot_relatedness
 #'
 #' @return A ggplot object.
@@ -103,7 +105,7 @@ compute_correlation_table <- function(cohort = NULL, fitness = NULL, method = 'b
 #'                  x = 'Ter_map', y = 'Mat_succ',
 #'                  xlab = 'x-axis title', ylab = 'y-axis title')
 #'
-plot_correlation <- function(data, x, y, xlab = 'x-axis title', ylab = 'y-axis title', limits = NULL) {
+plot_correlation <- function(data, x, y, xlab = 'x-axis title', ylab = 'y-axis title', y_limits = NULL, x_limits = NULL) {
   col1 <- 'red'
   col2 <- 'blue'
   if (!is.null(options('matingRhinos_colours')[[1]]) && !options('matingRhinos_colours')[[1]]) {
@@ -112,7 +114,8 @@ plot_correlation <- function(data, x, y, xlab = 'x-axis title', ylab = 'y-axis t
   }
   gg <- ggplot(data = data, aes(y = !!sym(y), x = !!sym(x), shape = Cohort, col = Cohort)) +
     labs(y = ylab, x = xlab) +
-    scale_y_continuous(limits = limits, breaks = function(x) seq(0, x[2], by = 2L)) +
+    scale_y_continuous(limits = y_limits, breaks = function(x) seq(0, x[2], by = 2L)) +
+    scale_x_continuous(limits = x_limits) +
     theme_classic() +
     scale_shape_manual(values = c(22, 24), name = 'Cohort of males:') +
     scale_colour_manual(values = c(col1, col2), name = 'Cohort of males:') +
@@ -177,55 +180,63 @@ figure_correlations <- function(data, which = c('mating', 'repro')) {
                           y = y,
                           xlab = 'Mean relatedness',
                           ylab = ylab,
-                          limits = limits)
+                          y_limits = limits,
+                          x_limits = c(0, 0.20))
   gg2 <- plot_correlation(data = data,
                           x = 'Ter_map',
                           y = y,
                           xlab = expression(paste('Territory size (km'^2,')')),
                           ylab = ylab,
-                          limits = limits)
+                          y_limits = limits,
+                          x_limits = c(0, 80))
   gg3 <- plot_correlation(data = data,
                           x = 'Open',
                           y = y,
                           xlab = 'Occurence of grassland (%)',
                           ylab = ylab,
-                          limits = limits)
+                          y_limits = limits,
+                          x_limits = c(0, 25))
   gg4 <- plot_correlation(data = data,
                           x = 'Me_open',
                           y = y,
                           xlab = 'Occurence of open woodland (%)',
                           ylab = ylab,
-                          limits = limits)
+                          y_limits = limits,
+                          x_limits = c(0, 100))
   gg5 <- plot_correlation(data = data,
                           x = 'Me_thick',
                           y = y,
                           xlab = 'Occurence of close woodland (%)',
                           ylab = ylab,
-                          limits = limits)
+                          y_limits = limits,
+                          x_limits = c(0, 60))
   gg6 <- plot_correlation(data = data,
                           x = 'Thick',
                           y = y,
                           xlab = 'Occurence of thickets (%)',
                           ylab = ylab,
-                          limits = limits)
+                          y_limits = limits)
   gg7 <- plot_correlation(data = data,
                           x = 'Pmax',
                           y = y,
                           xlab = expression(paste('Volume of ', italic('Panicum maximum'), ' (m'^3,')')),
                           ylab = ylab,
-                          limits = limits)
+                          y_limits = limits,
+                          x_limits = c(0, 5))
   gg8 <- plot_correlation(data = data,
                           x = 'PC1',
                           y = y,
                           xlab = 'Horn characteristics',
                           ylab = ylab,
-                          limits = limits)
+                          y_limits = limits,
+                          x_limits = c(-2, 3))
   gg9 <- plot_correlation(data = data,
                           x = 'Testo_mean',
                           y = y,
                           xlab = 'Testosterone metabolites (ng/g feces)',
                           ylab = ylab,
-                          limits = limits)
+                          y_limits = limits,
+                          x_limits = c(20, 100))
   pannel <- cowplot::plot_grid(gg1, gg2, gg3, gg4, gg5, gg6, gg7, gg8, gg9,
                                nrow = 3,
                                labels = c('A.',

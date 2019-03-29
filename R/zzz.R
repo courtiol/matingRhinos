@@ -26,10 +26,11 @@
   return(invisible(NULL))
 }
 
-.pretty_p <- function(p, prefix = TRUE) {
+.pretty_p <- function(p, prefix = TRUE, raw = FALSE, digits = 2L) {
   stopifnot(length(p) == 1)
   if (is.na(p)) return(NA)
-  out_txt <- format(signif(p, digits = 2L), nsmall = 2)
+  out_txt <- format(signif(p, digits = digits), nsmall = 2L)
+  if (raw) return(out_txt)
   if (p < 0.001) {
     out_txt <- ifelse(prefix, 'p < 0.001', '< 0.001')
   } else if (out_txt != "1.00") {

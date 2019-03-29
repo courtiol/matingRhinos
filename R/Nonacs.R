@@ -64,7 +64,7 @@ test_NonacsB <- function(benef, time, nsim = 1e5L, keep_H0 = FALSE, seed = 1L) {
     compute_NonacsB(benef = benef_no_skew, time = time)
   })
   pv <- (sum(H0 > Obs) + 1) / (nsim + 1)
- out <- list(B_obs = signif(Obs, digits = 2L), p = .pretty_p(pv), N = length(benef))
+ out <- list(B_obs = Obs, B_obs_pretty = .pretty_p(Obs, raw = TRUE), p = .pretty_p(pv), N = length(benef))
  if (keep_H0) {
    out[['B_H0']] <- H0
  }

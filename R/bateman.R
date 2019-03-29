@@ -23,14 +23,14 @@
 #' compute_Bateman(mating_success = males$Mat_succ,
 #'                 reproductive_success = males$Rep_succ)
 #' 
-compute_Bateman <- function(mating_success, reproductive_success, digits = 3L) {
+compute_Bateman <- function(mating_success, reproductive_success) {
   d <- data.frame(mating_success_rel = mating_success / mean(mating_success, na.rm = TRUE),
                   reproductive_success_rel = reproductive_success / mean(reproductive_success, na.rm = TRUE),
                   mating_success = mating_success,
                   reproductive_success = reproductive_success)
   d <- stats::na.omit(d)
   B <- stats::coef(stats::lm(reproductive_success_rel ~ mating_success_rel, data = d))[['mating_success_rel']]
-  print(signif(B, digits = digits))
+  print(.pretty_p(B, digits = 3L, raw = TRUE))
   return(invisible(B))
 }
 

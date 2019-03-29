@@ -5,7 +5,6 @@
 #' and scaled variables.
 #'
 #' @param data A dataframe containing the data to be processed.
-#' @inheritParams test_NonacsB
 #'
 #' @return A list providing the original data with the first 2 principal
 #'   components added to it, the proportion of variance explained by each
@@ -18,7 +17,7 @@
 #' PCA_C1_males <- compute_PCA(males[males$Cohort == 'C1', ])
 #' PCA_C2_males <- compute_PCA(males[males$Cohort == 'C2', ])
 #' 
-compute_PCA <- function(data, digits = 3L) {
+compute_PCA <- function(data) {
   PCA_horn <- stats::prcomp(~ Circ_1 + Length_1 + Circ_2 + Length_2, data = data, scale. = TRUE)
   var_expl <- PCA_horn$sdev^2/sum(PCA_horn$sdev^2)
   cum_var_expl <- cumsum(var_expl)
@@ -26,7 +25,7 @@ compute_PCA <- function(data, digits = 3L) {
   complete <- rownames(data)[match(rownames(PCA_horn$x), rownames(data))]
   data[complete, 'PC1'] <- PCA_horn$x[, 'PC1'][complete]
   data[complete, 'PC2'] <- PCA_horn$x[, 'PC2'][complete]
-  print(paste('var explained by PC1 (%) =', prettyNum(100*var_expl[1], digits = digits)), quote = 'FALSE')
+  print(paste('var explained by PC1 (%) =', signif(100*var_expl[1], digits = 3L)), quote = 'FALSE')
   return(invisible(list(data = data,
                         var_expl = var_expl,
                         cum_var_expl = cum_var_expl,

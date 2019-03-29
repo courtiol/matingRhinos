@@ -20,7 +20,8 @@ compute_correlation_table(cohort = NULL, fitness = NULL,
 A data.frame containing the predictor, the sample size after
   discarding the missing values, the correlation between two variables, the
   p-value of the correlation test, the p-value after correction for
-  multiple testing, and significance stars for the raw and adjusted p-values.
+  multiple testing, the number of tests, the E-value (p-value times number of 
+  tests), and significance stars for the raw and adjusted p-values.
 }
 \description{
 This function computes the Spearman correlation tests between a fitness

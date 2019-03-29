@@ -5,7 +5,7 @@
 \title{Plot the correlation between mating/reproductive success and their correlates}
 \usage{
 plot_correlation(data, x, y, xlab = "x-axis title",
-  ylab = "y-axis title", limits = NULL)
+  ylab = "y-axis title", y_limits = NULL, x_limits = NULL)
 }
 \arguments{
 \item{data}{A dataframe containing the data to be processed.}
@@ -18,7 +18,9 @@ plot_correlation(data, x, y, xlab = "x-axis title",
 
 \item{ylab}{A title for the y-axis.}
 
-\item{limits}{The limit for the y-axis of the plot.}
+\item{y_limits}{The limit for the y-axis of the plot.}
+
+\item{x_limits}{The limit for the x-axis of the plot.}
 }
 \value{
 A ggplot object.

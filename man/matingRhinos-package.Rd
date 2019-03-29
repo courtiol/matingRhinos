@@ -90,8 +90,8 @@ wilcox.test(malesC1$Related_mean_male, malesC2$Related_mean_male)
 #####################################
 
 ### 1. Computing the skewness tests for males: 
-test_NonacsB(benef = males$Mat_succ, time = males$Time, digits = 3L)
-test_NonacsB(benef = males$Rep_succ, time = males$Time, digits = 3L)
+test_NonacsB(benef = males$Mat_succ, time = males$Time)
+test_NonacsB(benef = males$Rep_succ, time = males$Time)
 
 ### 2. Creating figure 1:
 figure_NonacsB(data_males = males, data_females = females)
@@ -107,8 +107,8 @@ compute_Bateman(mating_success = malesC2$Mat_succ, reproductive_success = malesC
 figure_Bateman(data_agg = rhinos_agg)
 
 ### 5. Computing the skewness tests for females: 
-test_NonacsB(benef = females$Mat_succ, time = females$Time, digits = 3L)
-test_NonacsB(benef = females$Rep_succ, time = females$Time, digits = 3L)
+test_NonacsB(benef = females$Mat_succ, time = females$Time)
+test_NonacsB(benef = females$Rep_succ, time = females$Time)
 
 ### 6. Relationship between mating and reproductive success for females:
 compute_correlation(var1 = femalesC1$Mat_succ, var2 = femalesC1$Rep_succ)
@@ -130,10 +130,10 @@ malesC2[malesC2$Rep_succ == max(malesC2$Rep_succ), c('No', 'Rep_succ', 'Mat_succ
 ######################
 
 ### 1. Computing all the correlation tests
-compute_correlation_table(cohort = 'C1', fitness = 'Rep_succ', data = males)
 compute_correlation_table(cohort = 'C1', fitness = 'Mat_succ', data = males)
-compute_correlation_table(cohort = 'C2', fitness = 'Rep_succ', data = males)
+compute_correlation_table(cohort = 'C1', fitness = 'Rep_succ', data = males)
 compute_correlation_table(cohort = 'C2', fitness = 'Mat_succ', data = males)
+compute_correlation_table(cohort = 'C2', fitness = 'Rep_succ', data = males)
 
 ### 2. Creating figures 3 & 4:
 figure_correlations(data = males)

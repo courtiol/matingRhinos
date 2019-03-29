@@ -4,12 +4,10 @@
 \alias{compute_PCA}
 \title{Compute a PCA on horn characteristics}
 \usage{
-compute_PCA(data, digits = 3L)
+compute_PCA(data)
 }
 \arguments{
 \item{data}{A dataframe containing the data to be processed.}
-
-\item{digits}{The number of digits for the display.}
 }
 \value{
 A list providing the original data with the first 2 principal

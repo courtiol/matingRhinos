@@ -113,8 +113,8 @@
 #' figure_Bateman(data_agg = rhinos_agg)
 #'
 #' ### 5. Computing the skewness tests for females: 
-#' test_NonacsB(benef = females$Mat_succ, time = females$Time, digits = 3L)
-#' test_NonacsB(benef = females$Rep_succ, time = females$Time, digits = 3L)
+#' test_NonacsB(benef = females$Mat_succ, time = females$Time)
+#' test_NonacsB(benef = females$Rep_succ, time = females$Time)
 #'
 #' ### 6. Relationship between mating and reproductive success for females:
 #' compute_correlation(var1 = femalesC1$Mat_succ, var2 = femalesC1$Rep_succ)

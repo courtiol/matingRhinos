@@ -44,7 +44,6 @@ compute_NonacsB <- function(benef, time) {
 #' @param nsim The number of simulation to run.
 #' @param keep_H0 A boolean indicating whether to export the values of
 #'  the Nonacs' binomial skew index simulated under the null hypothesis.
-#' @param digits The number of digits for the display.
 #' @param seed The seed for the random number generator.
 #'
 #' @return A list with the observed Nonacs' binomial skew index value, its
@@ -57,7 +56,7 @@ compute_NonacsB <- function(benef, time) {
 #' @examples
 #' test_NonacsB(benef = males$Rep_succ, time = males$Time)
 #' 
-test_NonacsB <- function(benef, time, nsim = 1e5L, keep_H0 = FALSE, digits = Inf, seed = 1L) {
+test_NonacsB <- function(benef, time, nsim = 1e5L, keep_H0 = FALSE, seed = 1L) {
   set.seed(seed)
   Obs <- compute_NonacsB(benef = benef, time = time)
   H0 <- replicate(nsim, {
@@ -65,7 +64,7 @@ test_NonacsB <- function(benef, time, nsim = 1e5L, keep_H0 = FALSE, digits = Inf
     compute_NonacsB(benef = benef_no_skew, time = time)
   })
   pv <- (sum(H0 > Obs) + 1) / (nsim + 1)
- out <- list(B_obs = signif(Obs, digits = digits), p = signif(pv, digits = digits), N = length(benef))
+ out <- list(B_obs = signif(Obs, digits = 2L), p = .pretty_p(pv), N = length(benef))
  if (keep_H0) {
    out[['B_H0']] <- H0
  }
@@ -113,7 +112,7 @@ plot_NonacsB <- function(x, limits = c(-0.02, 0.05)) {
   r <- ggplot_build(gg)$layout$panel_scales_y[[1]]$range$range
   pos_y <- (max(r) - min(r))*0.8
   
-  gg <- gg + geom_text(aes(x = x$B_obs - 0.003, y = pos_y, label = .pretty_p(x$p)),
+  gg <- gg + geom_text(aes(x = x$B_obs - 0.003, y = pos_y, label = x$p),
                        colour = col, vjust = 0, hjust = 1)
   return(gg)
 }

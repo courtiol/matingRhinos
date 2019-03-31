@@ -30,7 +30,7 @@ compute_Bateman <- function(mating_success, reproductive_success) {
                   reproductive_success = reproductive_success)
   d <- stats::na.omit(d)
   B <- stats::coef(stats::lm(reproductive_success_rel ~ mating_success_rel, data = d))[['mating_success_rel']]
-  print(.pretty_p(B, digits = 3L, raw = TRUE))
+  print(.pretty_p(B, digits = 2L, raw = TRUE))
   return(invisible(B))
 }
 

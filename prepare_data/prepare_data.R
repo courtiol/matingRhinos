@@ -27,3 +27,21 @@ rhinos_agg$Sex <- factor(rhinos_agg$Sex)
 str(rhinos_agg)
 
 save(rhinos_agg, file = "./data/rhinos_agg.rda", compress = "xz")
+
+
+################################################################################
+## simulation data used for relatedness
+
+rm(list = ls())
+
+## 1. Checking what is the most suitable metric for relatedness
+d_sim <- read.csv("./prepare_data/not_yet_integrated/Result_all_rel3.csv")
+
+d_sim$Pop <- unlist(lapply(strsplit(as.character(d_sim$Indiv1), split = ""), function(i) paste(i[1:4], collapse = "")))
+d_sim <- d_sim[order(d_sim$Pop), ]
+d_sim$real <- rep(c(0.5, 0.5, 0.25, 1/8, 1/32, 0), each = 100)
+d_sim$cat <- as.factor(rep(c("PO", "FS", "HS", "FC", "SC", "U"), each = 100))
+d_sim$cat <- reorder(d_sim$cat, rev(d_sim$real))
+
+save(d_sim, file = "./data/d_sim.rda", compress = "xz")
+

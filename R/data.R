@@ -16,3 +16,17 @@
 #' females
 #' rhinos_agg
 NULL
+
+#' d_sim
+#'
+#' This dataset was used to infer the best measure of relatedness. It contains 600
+#' simulated observations and 12 variables.   
+#' @name d_sim
+#' @aliases d_sim
+#' @docType data
+#' @format A \var{dataframe}.
+#' @references This study.
+#' @keywords datasets
+#' @examples
+#' d_sim
+NULL

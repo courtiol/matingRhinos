@@ -223,7 +223,7 @@ figure_correlations <- function(data, which = c('mating', 'repro')) {
   gg7 <- plot_correlation(data = data,
                           x = 'Pmax',
                           y = y,
-                          xlab = expression(paste('Volume of ', italic('Panicum maximum'), ' (m'^3,')')),
+                          xlab = expression(paste('Volume of selected food', ' (m'^3,')')),
                           ylab = ylab,
                           y_limits = limits,
                           x_limits = c(0, 5))
@@ -241,7 +241,7 @@ figure_correlations <- function(data, which = c('mating', 'repro')) {
                           ylab = ylab,
                           y_limits = limits,
                           x_limits = c(20, 100))
-  pannel <- cowplot::plot_grid(gg1, gg2, gg3, gg4, gg5, gg6, gg7, gg8, gg9,
+  pannel <- cowplot::plot_grid(gg8, gg9, gg2, gg3, gg4, gg5, gg6, gg7, gg1,
                                nrow = 3,
                                labels = c('A.',
                                           'B.',

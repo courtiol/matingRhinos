@@ -141,11 +141,11 @@ figure_NonacsB <- function(data_males, data_females) {
   gg2 <- plot_NonacsB(x = femalesMat)
   gg3 <- plot_NonacsB(x = malesRep)
   gg4 <- plot_NonacsB(x = femalesRep)
-  pannel <- cowplot::plot_grid(gg1, gg2, gg3, gg4,
+  pannel <- cowplot::plot_grid(gg1, gg3, gg2, gg4,   ## gg3 before gg2 to have males on top and females below. 
                                nrow = 2,
                                labels = c('A. Males C1 & C2 mating success',
-                                          'B. Females mating success',
-                                          'C. Males C1 & C2 reproductive success',
+                                          'B. Males C1 & C2 reproductive success',
+                                          'C. Females mating success',
                                           'D. Females reproductive success'),
                                label_x = 0.02,
                                label_y = 1,

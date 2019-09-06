@@ -75,14 +75,17 @@ head(femalesC2)
 
 ### Note: the bioinformatic work leading to parentage has not been done using R.
 
-### 1. Result about the higher relatedness among C1 males than among C2 males:
-round(mean(malesC1$Related_mean_male), digits = 3L)
-round(sd(malesC1$Related_mean_male), digits = 3L)
-round(mean(malesC2$Related_mean_male), digits = 3L)
-round(sd(malesC2$Related_mean_male), digits = 3L)
-
-### 2. Mann-Whitney U test comparing the relatedness among C1 and C2 males: 
-wilcox.test(malesC1$Related_mean_male, malesC2$Related_mean_male)
+### 1. Fatherhood successfully assigned
+sum(males$Rep_succ) # number assigned for all males
+round(100*sum(males$Rep_succ)/104, 1) # proportion assigned for all males
+sum(malesC1$Rep_succ) # number assigned for C1 males
+round(100*sum(malesC1$Rep_succ)/53, 1) # proportion assigned for C1 males
+sum(malesC2$Rep_succ) # number assigned for C2 males
+round(100*sum(malesC2$Rep_succ)/51, 1) # proportion assigned for C2 males
+fisher.test(matrix(c(sum(malesC1$Rep_succ), 53 - sum(malesC1$Rep_succ),
+                     sum(malesC2$Rep_succ), 51 - sum(malesC2$Rep_succ)),
+                     byrow = TRUE,
+                     nrow = 2))
 
 
 #####################################
@@ -112,17 +115,31 @@ test_NonacsB(benef = females$Rep_succ, time = females$Time)
 
 ### 6. Relationship between mating and reproductive success for females:
 compute_correlation(var1 = femalesC1$Mat_succ, var2 = femalesC1$Rep_succ)
+nrow(femalesC1)
 compute_Bateman(mating_success = femalesC1$Mat_succ, reproductive_success = femalesC1$Rep_succ)
 
 compute_correlation(var1 = femalesC2$Mat_succ, var2 = femalesC2$Rep_succ)
+nrow(femalesC2)
 compute_Bateman(mating_success = femalesC2$Mat_succ, reproductive_success = femalesC2$Rep_succ)
 
-### 7. Successful males
+### 7. Successful males:
 malesC1[malesC1$Rep_succ == max(malesC1$Rep_succ), c('No', 'Rep_succ', 'Mat_succ')]
 range(malesC1$Mat_succ[malesC1$Rep_succ != max(malesC1$Rep_succ)])
 range(malesC1$Rep_succ[malesC1$Rep_succ != max(malesC1$Rep_succ)])
 
 malesC2[malesC2$Rep_succ == max(malesC2$Rep_succ), c('No', 'Rep_succ', 'Mat_succ')]
+
+
+##########################
+## Horn characteristics ##
+##########################
+
+### 1. Variance explained:
+round(100*PCA_C1_males$var_expl[1], 1)
+round(100*PCA_C2_males$var_expl[1], 1)
+
+### 2. Creating figure 3:
+figure_PCA(data = males)
 
 
 ######################
@@ -135,20 +152,23 @@ compute_correlation_table(cohort = 'C1', fitness = 'Rep_succ', data = males)
 compute_correlation_table(cohort = 'C2', fitness = 'Mat_succ', data = males)
 compute_correlation_table(cohort = 'C2', fitness = 'Rep_succ', data = males)
 
-### 2. Creating figures 3 & 4:
+### 2. Creating figures 4 & 5:
 figure_correlations(data = males)
 ## note: rerun if bug 'polygon edge not found'; this is a ggplot hiccup.
 
 
-#################
-## Relatedness ##
-#################
+#############################################
+##  Testosterone metabolites concentration ##
+#############################################
 
-### 1. Relatedness of the male the most related to females:
-males[which.max(males$Related_mean), c('No', 'Cohort', 'Related_mean', 'Related_SD')]
+### 1. Mean +/- SD:
+round(mean(malesC1$Testo_mean, na.rm = TRUE), digits = 3L)
+round(sd(malesC1$Testo_mean, na.rm = TRUE), digits = 3L)
+round(mean(malesC2$Testo_mean, na.rm = TRUE), digits = 3L)
+round(sd(malesC2$Testo_mean, na.rm = TRUE), digits = 3L)
 
-### 2. Creating figure S2:
-figure_relatedness(data = males)
+### 2. Creating figure S1:
+figure_testosterone(data = males)
 
 
 ######################
@@ -163,26 +183,18 @@ rbind(malesC2[which.min(malesC2$Ter_map), c('No', 'Cohort', 'Ter_map')],
       malesC2[which.max(malesC2$Ter_map), c('No', 'Cohort', 'Ter_map')])
 
 
-##########################
-## Horn characteristics ##
-##########################
+#################
+## Relatedness ##
+#################
 
-### 1. Creating figure S3:
-figure_PCA(data = males)
+### 1. Relatedness of the male the most related to females:
+males[which.max(males$Related_mean), c('No', 'Cohort', 'Related_mean', 'Related_SD')]
 
+### 2. Creating figure S2:
+figure_relatedness_simulation(relat_sim)
 
-#############################################
-##  Testosterone metabolites concentration ##
-#############################################
-
-### 1. Mean +/- SD:
-round(mean(malesC1$Testo_mean, na.rm = TRUE), digits = 3L)
-round(sd(malesC1$Testo_mean, na.rm = TRUE), digits = 3L)
-round(mean(malesC2$Testo_mean, na.rm = TRUE), digits = 3L)
-round(sd(malesC2$Testo_mean, na.rm = TRUE), digits = 3L)
-
-### 2. Creating figure S4:
-figure_testosterone(data = males)
+### 3. Creating figure S3:
+figure_relatedness(data = males)
 
 
 }

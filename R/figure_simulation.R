@@ -2,17 +2,16 @@
 #'
 #' This function creates a plot of the simulated relatedness 
 #' 
-#' @param d_sim A dataframe of simulated relatedness
+#' @param data A dataframe of simulated relatedness
 #' @name figure_relatedness_simulation
 #' @return A ggplot object
 #' @import ggplot2
 #' @export
 #'
 #' @examples
-#' data(d_sim)
-#' figure_relatedness_simulation(d_sim)
+#' figure_relatedness_simulation(relat_sim)
 #' 
-figure_relatedness_simulation <- function(d_sim){
+figure_relatedness_simulation <- function(data){
 col1 <- 'black'
 col2 <- 'red'
 if (!is.null(options('matingRhinos_colours')[[1]]) && !options('matingRhinos_colours')[[1]]) {
@@ -27,7 +26,7 @@ lines <- data.frame(y = c(0.5, 0.5, 0.25, 1/8, 1/32, 0),
 
 DyadML <- x <- xend <- y <- yend <- NULL
 
-out <- ggplot(d_sim, aes(x = cat, y = DyadML)) +
+out <- ggplot(data, aes(x = cat, y = DyadML)) +
   geom_boxplot(width = 0.8, col = col1) +
   scale_x_discrete("True Relationship") +
   geom_segment(data = lines, aes(y = y, yend = yend, xend = xend, x = x), col = "red", linetype = 2) +

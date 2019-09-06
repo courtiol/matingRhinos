@@ -65,7 +65,7 @@ compute_correlation <- function(var1, var2) {
 #' compute_correlation_table(cohort = 'C1', fitness = 'Mat_succ', method = 'bonferroni', data = males)
 #' 
 compute_correlation_table <- function(cohort = NULL, fitness = NULL, method = 'bonferroni', data = NULL) {
-  predictors <- c('Related_mean', 'Ter_map', 'Open', 'Me_open', 'Me_thick', 'Thick', 'Pmax', 'Horn', 'Testo_mean')
+  predictors <- c('Horn', 'Testo_mean', 'Ter_map', 'Open', 'Me_open', 'Me_thick', 'Thick', 'Pmax', 'Related_mean')
   fitness_var <- data[data$Cohort == cohort, fitness]
   list_corrs <- lapply(predictors, function(var) {
     if (is.null(data[data$Cohort == cohort, var])) return(c(n_obs = 0, rho = NA, p = NA))

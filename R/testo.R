@@ -70,11 +70,11 @@ figure_testosterone <- function(data) {
     if (!dir.exists('./figures')) {
       dir.create('./figures')
     }
-    ggsave(filename = './figures/figureS4_testosterone.pdf',
+    ggsave(filename = './figures/figureS1_testosterone.pdf',
            plot = pannel,
            width = 11.5*2,
            height = 11,
            units = 'cm')
-    message("figureS4_testosterone.pdf created and stored in directory 'figures'!")
+    message("figureS1_testosterone.pdf created and stored in directory 'figures'!")
   }
 }

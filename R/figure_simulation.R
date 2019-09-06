@@ -40,12 +40,12 @@ if (!is.null(options('matingRhinos_PDF')[[1]]) && options('matingRhinos_PDF')[[1
   if (!dir.exists('./figures')) {
     dir.create('./figures')
   }
-  ggsave(filename = './figures/figureS5_relatedness_simulation.pdf',
+  ggsave(filename = './figures/figureS2_relatedness_simulation.pdf',
          plot = out,
          width = 11.5*2,
          height = 13.5,
          units = 'cm')
-  message("figureS5_relatedness_simulation.pdf created and stored in directory 'figures'!")
+  message("figureS2_relatedness_simulation.pdf created and stored in directory 'figures'!")
 }
 out
 return(invisible(NULL))

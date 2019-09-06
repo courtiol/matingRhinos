@@ -113,12 +113,12 @@ figure_PCA <- function(data) {
     if (!dir.exists('./figures')) {
       dir.create('./figures')
     }
-    ggsave(filename = './figures/figureS3_PCA.pdf',
+    ggsave(filename = './figures/figure3_PCA.pdf',
            plot = pannel,
            width = 11.5*2,
            height = 11,
            units = 'cm')
-    message("figureS3_PCA.pdf created and stored in directory 'figures'!")
+    message("figure3_PCA.pdf created and stored in directory 'figures'!")
   }
   return(invisible(NULL))
 }

@@ -88,11 +88,11 @@ figure_relatedness <- function(data) {
     if (!dir.exists('./figures')) {
       dir.create('./figures')
     }
-    ggsave(filename = './figures/figureS2_relatedness.pdf',
+    ggsave(filename = './figures/figureS3_relatedness.pdf',
            plot = pannel,
            width = 11.5*2,
            height = 11*2,
            units = 'cm')
-    message("figureS2_relatedness.pdf created and stored in directory 'figures'!")
+    message("figureS3_relatedness.pdf created and stored in directory 'figures'!")
   }
 }

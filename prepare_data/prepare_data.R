@@ -35,7 +35,7 @@ save(rhinos_agg, file = "./data/rhinos_agg.rda", compress = "xz")
 rm(list = ls())
 
 ## 1. Checking what is the most suitable metric for relatedness
-d_sim <- read.csv("./prepare_data/not_yet_integrated/Result_all_rel3.csv")
+d_sim <- read.csv("./prepare_data/results_simu_metric_relatedness.csv")
 
 d_sim$Pop <- unlist(lapply(strsplit(as.character(d_sim$Indiv1), split = ""), function(i) paste(i[1:4], collapse = "")))
 d_sim <- d_sim[order(d_sim$Pop), ]

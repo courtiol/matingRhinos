@@ -4,10 +4,10 @@
 \alias{figure_relatedness_simulation}
 \title{Plot the results of the simulated relatedness}
 \usage{
-figure_relatedness_simulation(d_sim)
+figure_relatedness_simulation(data)
 }
 \arguments{
-\item{d_sim}{A dataframe of simulated relatedness}
+\item{data}{A dataframe of simulated relatedness}
 }
 \value{
 A ggplot object
@@ -16,7 +16,6 @@ A ggplot object
 This function creates a plot of the simulated relatedness
 }
 \examples{
-data(d_sim)
-figure_relatedness_simulation(d_sim)
+figure_relatedness_simulation(relat_sim)
 
 }

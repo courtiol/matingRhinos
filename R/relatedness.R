@@ -71,14 +71,14 @@ utils::globalVariables(c('var_y', 'No', 'Cohort'))
 #' figure_relatedness(data = males)
 #' 
 figure_relatedness <- function(data) {
-  gg1 <- plot_relatedness(data = data[data$Cohort == 'C1', ], limits = c(0, 0.3), to = 'males')
-  gg2 <- plot_relatedness(data = data[data$Cohort == 'C2', ], limits = c(0, 0.5), to = 'males')
+  #gg1 <- plot_relatedness(data = data[data$Cohort == 'C1', ], limits = c(0, 0.3), to = 'males')
+  #gg2 <- plot_relatedness(data = data[data$Cohort == 'C2', ], limits = c(0, 0.5), to = 'males')
   gg3 <- plot_relatedness(data = data[data$Cohort == 'C1', ], limits = c(0, 0.3), to = 'females')
   gg4 <- plot_relatedness(data = data[data$Cohort == 'C2', ], limits = c(0, 0.3), to = 'females')
-  pannel <- cowplot::plot_grid(gg1, gg2, gg3, gg4,
-                               nrow = 2,
-                               labels = c('A. Males C1 to males C1', 'B. Males C2 to males C2',
-                                          'C. Males C1 to females C1', 'D. Males C2 to females C2'),
+  pannel <- cowplot::plot_grid(gg3, gg4,
+                               nrow = 1,
+                               labels = c(#'A. Males C1 to males C1', 'B. Males C2 to males C2',
+                                          'A. Males C1 to females C1', 'B. Males C2 to females C2'),
                                label_x = 0.02,
                                label_y = 1,
                                hjust = 0)
@@ -91,7 +91,7 @@ figure_relatedness <- function(data) {
     ggsave(filename = './figures/figureS3_relatedness.pdf',
            plot = pannel,
            width = 11.5*2,
-           height = 11*2,
+           height = 11*1,
            units = 'cm')
     message("figureS3_relatedness.pdf created and stored in directory 'figures'!")
   }

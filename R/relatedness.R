@@ -39,7 +39,7 @@ plot_relatedness <- function(data, limits = c(0, 0.5), to = 'males') {
     var_y <- 'Related_mean'
     var_y_min <- with(data, Related_mean + stats::qnorm(0.025)*Related_SD/sqrt(Related_N))
     var_y_max <- with(data, Related_mean + stats::qnorm(0.975)*Related_SD/sqrt(Related_N))
-    lab_y <- 'Mean relatedness to females'
+    lab_y <- 'Mean relatedness to all females (bars)\n or their mating partners (stars)'
   }
   gg <- ggplot(data = data, aes(y = !!sym(var_y), x = No, fill = Cohort)) +
     geom_bar(stat = 'identity', width = 0.5) +
@@ -49,9 +49,11 @@ plot_relatedness <- function(data, limits = c(0, 0.5), to = 'males') {
     scale_y_continuous(limits = limits) +
     theme_classic() +
     geom_linerange(aes(ymax = var_y_max, ymin = !!sym(var_y)), size = 0.5) +
-    #geom_point(shape = 3, size = 0.5) +
     theme(plot.margin = unit(c(10, 8, 2, 2), 'mm'),
           text = element_text(size = 16))
+  
+  if(to != "males") gg <- gg + geom_point(aes(y = Related_mean_mated_fem), shape = 8, size = 2)
+  
   return(gg)
 }
 utils::globalVariables(c('var_y', 'No', 'Cohort'))
@@ -71,14 +73,14 @@ utils::globalVariables(c('var_y', 'No', 'Cohort'))
 #' figure_relatedness(data = males)
 #' 
 figure_relatedness <- function(data) {
-  #gg1 <- plot_relatedness(data = data[data$Cohort == 'C1', ], limits = c(0, 0.3), to = 'males')
-  #gg2 <- plot_relatedness(data = data[data$Cohort == 'C2', ], limits = c(0, 0.5), to = 'males')
-  gg3 <- plot_relatedness(data = data[data$Cohort == 'C1', ], limits = c(0, 0.3), to = 'females')
-  gg4 <- plot_relatedness(data = data[data$Cohort == 'C2', ], limits = c(0, 0.3), to = 'females')
-  pannel <- cowplot::plot_grid(gg3, gg4,
+  gg1 <- plot_relatedness(data = data[data$Cohort == 'C1', ], limits = c(0, 0.3), to = 'females')
+  gg2 <- plot_relatedness(data = data[data$Cohort == 'C2', ], limits = c(0, 0.3), to = 'females')
+  gg2 <- gg2 + theme(axis.title.y = element_blank())
+  pannel <- cowplot::plot_grid(gg1, gg2,
                                nrow = 1,
-                               labels = c(#'A. Males C1 to males C1', 'B. Males C2 to males C2',
-                                          'A. Males C1 to females C1', 'B. Males C2 to females C2'),
+                               labels = c('A. Males C1 to females C1',
+                                          'B. Males C2 to females C2'
+                                          ),
                                label_x = 0.02,
                                label_y = 1,
                                hjust = 0)

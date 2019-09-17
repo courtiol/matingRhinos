@@ -196,10 +196,16 @@
 #' ### 1. Relatedness of the male the most related to females:
 #' males[which.max(males$Related_mean), c('No', 'Cohort', 'Related_mean', 'Related_SD')]
 #' 
-#' ### 2. Creating figure S2:
+#' ### 2. Comparing mean relatedness of female mates and all candidate females:
+#' wilcox.test(males$Related_mean_mated_fem, males$Related_mean, paired = TRUE)
+#' wilcox.test(malesC1$Related_mean_mated_fem, malesC1$Related_mean, paired = TRUE)
+#' wilcox.test(malesC2$Related_mean_mated_fem, malesC2$Related_mean, paired = TRUE)
+#'
+#' 
+#' ### 3. Creating figure S2:
 #' figure_relatedness_simulation(relat_sim)
 #' 
-#' ### 3. Creating figure S3:
+#' ### 4. Creating figure S3:
 #' figure_relatedness(data = males)
 #'
 #'

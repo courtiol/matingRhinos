@@ -110,9 +110,11 @@ plot_NonacsB <- function(x, limits = c(-0.02, 0.05)) {
          axis.ticks.y = element_blank(), axis.text.y = element_blank(),
          text = element_text(size = 16))
   r <- ggplot_build(gg)$layout$panel_scales_y[[1]]$range$range
-  pos_y <- (max(r) - min(r))*0.8
+  pos_y <- (max(r) - min(r))*1.1
   
-  gg <- gg + geom_text(aes(x = x$B_obs + 0.003, y = pos_y, label = x$p),
+  gg <- gg + 
+    scale_y_continuous(limits = c(0, (max(r) - min(r))*1.3)) +
+    geom_text(aes(x = x$B_obs + 0.003, y = pos_y, label = x$p),
                        colour = col, vjust = 0, hjust = 0)
   return(gg)
 }

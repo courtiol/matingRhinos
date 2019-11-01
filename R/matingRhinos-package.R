@@ -3,14 +3,16 @@
 #'
 #' This R package aims at providing the data and documenting the R code behind
 #' the analysis of the paper entitled 'Mate choice, reproductive success and
-#' inbreeding in white rhiceros...' by by Kretzschmar P., Auld H., Boag P., 
-#' Ganslosser U., Scott C., Van Coeverden de Groot P.J. & Courtiol A. (in prep).
-#'
+#' inbreeding in white rhinos (_Ceratotherium simum_ Burchell, 1817): new insights
+#' for conservation management' by Kretzschmar P., Auld H., Boag P., Ganslosser
+#' U., Scott C., Van Coeverden de Groot P.J. & Courtiol A. (accepted in
+#' Evolutionary Applications).
+#' 
 #' This package has not been conceived for general use!
 #'
 #' The main functions of this package contain a small documentation and examples
 #' which could be useful for those who try to understand our code. Type
-#' \code{ls('package:matingRhinos')} for a list of all exported functions and
+#' \code{ls('package:matingRhinos')} for a list of all (exported) functions and
 #' datasets.
 #'
 #' You may directly explore the files contained in the package on GitHub at
@@ -29,8 +31,10 @@
 #'
 #' @references
 #' Kretzschmar P., Auld H., Boag P., Ganslosser U., Scott C.,
-#' Van Coeverden de Groot P.J. & Courtiol A. (in prep)
-#' Mate choice, reproductive success and inbreeding in white rhinos.
+#' Van Coeverden de Groot P.J. & Courtiol A.
+#' (accepted in Evolutionary Applications)
+#' Mate choice, reproductive success and inbreeding in white rhinos
+#' (_Ceratotherium simum_ Burchell, 1817): new insights for conservation management
 #' 
 #'
 #' @keywords package

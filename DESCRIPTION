@@ -1,17 +1,18 @@
 Package: matingRhinos
 Type: Package
 Title: Analysis of the Mating, Reproductive Success and Their Correlates in White Rhinos
-Version: 0.2.0
+Version: 0.9
 Authors@R:
     c(
     person('Courtiol', 'Alexandre', email = "courtiol@izw-berlin.de", role = c('cre', 'aut'), comment = c(ORCID = "0000-0003-0637-2959"))
     )
 Description: This R package aims at providing the data and documenting the 
     R code behind the analysis of the paper entitled 'Mate choice, 
-    reproductive success and inbreeding in white rhinos' by Kretzschmar P.,
+    reproductive success and inbreeding in white rhinos (Ceratotherium simum Burchell, 1817):
+    new insights for conservation management' by Kretzschmar P.,
     Auld H., Boag P., Ganslosser U., Scott C., Van Coeverden de 
-    Groot P.J. & Courtiol A. (in prep). This package has not been conceived for 
-    general use.
+    Groot P.J. & Courtiol A. (accepted in Evolutionary Applications).
+    This package has not been conceived for general use.
 Imports:
     cowplot,
     ggplot2,
@@ -24,3 +25,4 @@ License: GPL (>= 2)
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.1.1
+Roxygen: list(markdown = TRUE)

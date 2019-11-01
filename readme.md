@@ -4,7 +4,7 @@ This is the GitHub repository hosting the R package matingRhinos.
 
 The package aims at documenting how we obtained the results for the paper
 entitled 'Mate choice, reproductive success and inbreeding in white rhinos
-(Ceratotherium simum Burchell, 1817): new insights for conservation management'
+(_Ceratotherium simum_ Burchell, 1817): new insights for conservation management'
 by Kretzschmar P., Auld H., Boag P., Ganslosser U., Scott C., Van Coeverden de
 Groot P.J. & Courtiol A. (accepted in Evolutionary Applications).
 

@@ -4,7 +4,15 @@ Title: Analysis of the Mating, Reproductive Success and Their Correlates in Whit
 Version: 0.9
 Authors@R:
     c(
-    person('Courtiol', 'Alexandre', email = "courtiol@izw-berlin.de", role = c('cre', 'aut'), comment = c(ORCID = "0000-0003-0637-2959"))
+    person(given = 'Alexandre',
+           family = 'Courtiol', 
+           role = c('cre', 'aut'),
+           email = "courtiol@izw-berlin.de",
+           comment = c(ORCID = "0000-0003-0637-2959")),
+    person(given = "Colin",
+           family = "Vullioud",
+           role = "aut",
+           email = "colin.vullioud@posteo.org")
     )
 Description: This R package aims at providing the data and documenting the 
     R code behind the analysis of the paper entitled 'Mate choice, 

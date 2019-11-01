@@ -34,7 +34,7 @@
 #' Van Coeverden de Groot P.J. & Courtiol A.
 #' (accepted in Evolutionary Applications)
 #' Mate choice, reproductive success and inbreeding in white rhinos
-#' (_Ceratotherium simum_ Burchell, 1817): new insights for conservation management
+#' (_Ceratotherium simum_ Burchell, 1817): new insights for conservation management.
 #' 
 #'
 #' @keywords package

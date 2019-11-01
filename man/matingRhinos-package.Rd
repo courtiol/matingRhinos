@@ -211,6 +211,6 @@ Kretzschmar P., Auld H., Boag P., Ganslosser U., Scott C.,
 Van Coeverden de Groot P.J. & Courtiol A.
 (accepted in Evolutionary Applications)
 Mate choice, reproductive success and inbreeding in white rhinos
-(\emph{Ceratotherium simum} Burchell, 1817): new insights for conservation management
+(\emph{Ceratotherium simum} Burchell, 1817): new insights for conservation management.
 }
 \keyword{package}

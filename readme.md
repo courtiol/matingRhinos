@@ -20,7 +20,7 @@ and must be used with our data.
 To see our source code, you can either browse the files above within GitHub or
 download the *.tar.gz file containing all sources bundled with some data to
 try out our functions in R.
-This file is available [here](https://github.com/courtiol/drat/blob/gh-pages/src/contrib/matingRhinos_0.9.tar.gz)
+This file is available [here](https://github.com/courtiol/drat/blob/gh-pages/src/contrib/matingRhinos_0.9.tar.gz).
 
 
 ## Installation

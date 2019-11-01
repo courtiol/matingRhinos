@@ -15,7 +15,7 @@ plot_Bateman(data_agg, sex)
 A ggplot object.
 }
 \description{
-This function creates a plot of the relationship between mating and 
+This function creates a plot of the relationship between mating and
 reproductive success.
 }
 \examples{

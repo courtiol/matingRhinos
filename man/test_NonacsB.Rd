@@ -21,8 +21,8 @@ the Nonacs' binomial skew index simulated under the null hypothesis.}
 }
 \value{
 A list with the observed Nonacs' binomial skew index value, its
-  corresponding p-value and (optionally) the values computed on data
-  simulated under the null hypothesis.
+corresponding p-value and (optionally) the values computed on data
+simulated under the null hypothesis.
 }
 \description{
 This functions compare the observed values of the Nonacs' binomial skew index

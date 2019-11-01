@@ -123,8 +123,8 @@ plot_correlation <- function(data, x, y, xlab = 'x-axis title', ylab = 'y-axis t
     theme_classic() +
     scale_shape_manual(values = c(22, 24), name = 'Cohort of males:') +
     scale_colour_manual(values = c(col1, col2), name = 'Cohort of males:') +
-    geom_point(size = 9) +
-    geom_text(aes(label = No), size = 2) +
+    geom_point(size = 9, stroke = 1.5) +
+    geom_text(aes(label = No), size = 4) +
     theme(plot.margin = unit(c(10, 10, 4, 1), 'mm'),
           legend.position = 'none',
           text = element_text(size = 16))

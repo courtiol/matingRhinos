@@ -11,13 +11,13 @@ compute_PCA(data)
 }
 \value{
 A list providing the original data with the first 2 principal
-  components added to it, the proportion of variance explained by each
-  component, the cummulated proportion of variance explained by each
-  component, and the PCA object as returned by \code{\link{prcomp}}.
+components added to it, the proportion of variance explained by each
+component, the cummulated proportion of variance explained by each
+component, and the PCA object as returned by \code{\link{prcomp}}.
 }
 \description{
 This function computes a Principal Component Analysis (PCA) on male horn
-measurements using \code{\link{prcomp}}. The PCA is computed on the centered 
+measurements using \code{\link{prcomp}}. The PCA is computed on the centered
 and scaled variables.
 }
 \examples{

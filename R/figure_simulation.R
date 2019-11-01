@@ -28,7 +28,7 @@ DyadML <- x <- xend <- y <- yend <- NULL
 
 out <- ggplot(data, aes(x = cat, y = DyadML)) +
   geom_boxplot(width = 0.8, col = col1) +
-  scale_x_discrete("True Relationship") +
+  scale_x_discrete("True relationship") +
   geom_segment(data = lines, aes(y = y, yend = yend, xend = xend, x = x), col = "red", linetype = 2) +
   theme_classic() +
   theme(plot.margin = unit(c(10, 4, 5, 1), 'mm'),

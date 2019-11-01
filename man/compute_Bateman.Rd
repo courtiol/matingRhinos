@@ -29,8 +29,8 @@ compute_Bateman(mating_success = males$Mat_succ,
 }
 \references{
 Jones A.G (2009).On the opportunity for sexual selection, the
-  Bateman gradient and the maximum intensity of sexual selection. Evolution,
-  63(7), 1673-1684.
+Bateman gradient and the maximum intensity of sexual selection. Evolution,
+63(7), 1673-1684.
 }
 \seealso{
 \code{\link{test_NonacsB}}

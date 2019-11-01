@@ -9,20 +9,22 @@ Rhinos}
 \description{
 This R package aims at providing the data and documenting the R code behind
 the analysis of the paper entitled 'Mate choice, reproductive success and
-inbreeding in white rhiceros...' by by Kretzschmar P., Auld H., Boag P., 
-Ganslosser U., Scott C., Van Coeverden de Groot P.J. & Courtiol A. (in prep).
+inbreeding in white rhinos (\emph{Ceratotherium simum} Burchell, 1817): new insights
+for conservation management' by Kretzschmar P., Auld H., Boag P., Ganslosser
+U., Scott C., Van Coeverden de Groot P.J. & Courtiol A. (accepted in
+Evolutionary Applications).
 }
 \details{
 This package has not been conceived for general use!
 
 The main functions of this package contain a small documentation and examples
 which could be useful for those who try to understand our code. Type
-\code{ls('package:matingRhinos')} for a list of all exported functions and
+\code{ls('package:matingRhinos')} for a list of all (exported) functions and
 datasets.
 
 You may directly explore the files contained in the package on GitHub at
 \url{https://github.com/courtiol/matingRhinos}, or after uncompressing the
-content of the *.tar.gz file (link available on the GitHub as well). To 
+content of the *.tar.gz file (link available on the GitHub as well). To
 uncompress such a tarball, you can use the R function \code{\link{untar}}.
 
 The package contains all the original data.
@@ -190,17 +192,25 @@ rbind(malesC2[which.min(malesC2$Ter_map), c('No', 'Cohort', 'Ter_map')],
 ### 1. Relatedness of the male the most related to females:
 males[which.max(males$Related_mean), c('No', 'Cohort', 'Related_mean', 'Related_SD')]
 
-### 2. Creating figure S2:
+### 2. Comparing mean relatedness of female mates and all candidate females:
+wilcox.test(males$Related_mean_mated_fem, males$Related_mean, paired = TRUE)
+wilcox.test(malesC1$Related_mean_mated_fem, malesC1$Related_mean, paired = TRUE)
+wilcox.test(malesC2$Related_mean_mated_fem, malesC2$Related_mean, paired = TRUE)
+
+
+### 3. Creating figure S2:
 figure_relatedness_simulation(relat_sim)
 
-### 3. Creating figure S3:
+### 4. Creating figure S3:
 figure_relatedness(data = males)
 
 
 }
 \references{
 Kretzschmar P., Auld H., Boag P., Ganslosser U., Scott C.,
-Van Coeverden de Groot P.J. & Courtiol A. (in prep)
-Mate choice, reproductive success and inbreeding in white rhinos.
+Van Coeverden de Groot P.J. & Courtiol A.
+(accepted in Evolutionary Applications)
+Mate choice, reproductive success and inbreeding in white rhinos
+(\emph{Ceratotherium simum} Burchell, 1817): new insights for conservation management
 }
 \keyword{package}

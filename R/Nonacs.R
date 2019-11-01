@@ -112,8 +112,8 @@ plot_NonacsB <- function(x, limits = c(-0.02, 0.05)) {
   r <- ggplot_build(gg)$layout$panel_scales_y[[1]]$range$range
   pos_y <- (max(r) - min(r))*0.8
   
-  gg <- gg + geom_text(aes(x = x$B_obs - 0.003, y = pos_y, label = x$p),
-                       colour = col, vjust = 0, hjust = 1)
+  gg <- gg + geom_text(aes(x = x$B_obs + 0.003, y = pos_y, label = x$p),
+                       colour = col, vjust = 0, hjust = 0)
   return(gg)
 }
 

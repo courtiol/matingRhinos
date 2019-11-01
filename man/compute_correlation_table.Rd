@@ -18,10 +18,10 @@ compute_correlation_table(cohort = NULL, fitness = NULL,
 }
 \value{
 A data.frame containing the predictor, the sample size after
-  discarding the missing values, the correlation between two variables, the
-  p-value of the correlation test, the p-value after correction for
-  multiple testing, the number of tests, the E-value (p-value times number of 
-  tests), and significance stars for the raw and adjusted p-values.
+discarding the missing values, the correlation between two variables, the
+p-value of the correlation test, the p-value after correction for
+multiple testing, the number of tests, the E-value (p-value times number of
+tests), and significance stars for the raw and adjusted p-values.
 }
 \description{
 This function computes the Spearman correlation tests between a fitness
@@ -31,10 +31,10 @@ correction for multiple testing (default = 'bonferroni').
 }
 \note{
 We set the argument \code{exact} to \var{FALSE} in the call to \code{\link{cor.test}},
-  so that the presence of ties in some correlation tests would not change
-  how the p-values are computed (exact tests are not possible in the presence of ties for this implementation of
-  the test). Otherwise p-values obtained can sometimes be inconsistent across tests (ex: smaller p-values despite higher rho and same sample
-  size.)
+so that the presence of ties in some correlation tests would not change
+how the p-values are computed (exact tests are not possible in the presence of ties for this implementation of
+the test). Otherwise p-values obtained can sometimes be inconsistent across tests (ex: smaller p-values despite higher rho and same sample
+size.)
 }
 \examples{
 compute_correlation_table(cohort = 'C1', fitness = 'Mat_succ', method = 'bonferroni', data = males)

@@ -39,7 +39,7 @@ plot_relatedness <- function(data, limits = c(0, 0.5), to = 'males') {
     var_y <- 'Related_mean'
     var_y_min <- with(data, Related_mean + stats::qnorm(0.025)*Related_SD/sqrt(Related_N))
     var_y_max <- with(data, Related_mean + stats::qnorm(0.975)*Related_SD/sqrt(Related_N))
-    lab_y <- 'Mean relatedness to all females (bars)\n or their mating partners (stars)'
+    lab_y <- 'Relatedness to all females (bars)\n or their mating partners (stars)'
   }
   gg <- ggplot(data = data, aes(y = !!sym(var_y), x = No, fill = Cohort)) +
     geom_bar(stat = 'identity', width = 0.5) +
@@ -52,11 +52,11 @@ plot_relatedness <- function(data, limits = c(0, 0.5), to = 'males') {
     theme(plot.margin = unit(c(10, 8, 2, 2), 'mm'),
           text = element_text(size = 16))
   
-  if(to != "males") gg <- gg + geom_point(aes(y = Related_mean_mated_fem), shape = 8, size = 2)
+  if (to != "males") gg <- gg + geom_point(aes(y = Related_mean_mated_fem), shape = 8, size = 2)
   
   return(gg)
 }
-utils::globalVariables(c('var_y', 'No', 'Cohort'))
+utils::globalVariables(c('var_y', 'No', 'Cohort', 'Related_mean_mated_fem'))
 
 
 #' Create the figure showing the distribution of relatedness

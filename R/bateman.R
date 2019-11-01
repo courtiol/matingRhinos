@@ -80,14 +80,12 @@ plot_Bateman <- function(data_agg, sex) {
                                               y = Rep_succ,
                                               shape = Cohort,
                                               colour = Cohort,
-                                              size = Count,
-                                              fill = Cohort)) + 
-    geom_point(alpha = 0.8) +
+                                              size = Count)) + 
+    geom_point(stroke = 1.5) +
     labs(x = 'Number of mates', y = 'Number of offspring') +
     scale_x_continuous(limits = c(0, x_max_nice), breaks = function(x) seq(0, x[2], by = steps)) +
     scale_y_continuous(limits = c(0, y_max_nice), breaks = function(x) seq(0, x[2], by = steps)) +
     scale_shape_manual(values = c(22, 24), name = 'Cohort of males:', guide = do_guide1) +
-    scale_fill_manual(values = c('white', 'white'), name = 'Cohort of males:', guide = do_guide1) +
     scale_colour_manual(values = c(col1, col2), name = 'Cohort of males:', guide = do_guide1) +
     scale_radius(range = counts_nice, breaks = c(1, 10, 17), name = 'Number of rhinos:', guide = do_guide2) +
     theme_classic() +

@@ -14,7 +14,7 @@ figure_correlations(data, which = c("mating", "repro"))
 \description{
 This function creates the figures showing the correlations. It is a
 wrapper around the function \code{\link{plot_correlation}}. The function
-can either illustrate the correlations with the mating success or those with 
+can either illustrate the correlations with the mating success or those with
 the reproductive success depending on the value of the argument \code{which}.
 }
 \examples{

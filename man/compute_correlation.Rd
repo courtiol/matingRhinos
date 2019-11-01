@@ -12,8 +12,8 @@ compute_correlation(var1, var2)
 \item{var2}{A vector.}
 }
 \value{
-A vector containing the correlation between two variables, the 
-p-value of the correlation test, and the sample size after discarding the 
+A vector containing the correlation between two variables, the
+p-value of the correlation test, and the sample size after discarding the
 missing values.
 }
 \description{

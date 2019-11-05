@@ -87,7 +87,7 @@ plot_Bateman <- function(data_agg, sex) {
     scale_y_continuous(limits = c(0, y_max_nice), breaks = function(x) seq(0, x[2], by = steps)) +
     scale_shape_manual(values = c(22, 24), name = 'Cohort of males:', guide = do_guide1) +
     scale_colour_manual(values = c(col1, col2), name = 'Cohort of males:', guide = do_guide1) +
-    scale_radius(range = counts_nice, breaks = c(1, 10, 17), name = 'Number of rhinos:', guide = do_guide2) +
+    scale_radius(range = counts_nice, breaks = c(1, 10, 20), name = 'Number of rhinos:', guide = do_guide2) +
     theme_classic() +
     theme(plot.margin = unit(c(10, 4, 5, 1), 'mm'),
           legend.position = 'bottom',

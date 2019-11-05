@@ -1,7 +1,7 @@
 Package: matingRhinos
 Type: Package
 Title: Analysis of the Mating, Reproductive Success and Their Correlates in White Rhinos
-Version: 0.9
+Version: 0.9.1
 Authors@R:
     c(
     person(given = 'Alexandre',

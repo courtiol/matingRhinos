@@ -28,6 +28,16 @@ str(rhinos_agg)
 
 save(rhinos_agg, file = "./data/rhinos_agg.rda", compress = "xz")
 
+females %>% 
+  select(-Cohort) %>%
+  group_by(No) %>%
+  summarize(Mat_succ = sum(Mat_succ),
+            Rep_succ = sum(Rep_succ),
+            Time = sum(Time)) %>%
+  as.data.frame() -> females_C1C2merged
+
+save(females_C1C2merged, file = "./data/females_C1C2merged.rda", compress = "xz")
+
 
 ################################################################################
 ## simulation data used for relatedness

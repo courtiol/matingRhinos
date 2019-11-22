@@ -107,7 +107,7 @@
 #' test_NonacsB(benef = males$Rep_succ, time = males$Time)
 #'
 #' ### 2. Creating figure 1:
-#' figure_NonacsB(data_males = males, data_females = females)
+#' figure_NonacsB(data_males = males, data_females = females_C1C2merged)
 #'
 #' ### 3. Relationship between mating and reproductive success for males: 
 #' compute_correlation(var1 = malesC1$Mat_succ, var2 = malesC1$Rep_succ)
@@ -120,8 +120,8 @@
 #' figure_Bateman(data_agg = rhinos_agg)
 #'
 #' ### 5. Computing the skewness tests for females: 
-#' test_NonacsB(benef = females$Mat_succ, time = females$Time)
-#' test_NonacsB(benef = females$Rep_succ, time = females$Time)
+#' test_NonacsB(benef = females_C1C2merged$Mat_succ, time = females_C1C2merged$Time)
+#' test_NonacsB(benef = females_C1C2merged$Rep_succ, time = females_C1C2merged$Time)
 #'
 #' ### 6. Relationship between mating and reproductive success for females:
 #' compute_correlation(var1 = femalesC1$Mat_succ, var2 = femalesC1$Rep_succ)

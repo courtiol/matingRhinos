@@ -4,8 +4,15 @@
 \alias{plot_correlation}
 \title{Plot the correlation between mating/reproductive success and their correlates}
 \usage{
-plot_correlation(data, x, y, xlab = "x-axis title",
-  ylab = "y-axis title", y_limits = NULL, x_limits = NULL)
+plot_correlation(
+  data,
+  x,
+  y,
+  xlab = "x-axis title",
+  ylab = "y-axis title",
+  y_limits = NULL,
+  x_limits = NULL
+)
 }
 \arguments{
 \item{data}{A dataframe containing the data to be processed.}

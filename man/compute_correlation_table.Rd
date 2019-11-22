@@ -4,8 +4,12 @@
 \alias{compute_correlation_table}
 \title{Compute a Spearman correlation tests for a given cohort and fitness measurement}
 \usage{
-compute_correlation_table(cohort = NULL, fitness = NULL,
-  method = "bonferroni", data = NULL)
+compute_correlation_table(
+  cohort = NULL,
+  fitness = NULL,
+  method = "bonferroni",
+  data = NULL
+)
 }
 \arguments{
 \item{cohort}{The cohort of males ('C1' or 'C2').}
